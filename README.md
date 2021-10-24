@@ -1,29 +1,42 @@
-# form-mobile
+# FormMobile
 
-## Project setup
+## 快速上手
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+基于mue框架，使用前需提前引入mue
 ```
 
-### Compiles and minifies for production
+## 安装
 ```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
+cnpm i git+https://hub.hddznet.com/uniplatform/FormMobile.git --save
 ```
 
-### Lints and fixes files
+## 引入
 ```
-npm run lint
+import Vue from "vue";
+import Mue from "mue/src/index";
+import FormMobile from "FormMobile/src/index"
+
+Vue.use(Mue);
+Vue.use(FormMobile);
+
+import "mue/themes/index.less";
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 特殊修改
+vue.config.js
+添加了jQuery、Moment插件
+```
+plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        moment: "moment"
+    })
+],
+```
+
+## 版本
+查看方法
+```
+window.FORMMOBILE_VERSION
+```

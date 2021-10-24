@@ -28,7 +28,6 @@
 </template>
 <script>
     import FormItem from "../../../render/form";
-    import {deepClone} from '@/utils/lib'
     export default {
         inheritAttrs: false,
         components: {FormItem},

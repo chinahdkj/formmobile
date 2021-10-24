@@ -10,23 +10,23 @@
     </div>
 </template>
 <script>
-    import BASE from "./base";
+import BASE from "./base";
 
-    export default {
-        inheritAttrs: false,
-        components: {},
-        mixins: [BASE],
-        //panelType = 'view' 为非设计模式
-        props: ["id", "cols", "gutter", "panelType", "showCondition", "isDesign"],
-        data() {
-            return {};
-        }
-    };
+export default {
+    inheritAttrs: false,
+    components: {},
+    mixins: [BASE],
+    //panelType = 'view' 为非设计模式
+    props: ["id", "cols", "gutter", "panelType", "showCondition", "isDesign"],
+    data() {
+        return {};
+    }
+};
 </script>
 
 <style lang="less">
-    .custom-form-group-grids {
-        position: relative;
-        width: 100%;
-    }
+.custom-form-group-grids {
+    position: relative;
+    width: 100%;
+}
 </style>

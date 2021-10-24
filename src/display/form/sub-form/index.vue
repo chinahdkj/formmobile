@@ -1,106 +1,178 @@
 <template>
     <div class="sub-form-view-display">
-
-        <el-table border :data="value" >
-            <el-table-column prop="index" label="#" width="50px" :align="align">
-                <template slot-scope="{$index}">
-                    {{$index + 1}}
-                </template>
-            </el-table-column>
-            <el-table-column :prop="sub.id" :label="sub.options.name" :align="align"
-                             v-for="(sub, i) in subs" :key="i">
-                <template #header="{column}">
-                    <span v-if="sub.options.required" class="must">*</span>
-                    {{column.label}}
-                </template>
-                <template slot-scope="{row, $index}">
-                    <item-html v-bind="sub.options" :model="row" :value="row[sub.options.field]" :type="sub.type"></item-html>
-                </template>
-            </el-table-column>
-        </el-table>
+        <van-icon class="do-expand" :name="expendStatus ? 'arrow-up' : 'arrow-down'" @click="onExpand" />
+        <div class="container">
+            <div class="header">
+                {{name}}
+            </div>
+            <div class="form-part-list">
+                <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
+                    <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
+                        <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
+                        <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
+                        <div v-for="(sub, idx) in subs" :key="idx">
+                            <item-html :model="row"
+                                       :type="sub.type"
+                                       :value="row[sub.options.field]"
+                                       v-bind="sub.options">
+                            </item-html>
+                        </div>
+                    </mue-panel>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
-    import ItemHtml from "../../../display/form";
-    export default {
-        inheritAttrs: false,
-        components: {ItemHtml},
-        mixins: [],
-        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-            "customClass", "labelWidth", "labelHidden", "showRowNum"],
-        data() {
-            return {};
-        },
-        computed: {
-            style() {
-                if (!this.width) {
-                    return {width: "100%"};
-                }
-                return {width: this.width};
+import ItemHtml from "../../../display/form";
+export default {
+    inheritAttrs: false,
+    components: {ItemHtml},
+    mixins: [],
+    props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
+        "customClass", "labelWidth", "labelHidden", "showRowNum"],
+    data() {
+        return {
+            expendStatus: true,
+            flags: [] //{index:0, hideFields: false}
+        };
+    },
+    computed: {
+        value: {
+            get(){
+                let v = this.model[this.field] || []
+                return Array.isArray(v) ? v : JSON.parse(v);
             },
-            btnPosition() {
-                return {paddingLeft: !this.labelHidden ? `${this.labelWidth + 20}px` : 0}
-            },
-            value: {
-                get(){
-                    let v = this.model[this.field] || []
-                    return Array.isArray(v) ? v : JSON.parse(v);
-                },
-                set(nv){
-                    this.$set(this.model, this.field, nv);
-                }
+            set(nv){
+                this.$set(this.model, this.field, nv);
             }
-        },
-        watch: {
-            subs: {
-                immediate: true, deep: true, handler(v, ov) {
-                    this.value.forEach(row => {
-                        for(let sub of v) {
-                            if(!(sub.options.field in row)) {
-                                row[sub.options.field] = sub.options.defaultValue
-                            }
+        }
+    },
+    watch: {
+        subs: {
+            immediate: true, deep: true, handler(v, ov) {
+                this.value.forEach(row => {
+                    for(let sub of v) {
+                        if(!(sub.options.field in row)) {
+                            row[sub.options.field] = sub.options.defaultValue
                         }
-                    })
-                    this.$set(this.model, this.field, this.value);
-                }
+                    }
+                })
+                this.$set(this.model, this.field, this.value);
+            }
+        }
+    },
+    methods: {
+        addModel() {
+            let fields = {}
+            for(let sub of this.subs) {
+                fields[sub.options.field] = sub.options.defaultValue
+            }
+            this.value.push(fields);
+        },
+        delModel(i){
+            this.value.splice(i, 1);
+        },
+        isHide(i) {
+            return this.value[i].__hideFields;
+        },
+        showFields(i) {
+            if(this.value[i]) {
+                this.$set(this.value[i], "__hideFields", false)
             }
         },
-        methods: {
+        hideFields(i) {
+            if(this.value[i]) {
+                this.$set(this.value[i], "__hideFields", true)
+            }
         },
-    };
+        onExpand() {
+            this.expendStatus = !this.expendStatus;
+            this.value.forEach((row, i) => {
+                this.$set(this.value[i], "__hideFields", !this.expendStatus)
+            })
+        }
+    }
+};
 </script>
 
 <style lang="less">
-    .sub-form-view-display {
-        width: 100%;
-        .el-table {
-            .dsp-form-item {
-                .label {
-                    display: none;
-                }
-                .value {
-                    padding: 0 10px;
-                }
-            }
-            .el-table__header{
-                .cell .must{
-                    color:#f56c6c;
-                    margin-right:4px;
-                    vertical-align: top;
-                }
-            }
+.sub-form-view-display {
+    position: relative;
+    width: 100%;
+    margin: 4px 0;
+
+    .container {
+        background-color: #ffffff;
+        padding:0 10px;
+        box-sizing: border-box;
+        border-bottom: #ebebeb 1px solid;
+
+        .header {
+            height: 36px;
+            line-height: 36px;
+            padding-left: 5px;
         }
 
-        .custom-form-item.cue-form-item.is-label-hidden {
-            padding-left:0;
+        .form-part-list {
+            background: #f0f0f0;
+            padding: 5px;
+            margin-bottom: 10px;
 
-            > .cue-form-item__content {
-                padding-left: 0;
+            .form-part {
+                border: solid 1px #e0e0e0;
+                margin-bottom: 5px;
+
+                &:last-child {
+                    margin: 0;
+                }
+
+                &.hide {
+                    .mue-panel-body {
+                        display: none;
+                    }
+                }
+
+                .mue-panel-header {
+                    border-bottom: solid 1px #ebebeb;
+
+                    .mue-panel-tools {
+                        .van-icon {
+                            margin-left:10px;
+                        }
+                    }
+                }
+
+                .mue-panel-body {
+                    > div:last-child {
+                        .dsp-form-item {
+                            border: 0;
+                        }
+                    }
+                }
+
             }
-        }
-
-        .sub-form-handle-btn{
-
         }
     }
+
+    .do-expand {
+        position: absolute;
+        right: 15px;
+        z-index: 1;
+        line-height: 36px;
+    }
+
+
+    .sub-form-handle-btn {
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+        .van-button {
+            border-radius: 3px;
+            flex: 1;
+        }
+    }
+}
+
 </style>

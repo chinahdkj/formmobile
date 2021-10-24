@@ -1,6 +1,6 @@
 <template>
     <div v-if="isShow" class="panel-form-item-display" :data-id="item.id">
-<!--        <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" panel-type="view">
+        <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" panel-type="view">
             <template slot-scope="{tab, items}">
                 <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model"/>
             </template>
@@ -28,18 +28,16 @@
 
         <template v-else>
             <item-html v-bind="item.options" :model="model" :type="item.type" :value="model[item.options.field]"></item-html>
-        </template>-->
-
-        <item-html v-bind="item.options" :model="model" :type="item.type" :value="model[item.options.field]"></item-html>
+        </template>
     </div>
 </template>
 <script>
     /*--- 渲染组件 ---*/
-    // import TabsPanel from "../../../src/display/layout/tabs";
-    // import GridsPanel from "../../../src/display/layout/grids";
-    // import SplitLine from "../../../src/display/layout/split-line";
-    // import CardPanel from "../../../src/display/layout/card";
-    // import SubForm from "../../../src/display/form/sub-form";
+    import TabsPanel from "../../../src/display/layout/tabs";
+    import GridsPanel from "../../../src/display/layout/grids";
+    import SplitLine from "../../../src/display/layout/split-line";
+    import CardPanel from "../../../src/display/layout/card";
+    import SubForm from "../../../src/display/form/sub-form";
     import ItemHtml from "../../../src/display/form";
     import {needShow} from "../../../src/utils/lib";
 
@@ -47,7 +45,11 @@
         inheritAttrs: false,
         name: "display-items",
         components: {
-            // TabsPanel, GridsPanel, CardPanel, SubForm, SplitLine,
+            TabsPanel,
+            GridsPanel,
+            CardPanel,
+            SubForm,
+            SplitLine,
             ItemHtml
         },
         props: ["list", "item", "model"],

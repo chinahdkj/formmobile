@@ -10,35 +10,35 @@
     </div>
 </template>
 <script>
-    import BASE from "./base";
+import BASE from "./base";
 
-    export default {
-        inheritAttrs: false,
-        components: {},
-        mixins: [BASE],
-        props: [
-            "id", "type", "showCondition", "isDesign", "panelType",
-            "card", "showTitle", "title", "shadow", "showBorder", "titleLine"
-        ],
-        data() {
-            return {};
-        }
+export default {
+    inheritAttrs: false,
+    components: {},
+    mixins: [BASE],
+    props: [
+        "id", "type", "showCondition", "isDesign", "panelType",
+        "card", "showTitle", "title", "shadow", "showBorder", "titleLine"
+    ],
+    data() {
+        return {};
+    }
 
-    };
+};
 </script>
 
 <style lang="less">
-    .custom-form-group-card {
-        position: relative;
-        margin: 4px 0;
+.custom-form-group-card {
+    position: relative;
+    margin: 4px 0;
 
-        .mue-panel {
-            &.title-line {
-                .mue-panel-header {
-                    border-bottom: solid 1px #dddddd;
-                }
+    .mue-panel {
+        &.title-line {
+            .mue-panel-header {
+                border-bottom: solid 1px #dddddd;
             }
         }
-
     }
+
+}
 </style>

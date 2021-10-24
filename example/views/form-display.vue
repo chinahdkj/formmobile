@@ -12,30 +12,49 @@ export default {
         return {
             loading: false,
             model: {
-                "text0": "123123",
-                "field_1634117033617": "123123",
+                "text0": "1111",
+                "field_1634117033617": "222",
                 "field_1634120953850": "1",
                 "field_1634180237996": "val1",
                 "field_1634182902475": ["val2", "val3"],
                 "field_1634183950171": "1",
-                "field_1634184076151": 2,
-                "field_1634191853549": "14:32:53",
-                "field_1634264298442": "2021-10-21",
-                "field_1634264357536": ["2021-10-05", "2021-11-23"],
+                "field_1634184076151": 1,
+                "field_1634191853549": "15:18:34",
+                "field_1634264298442": "2021-10-22",
+                "field_1634264357536": ["2021-10-13", "2021-11-17"],
                 "field_1634266365312": 3,
                 "field_1634267540547": 50,
                 "field_1634268098595": "This is a text",
                 "field_1634281000159": null,
-                "field_1634287958035": "/upload/65de37a5168c9c3a5d95360c67d56051.jpg,/upload/6f7bcf4e14f2d39a0fb550e39c15cc8d.png",
+                "field_1634287958035": null,
                 "field_1634548031267": "111,112",
                 "field_1634554628599": "5dd38a8266d735290078250c",
                 "field_1634608805377": "5dd38a8266d735290078250c",
-                "field_1634615117342": "120.7616436481476,30.74703864628557",
-                "field_1634633021641": "一级",
+                "field_1634615117342": null,
+                "field_1634633021641": null,
                 "field_1634697515211": null,
                 "field_1634700153987": null,
-                "field_1634700160854": "/upload/5/56/5659d10fc7e544f6b6dad5e4d2ec7c72.wav",
-                "field_1634700164206": "/upload/8e3b4717346c560ccb06b27a2092d4af.png",
+                "field_1634700160854": null,
+                "field_1634700164206": null,
+                "field_1634723175403": "11",
+                "field_1634723182912": "22",
+                "field_1634726277237": "1",
+                "field_1634726668285": "2",
+                "field_1634783850506": "3",
+                "field_1634783853606": "4",
+                "field_1634785315756": [{
+                    "field_1634785366887": "11",
+                    "field_1634785372296": "val1",
+                    "field_1634785400687": null,
+                    "field_1634785404113": null
+                }, {
+                    "field_1634785366887": "33",
+                    "field_1634785372296": "val2",
+                    "field_1634785400687": null,
+                    "field_1634785404113": null
+                }],
+                "field_1634898577921": "123123",
+                "field_1634898611699": "val3",
                 "field_1634548031267$$text": "随意勾选 1-1-1,随意勾选 1-1-2",
                 "field_1634554628599$$text": "软件部"
             },
@@ -58,7 +77,7 @@ export default {
                             "customClass": null,
                             "width": "100%",
                             "labelWidth": 0,
-                            "labelLine": null,
+                            "labelLine": 0,
                             "labelHidden": 0,
                             "required": 1,
                             "regular": 0,
@@ -636,6 +655,20 @@ export default {
                         }
                     },
                     {
+                        "id": "9b62a117-b98a-4925-aba7-a8fe6b149712",
+                        "type": "split-line",
+                        "icon": "fa-credit-card",
+                        "description": "分割线",
+                        "classify": "layout",
+                        "options": {
+                            "hide": 0,
+                            "position": "left",
+                            "showCondition": null,
+                            "field": "field_1634780378588",
+                            "name": "移动端组件"
+                        }
+                    },
+                    {
                         "id": "f6822bda-a475-43d1-a470-a5ff84c1c1fe",
                         "type": "water-marking-camera",
                         "icon": "fa-square-o",
@@ -729,6 +762,464 @@ export default {
                             "required": 0,
                             "field": "field_1634700164206",
                             "name": "电子签名",
+                            "rules": []
+                        }
+                    },
+                    {
+                        "id": "27ed1505-f634-45e7-8259-c484b0266623",
+                        "type": "tabs",
+                        "icon": "fa-tags",
+                        "description": "标签页",
+                        "classify": "layout",
+                        "options": {
+                            "hide": 0,
+                            "customClass": null,
+                            "type": "normal",
+                            "position": "top",
+                            "showCondition": null,
+                            "field": "field_1634717760983",
+                            "name": "标签页"
+                        },
+                        "tabs": [
+                            {
+                                "value": "32de97ad-7775-4a28-b279-5c7913cb7dc0",
+                                "name": "标签",
+                                "children": [
+                                    {
+                                        "id": "28e2e0f3-5113-4cd6-a246-e1a84b58abf7",
+                                        "type": "text",
+                                        "icon": "fa-square-o",
+                                        "description": "单行文本",
+                                        "classify": "form",
+                                        "options": {
+                                            "dataType": "Text",
+                                            "hide": 0,
+                                            "disabled": 0,
+                                            "readonly": 0,
+                                            "defaultValue": "",
+                                            "showCondition": null,
+                                            "placeholder": null,
+                                            "customClass": null,
+                                            "width": "100%",
+                                            "labelWidth": 0,
+                                            "labelLine": null,
+                                            "labelHidden": 0,
+                                            "required": 0,
+                                            "regular": 0,
+                                            "field": "field_1634723175403",
+                                            "name": "单行文本1",
+                                            "rules": [],
+                                            "checkType": null
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "标签1",
+                                "value": "e11b1bfa-be52-47e8-b4ec-d54451655535",
+                                "children": [
+                                    {
+                                        "id": "607ca2bd-38c9-48e2-a52c-612916dbfe15",
+                                        "type": "text",
+                                        "icon": "fa-square-o",
+                                        "description": "单行文本",
+                                        "classify": "form",
+                                        "options": {
+                                            "dataType": "Text",
+                                            "hide": 0,
+                                            "disabled": 0,
+                                            "readonly": 0,
+                                            "defaultValue": "",
+                                            "showCondition": null,
+                                            "placeholder": null,
+                                            "customClass": null,
+                                            "width": "100%",
+                                            "labelWidth": 0,
+                                            "labelLine": null,
+                                            "labelHidden": 0,
+                                            "required": 0,
+                                            "regular": 0,
+                                            "field": "field_1634723182912",
+                                            "name": "单行文本2",
+                                            "rules": [],
+                                            "checkType": null
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4ffb694a-8cdf-43d7-ad94-ffef4283e8d9",
+                        "type": "card",
+                        "icon": "fa-credit-card",
+                        "description": "卡片",
+                        "classify": "layout",
+                        "options": {
+                            "hide": 0,
+                            "customClass": null,
+                            "showTitle": 1,
+                            "title": "标题",
+                            "shadow": "never",
+                            "showCondition": null,
+                            "showBorder": 0,
+                            "titleLine": 0,
+                            "field": "field_1634726256768",
+                            "name": "卡片"
+                        },
+                        "cardItem": [
+                            {
+                                "id": "4fbe11e3-6441-42ca-bdbf-1797e42b5644",
+                                "type": "text",
+                                "icon": "fa-square-o",
+                                "description": "单行文本",
+                                "classify": "form",
+                                "options": {
+                                    "dataType": "Text",
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "readonly": 0,
+                                    "defaultValue": "",
+                                    "showCondition": null,
+                                    "placeholder": null,
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "labelWidth": 0,
+                                    "labelLine": null,
+                                    "labelHidden": 0,
+                                    "required": 0,
+                                    "regular": 0,
+                                    "field": "field_1634726277237",
+                                    "name": "单行文本",
+                                    "rules": [],
+                                    "checkType": null
+                                }
+                            },
+                            {
+                                "id": "f1d28a5e-097b-4e3e-98c5-91a636aef4e0",
+                                "type": "textarea",
+                                "icon": "fa-sticky-note-o",
+                                "description": "多行文本",
+                                "classify": "form",
+                                "options": {
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "readonly": 0,
+                                    "defaultValue": "",
+                                    "showCondition": null,
+                                    "placeholder": null,
+                                    "rows": 3,
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "labelWidth": 0,
+                                    "labelHidden": 0,
+                                    "labelLine": null,
+                                    "required": 0,
+                                    "regular": 0,
+                                    "field": "field_1634726668285",
+                                    "name": "多行文本",
+                                    "rules": []
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "7b413c2f-1420-4c20-a7b7-b7324f753ce9",
+                        "type": "grids",
+                        "icon": "fa-navicon",
+                        "description": "栅格布局",
+                        "classify": "layout",
+                        "options": {
+                            "hide": 0,
+                            "customClass": null,
+                            "gutter": 20,
+                            "showCondition": null,
+                            "isBorder": 0,
+                            "isLast": 0,
+                            "field": "field_1634783830568",
+                            "name": "栅格布局"
+                        },
+                        "cols": [
+                            {
+                                "value": "9055bf19-a7ac-40f4-956b-b9bd2b3633f1",
+                                "span": 12,
+                                "children": [
+                                    {
+                                        "id": "e0af5961-62d6-4288-a21b-1447cc6f1d25",
+                                        "type": "text",
+                                        "icon": "fa-square-o",
+                                        "description": "单行文本",
+                                        "classify": "form",
+                                        "options": {
+                                            "dataType": "Text",
+                                            "hide": 0,
+                                            "disabled": 0,
+                                            "readonly": 0,
+                                            "defaultValue": "",
+                                            "showCondition": null,
+                                            "placeholder": null,
+                                            "customClass": null,
+                                            "width": "100%",
+                                            "labelWidth": 0,
+                                            "labelLine": null,
+                                            "labelHidden": 0,
+                                            "required": 0,
+                                            "regular": 0,
+                                            "field": "field_1634783850506",
+                                            "name": "单行文本1",
+                                            "rules": [],
+                                            "checkType": null
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "value": "ad57f0a6-0559-4ab4-90a6-f16bab459206",
+                                "span": 12,
+                                "children": [
+                                    {
+                                        "id": "7d71f7b3-2c75-45bc-b4bc-d437036136c5",
+                                        "type": "text",
+                                        "icon": "fa-square-o",
+                                        "description": "单行文本",
+                                        "classify": "form",
+                                        "options": {
+                                            "dataType": "Text",
+                                            "hide": 0,
+                                            "disabled": 0,
+                                            "readonly": 0,
+                                            "defaultValue": "",
+                                            "showCondition": null,
+                                            "placeholder": null,
+                                            "customClass": null,
+                                            "width": "100%",
+                                            "labelWidth": 0,
+                                            "labelLine": null,
+                                            "labelHidden": 0,
+                                            "required": 0,
+                                            "regular": null,
+                                            "field": "field_1634783853606",
+                                            "name": "单行文本2",
+                                            "rules": []
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "48ec50a0-3fe2-4c32-90d3-8cadc2da1b20",
+                        "type": "sub-form",
+                        "icon": "fa-credit-card",
+                        "description": "子表单",
+                        "classify": "layout",
+                        "options": {
+                            "hide": 0,
+                            "customClass": null,
+                            "disabled": 0,
+                            "labelHidden": 0,
+                            "labelWidth": 0,
+                            "showCondition": null,
+                            "labelLine": null,
+                            "width": "100%",
+                            "showRowNum": true,
+                            "subFormId": "",
+                            "subFormEdition": "",
+                            "subObjectId": "",
+                            "subObjectEdition": "",
+                            "field": "field_1634785315756",
+                            "name": "子表单",
+                            "dataType": null
+                        },
+                        "subs": [
+                            {
+                                "id": "f471672f-e864-4afa-9912-61b0b4b0319b",
+                                "type": "text",
+                                "icon": "fa-square-o",
+                                "description": "单行文本",
+                                "classify": "form",
+                                "options": {
+                                    "dataType": "Text",
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "readonly": 0,
+                                    "defaultValue": "",
+                                    "showCondition": null,
+                                    "placeholder": null,
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "labelWidth": 0,
+                                    "labelLine": null,
+                                    "labelHidden": 0,
+                                    "required": 0,
+                                    "regular": 0,
+                                    "field": "field_1634785366887",
+                                    "name": "单行文本",
+                                    "rules": [],
+                                    "checkType": null
+                                }
+                            },
+                            {
+                                "id": "a249b17a-a3a1-4a7f-b01b-82aadc3822f0",
+                                "type": "select",
+                                "icon": "fa-plus-square-o",
+                                "description": "下拉框",
+                                "classify": "form",
+                                "options": {
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "defaultValue": null,
+                                    "showCondition": null,
+                                    "placeholder": null,
+                                    "multiple": 0,
+                                    "expandTags": "collapse",
+                                    "optionsType": "static",
+                                    "bindings": [
+                                        {
+                                            "Value": "val1",
+                                            "Name": "选项一"
+                                        },
+                                        {
+                                            "Value": "val2",
+                                            "Name": "选项二"
+                                        },
+                                        {
+                                            "Value": "val3",
+                                            "Name": "选项三"
+                                        }
+                                    ],
+                                    "dataType": "String",
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "labelHidden": 0,
+                                    "labelWidth": 0,
+                                    "labelLine": null,
+                                    "required": 0,
+                                    "field": "field_1634785372296",
+                                    "name": "下拉框",
+                                    "rules": []
+                                }
+                            },
+                            {
+                                "id": "cefb2e67-b2c5-4975-8088-9b546107db0e",
+                                "type": "file",
+                                "icon": "fa-square-o",
+                                "description": "文件",
+                                "classify": "form",
+                                "options": {
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "defaultValue": null,
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "showCondition": null,
+                                    "labelWidth": 0,
+                                    "labelLine": null,
+                                    "labelHidden": 0,
+                                    "required": 0,
+                                    "multiple": 0,
+                                    "placeholder": "",
+                                    "accept": "",
+                                    "dataType": "String",
+                                    "isDownload": 0,
+                                    "field": "field_1634785400687",
+                                    "name": "文件",
+                                    "rules": []
+                                }
+                            },
+                            {
+                                "id": "9a73fc68-7072-4383-a16b-31b7dd433183",
+                                "type": "picture",
+                                "icon": "fa-dot-circle-o",
+                                "description": "图片",
+                                "classify": "form",
+                                "options": {
+                                    "hide": 0,
+                                    "disabled": 0,
+                                    "readonly": 0,
+                                    "defaultValue": null,
+                                    "customClass": null,
+                                    "width": "100%",
+                                    "showCondition": null,
+                                    "labelWidth": 0,
+                                    "labelLine": null,
+                                    "labelHidden": 0,
+                                    "required": 0,
+                                    "multiple": 0,
+                                    "limit": 5,
+                                    "accept": ".jpg,.jpeg,.png,.gif,.JPG,.JPEG,.GIF",
+                                    "dataType": "String",
+                                    "thumbZip": 0,
+                                    "isComment": 0,
+                                    "field": "field_1634785404113",
+                                    "name": "图片",
+                                    "rules": []
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "8b7c28cb-c54c-4274-b8ba-dc1354c0fb0e",
+                        "type": "text",
+                        "icon": "fa-square-o",
+                        "description": "单行文本",
+                        "classify": "form",
+                        "options": {
+                            "dataType": "Text",
+                            "hide": 0,
+                            "disabled": 0,
+                            "readonly": 0,
+                            "defaultValue": "",
+                            "showCondition": null,
+                            "placeholder": null,
+                            "customClass": null,
+                            "width": "100%",
+                            "labelWidth": 0,
+                            "labelLine": null,
+                            "labelHidden": 0,
+                            "required": 0,
+                            "regular": 0,
+                            "field": "field_1634898577921",
+                            "name": "单行文本",
+                            "rules": [],
+                            "checkType": null
+                        }
+                    },
+                    {
+                        "id": "2bd82338-9d3b-48c0-b2dd-a80d54858bd2",
+                        "type": "radio",
+                        "icon": "fa-dot-circle-o",
+                        "description": "单选框组",
+                        "classify": "form",
+                        "options": {
+                            "hide": 0,
+                            "disabled": 0,
+                            "defaultValue": null,
+                            "showCondition": null,
+                            "optionsType": "static",
+                            "bindings": [
+                                {
+                                    "Value": "val1",
+                                    "Name": "选项一"
+                                },
+                                {
+                                    "Value": "val2",
+                                    "Name": "选项二"
+                                },
+                                {
+                                    "Value": "val3",
+                                    "Name": "选项三"
+                                }
+                            ],
+                            "customClass": null,
+                            "layoutMode": "inline",
+                            "width": "100%",
+                            "labelHidden": 0,
+                            "labelWidth": 0,
+                            "labelLine": null,
+                            "required": 0,
+                            "field": "field_1634898611699",
+                            "name": "单选框组",
                             "rules": []
                         }
                     }
