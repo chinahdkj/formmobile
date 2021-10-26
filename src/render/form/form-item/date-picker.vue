@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import {DateFormat, GetDefaultValue, GetFormatString, needShow, EvalExpression} from '@/utils/lib'
+    import {DateFormat, GetDefaultValue, GetFormatString, needShow, EvalExpression} from '../../../utils/lib'
 
     export default {
         inheritAttrs: false,

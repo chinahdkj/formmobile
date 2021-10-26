@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import {strToArr} from '@/utils/lib'
+    import {strToArr} from '../../../../utils/lib'
 
     export default {
         components: {},
