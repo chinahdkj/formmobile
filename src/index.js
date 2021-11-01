@@ -1,7 +1,8 @@
-import "./utils/mixin";
+import Vue from 'vue'
 import Server from './utils/server';
 import FormView from '../packages/form-view'
 import FormDisplay from '../packages/form-display'
+import {BindRecords, DateFormat} from "./utils/lib"
 
 const components = [FormView, FormDisplay];
 
@@ -12,6 +13,13 @@ const install = (Vue, opts = {}) => {
     
     Vue.prototype.$server = Server;
     Vue.prototype.$OPTS = opts
+    
+    Vue.mixin({
+        methods: {
+            __BindRecords: BindRecords,
+            __DateFormat: DateFormat,
+        }
+    });
 }
 
 if (typeof window !== "undefined" && window.Vue) {
