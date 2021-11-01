@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import {BindRecords} from "../../../utils/lib";
+
 export default {
     components: {},
     props: [
@@ -70,7 +72,7 @@ export default {
                 items = this.bindings;
             }
             if (this.optionsType === "dynamic") {
-                items = this.__BindRecords(this.optionsDict) || [];
+                items = BindRecords(this.optionsDict) || [];
             }
 
             //无二级联动

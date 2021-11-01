@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {deepClone, strToArr, TreeDataTrans} from "../../../../utils/lib";
+import {deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
 
 export default {
     inheritAttrs: false,
@@ -37,10 +37,10 @@ export default {
         bindings() {
             if (this.dataMode === "tree") {
                 //树形结构数据，进行数据转换后传递
-                return TreeDataTrans(this.__BindRecords("__GroupTree"))
+                return TreeDataTrans(BindRecords("__GroupTree"))
             } else {
                 //简单结构数据，进行数据转换后，手动组装成树
-                let datas = (this.__BindRecords("__GroupTree") || []).map(m => {
+                let datas = (BindRecords("__GroupTree") || []).map(m => {
                     return {...m, code: m.id, name: m.name}
                 });
                 let ids = datas.map((d) => {

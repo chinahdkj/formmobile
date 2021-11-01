@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import { TransBindings } from "../../../utils/lib";
+    import { TransBindings, BindRecords } from "../../../utils/lib";
     export default {
         components: {},
         props: [
@@ -66,7 +66,7 @@
                     items = TransBindings(this.bindings);
                 }
                 if(this.optionsType === "dynamic") {
-                    items = TransBindings(this.__BindRecords(this.optionsDict) || []);
+                    items = TransBindings(BindRecords(this.optionsDict) || []);
                 }
 
                 //无二级联动

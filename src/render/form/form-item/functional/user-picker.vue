@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {deepClone, strToArr, TreeDataTrans} from "../../../../utils/lib";
+import {deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
 
 export default {
     inheritAttrs: false,
@@ -35,7 +35,7 @@ export default {
             }
         },
         bindings() {
-            return TreeDataTrans(this.__BindRecords("__UserTree"))
+            return TreeDataTrans(BindRecords("__UserTree"))
         }
     },
     methods: {

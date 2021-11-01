@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {TransferUrl, deepClone, strToArr, TreeDataTrans} from "../../../../utils/lib";
+import {TransferUrl, deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
 
 export default {
     inheritAttrs: false,
@@ -43,10 +43,10 @@ export default {
         bindings() {
             if (this.dataMode === "tree") {
                 //树形结构数据，进行数据转换后传递
-                return TreeDataTrans(this.__BindRecords(this.dict))
+                return TreeDataTrans(BindRecords(this.dict))
             } else {
                 //简单结构数据，进行数据转换后，手动组装成树
-                let datas = (this.__BindRecords(this.dict) || []).map(m => {
+                let datas = (BindRecords(this.dict) || []).map(m => {
                     return {...m, code: m.Value, name: m.Name}
                 });
                 let ids = datas.map((d) => {
