@@ -1,9 +1,9 @@
 <template>
-<!--    <cue-ztree-picker ref="picker" style="width:100%" v-model="value" :clearable="!required" :array="false"
-                      :nodes="nodes" :disabled="!!disabled" :simple-data="dataMode === 'simple'"
-                      :multiple="!!multiple" :multiple-filter="multipleFilter"
-                      :whole-path="!!wholePath" search show-icon @change="onChange">
-    </cue-ztree-picker>-->
+    <!--    <cue-ztree-picker ref="picker" style="width:100%" v-model="value" :clearable="!required" :array="false"
+                          :nodes="nodes" :disabled="!!disabled" :simple-data="dataMode === 'simple'"
+                          :multiple="!!multiple" :multiple-filter="multipleFilter"
+                          :whole-path="!!wholePath" search show-icon @change="onChange">
+        </cue-ztree-picker>-->
 
     <mue-tree-picker ref="tree" v-model="value" :clearable="!required" :data="nodes" :disabled="!!disabled"
                      :multiple="!!multiple" :selectable="checkFilter" @change="onChange"
@@ -173,18 +173,18 @@ export default {
             this.timer = setTimeout(() => {
                 let res_Url = TransferUrl(url, this.model);
 
-                let nodesTrans = (datas = null) => {
-                    if(!datas) {
+                let nodesTrans = (nodes = null) => {
+                    if(!nodes) {
                         return
                     }
 
                     if (this.dataMode === "tree") {
                         //树形结构数据，进行数据转换后传递
-                        this.nodes = TreeDataTrans(datas || [])
+                        this.nodes = TreeDataTrans(nodes || [])
                     } else {
-                        //简单结构数据，进行数据转换后，手动组装成树
-                        let datas = (datas || []).map(m => {
-                            return {...m, code: m.Value, name: m.Name}
+                        //简单结构数据，进行数据转换后，手动组装成树(接口返回一般是id,pid,name形式或Name,Value,pid形式)
+                        let datas = (nodes || []).map(m => {
+                            return m.Value ? {...m, code: m.Value, name: m.Name} : {...m, code: m.id}
                         });
                         let ids = datas.map((d) => {
                             return d.code;
