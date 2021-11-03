@@ -44,9 +44,9 @@ export default {
                 return;
             }
             if(this.dataType === "String") {
-                this.$set(this.model, this.field, this.stringToUnix(v, this.fmt));
+                this.$set(this.model, this.field, !this.isTimestamp ? v : this.stringToUnix(v, this.fmt));
             } else {
-                this.$set(this.model, this.field, this.stringToUnix(v, this.fmt).split(","));
+                this.$set(this.model, this.field, !this.isTimestamp ? v.split(",") : this.stringToUnix(v, this.fmt).split(","));
             }
         },
         //时间戳转字符串
