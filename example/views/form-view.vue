@@ -335,6 +335,8 @@ export default {
                             "labelLine": null,
                             "required": 0,
                             "format": "yyyy-MM-dd",
+                            "dataType": "String",
+                            "isTimestamp": 1,
                             "field": "field_1634264357536",
                             "name": "区间选择器",
                             "rules": []
