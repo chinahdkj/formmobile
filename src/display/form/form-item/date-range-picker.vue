@@ -35,11 +35,11 @@ export default {
     methods: {
         unixToString(date, format) {
             if(Array.isArray(date)) {
-                let vals = date.map(m => moment.unix(m/1000).format(format));
+                let vals = date.map(m => moment.unix(m).format(format));
                 return vals.join(",");
             }
             let arr = date.split(",");
-            return arr.map(m => moment.unix(Number(m)/1000).format(format)).join(",")
+            return arr.map(m => moment.unix(Number(m)).format(format)).join(",")
         }
     }
 }

@@ -52,16 +52,16 @@ export default {
         //时间戳转字符串
         unixToString(date, format) {
             if(Array.isArray(date)) {
-                let vals = date.map(m => moment.unix(m/1000).format(format));
+                let vals = date.map(m => moment.unix(m).format(format));
                 return vals.join(",");
             }
             let arr = date.split(",");
-            return arr.map(m => moment.unix(Number(m)/1000).format(format)).join(",")
+            return arr.map(m => moment.unix(Number(m)).format(format)).join(",")
         },
         //字符串转时间戳,最终返回时间戳组成的字符串
         stringToUnix(date, format) {
-            let arr = date.split(",");
-            return arr.map(m => moment(m, format).unix()*1000).join(",")
+            let arr = Array.isArray(date) ? date : date.split(",");
+            return arr.map(m => moment(m, format).unix()).join(",")
         }
     }
 }
