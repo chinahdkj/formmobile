@@ -19,7 +19,7 @@ export default {
                 return "";
             }
             if(Array.isArray(this.value)) {
-                return this.value.join(" - ");
+                return this.value.join(",");
             }
             return this.value;
         }

@@ -79,7 +79,7 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, editable: 0, clearable: 1, readonly: 0, placeholder: null, showCondition: null,
             defaultValue: null, customClass: null,  width: "100%",
-            labelHidden: 0, labelWidth: null, labelLine: null, required: 0, format: "yyyy-MM-dd",
+            labelHidden: 0, labelWidth: null, labelLine: null, required: 0, format: "yyyy-MM-dd", dataType: "Array"
         };
     },
     rate() {

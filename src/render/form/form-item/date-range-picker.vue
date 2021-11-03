@@ -1,25 +1,57 @@
 <template>
-    <van-tag>移动端暂不支持时间区间选择</van-tag>
+    <mue-date-range-picker v-model="value" :disabled="!!disabled" :clearable="!!clearable"
+                           :format="fmt" v-bind="$attrs" :begin.sync="begin" :end.sync="end"></mue-date-range-picker>
 </template>
 
 <script>
+import {GetFormatString} from "../../../utils/lib";
 export default {
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "required", "disabled", "defaultValue",
-        "readonly", "editable", "clearable", "dateType", "format", "valueFormat"],
+        "readonly", "editable", "clearable", "dataType", "format", "valueFormat"],
     data() {
-        return {};
+        return {
+            begin: "",
+            end: ""
+        };
     },
-    computed: {},
-    methods: {}
+    computed: {
+        value: {
+            get() {
+                let v = this.model[this.field]
+                return this.transValue(v);
+            },
+            set(nv) {
+                return this.commitValue(nv)
+            }
+        },
+        fmt() {
+            return GetFormatString(this.format);
+        }
+    },
+    methods: {
+        transValue(v){
+            if(!v) return null;
+            return Array.isArray(v) ? v.join(",") : v;
+        },
+        commitValue(v){
+            if(!v){
+                this.$set(this.model, this.field, null);
+                return;
+            }
+            if(this.dataType === "String") {
+                this.$set(this.model, this.field, v);
+            } else {
+                this.$set(this.model, this.field, v.split(","));
+            }
+        },
+    }
 }
 </script>
 
 <style lang="less">
 .fpt__date-range-picker {
-    .van-tag {
-        margin: 5px 0;
-    }
+
 }
 </style>
