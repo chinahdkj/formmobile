@@ -538,6 +538,31 @@ export default {
                         }
                     },
                     {
+                        "id": "302aef6e-906d-4ddd-a7b6-eff6980f0dc5",
+                        "type": "user-picker",
+                        "icon": "fa-square-o",
+                        "description": "用户选择",
+                        "classify": "form",
+                        "options": {
+                            "hide": 0,
+                            "disabled": 0,
+                            "defaultValue": null,
+                            "placeholder": null,
+                            "showCondition": null,
+                            "customClass": null,
+                            "width": "100%",
+                            "labelHidden": 0,
+                            "labelWidth": 0,
+                            "labelLine": null,
+                            "required": 0,
+                            "multiple": 0,
+                            "linkage": "",
+                            "field": "field_1636072780562",
+                            "name": "用户选择",
+                            "rules": []
+                        }
+                    },
+                    {
                         "id": "e8d09fd4-bf8f-480b-a8bc-f7b6ba2f85c6",
                         "type": "expression",
                         "icon": "fa-dot-circle-o",
@@ -1206,6 +1231,7 @@ export default {
                 text0: "bbbccccc",
                 field_1634287958035: "/upload/65de37a5168c9c3a5d95360c67d56051.jpg,/upload/6f7bcf4e14f2d39a0fb550e39c15cc8d.png",
                 field_1634700160854: "/upload/5/56/5659d10fc7e544f6b6dad5e4d2ec7c72.wav",
+                field_1636072780562: "5e623edcfdb792000acb505e"
                 // field_zbd: [{"field_zbd-text": "11111", "field_zbd-date": "2021-06-24", "field_zbd-number": 1}],
                 // field_switch: 1,
             }
