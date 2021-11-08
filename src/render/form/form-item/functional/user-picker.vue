@@ -87,8 +87,7 @@ export default {
             }, {deep: true, immediate: !this.defaultValue});
         },
         initInterfaceData(pid = "") {
-            return this.$http.post(`/app/v1.0/getUserTree.json`, {type: "user", root: pid})
-            // return this.$http.post(`/app/bpm/app/getUserTree`, {type: "user", root: pid})
+            return this.$http.post(`/app/bpm/app/getUserTree`, {type: "user", root: pid})
         },
 
 
