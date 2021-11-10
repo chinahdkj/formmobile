@@ -244,7 +244,7 @@ export const DateFormat = (value, format) => {
     if(typeof value === "number"){
         return moment.unix(value).format(format);
     }
-    return value;
+    return moment(value).format(format);
 }
 
 //饿了么时间格式兼容moment
