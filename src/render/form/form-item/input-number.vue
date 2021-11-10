@@ -1,5 +1,5 @@
 <template>
-    <van-stepper v-model="value" :disabled="!!disabled" v-bind="$attrs" />
+    <van-stepper v-model="value" :disabled="!!disabled" v-bind="$attrs" native-type="button" />
 </template>
 
 <script>
@@ -30,6 +30,12 @@
                 }
             }*/
         },
-        methods: {}
+        methods: {},
+        mounted() {
+            //vant 1.x van-stepper的递加和递减按钮type位设置成button，表单中直接使用会提交表单，此问题在2.x中已修复
+            this.$nextTick(() => {
+                $(".fpt__input-number .van-stepper > button").attr("type", "button")
+            })
+        }
     }
 </script>
