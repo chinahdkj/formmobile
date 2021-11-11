@@ -14,7 +14,7 @@
                                    :type="sub.type"
                                    v-bind="sub.options"
                                    :parent-field="field"
-                                   :index="idx">
+                                   :index="i">
                         </form-item>
                     </div>
                 </mue-panel>
