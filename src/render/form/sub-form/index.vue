@@ -163,6 +163,7 @@
 
             .mue-form-item > label {
                 left: 10px;
+                text-align: left;
             }
         }
 
