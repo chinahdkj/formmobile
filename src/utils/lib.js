@@ -241,8 +241,9 @@ export const DateFormat = (value, format) => {
         return "";
     }
     format = GetFormatString(format || "yyyy-MM-dd");
-    if(typeof value === "number"){
-        return moment.unix(value).format(format);
+    let num = Number(value);
+    if(!isNaN(num)){ //数字类型 or 字符串类型的数字
+        return moment.unix(num).format(format);
     }
     return moment(value).format(format);
 }

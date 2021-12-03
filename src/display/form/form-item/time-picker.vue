@@ -1,24 +1,23 @@
 <template>
     <div class="dsp__time-picker">
-        {{text}}
+        {{ text }}
     </div>
 </template>
 
 <script>
-    export default {
-        inheritAttrs: false,
-        components: {},
-        props: ["value"],
-        data() {
-            return {};
-        },
-        computed: {
-            text() {
-                if(!this.value){
-                    return "";
-                }
-                return this.value;
-            }
-        },
-    }
+import {DateFormat} from "../../../utils/lib"
+
+export default {
+    inheritAttrs: false,
+    components: {},
+    props: ["value", "format"],
+    data() {
+        return {};
+    },
+    computed: {
+        text() {
+            return DateFormat(this.value, this.format);
+        }
+    },
+}
 </script>
