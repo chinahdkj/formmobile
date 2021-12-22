@@ -45,7 +45,7 @@ export const InputDefaults = {
     },
     switch() {
         return {
-            hide: 0, disabled: 0, defaultValue: false, showCondition: null, customClass: null,
+            hide: 0, disabled: 0, defaultValue: "0", showCondition: null, customClass: null,
             labelHidden: 0, labelWidth: null, labelLine: null, required: 0
         };
     },
