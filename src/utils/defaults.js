@@ -62,7 +62,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, editable: 0, clearable: 1, readonly: 0, placeholder: null,
             arrowControl: 0, defaultValue: null, showCondition: null, customClass: null, width: "100%",
             isRange: false, labelHidden: 0, labelWidth: null, labelLine: null, required: 0,
-            format: "HH:mm:ss", valueFormat: "HH:mm:ss"
+            format: "HH:mm:ss", valueFormat: "String"
         };
     },
     "date-picker"() {
@@ -72,7 +72,8 @@ export const InputDefaults = {
             required: 0, mode: "default", format: "yyyy-MM-dd", valueFormat: "String",
             defaultType: "static", dftActivity: "",
             max: {value: "", offsetType: "static", offset: 0, unit: "days"},
-            min: {value: "", offsetType: "static", offset: 0, unit: "days"}
+            min: {value: "", offsetType: "static", offset: 0, unit: "days"},
+            dateChange: ""
         };
     },
     "date-range-picker"() {
@@ -165,19 +166,21 @@ export const InputDefaults = {
     },
     grids() {
         return {
-            hide: 0, customClass: null, gutter: 20, showCondition: null, isBorder: 0, isLast: 0
+            hide: 0, customClass: null, gutter: 20, showCondition: null, isBorder: 0, isLast: 0, showInForm: 0,
+            showInDetail: 1
         };
     },
     "sub-form"() {
         return {
             hide: 0, customClass: null, disabled: 0, labelHidden: 0, labelWidth: null, showCondition: null,
             labelLine: null, width: "100%", showRowNum: true, subFormId: "", subFormEdition: "",
-            subObjectId: "", subObjectEdition: ""
+            subObjectId: "", subObjectEdition: "", displayType: "default", colNum: 1, addHidden: 0, deleteHidden: 0,
+            itfData: {enable: 0, url: "", afterQuery: null}, buttonName: "子表单明细",fullscreen: 0, dlgWidth: "50%"
         };
     },
     "split-line"() {
         return {
-            hide: 0, position: "left", showCondition: null,
+            hide: 0, position: "left", showCondition: null
         };
     },
     card() {
@@ -222,7 +225,8 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, placeholder: null, showCondition: null,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
-            labelLine: null, required: 0, center: null, saveFields: []
+            labelLine: null, required: 0, center: null, saveFields: [],
+            gwtOption: "", customType: "", map_options: ""
         };
     },
     autocomplete() {

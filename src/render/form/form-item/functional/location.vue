@@ -1,7 +1,10 @@
 <template>
     <mue-gis-point v-model="value"
                    @on-confirm="onConfirm"
-                   :readonly="!!disabled">
+                   :readonly="!!disabled"
+                   :current-location="!!currentLocation"
+                   :gislist="gis"
+                   :lhsw="customType === 'lhsw'">
     </mue-gis-point>
 </template>
 
@@ -10,7 +13,8 @@ export default {
     inheritAttrs: false,
     components: {},
     props: [
-        "field", "model", "disabled", "required", "defaultValue", "center", "saveFields"
+        "field", "model", "disabled", "required", "defaultValue", "center", "saveFields",
+        "currentLocation", "gislist", "customType"
     ],
     data() {
         return {};
@@ -22,6 +26,17 @@ export default {
             },
             set(nv){
                 this.$set(this.model, this.field, nv);
+            }
+        },
+        gis() {
+            if(!this.gislist) {
+                return null
+            }
+            try {
+                return JSON.parse(this.gislist)
+            } catch (e) {
+                console.log(e);
+                return null
             }
         }
     },

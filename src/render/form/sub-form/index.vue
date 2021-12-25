@@ -27,13 +27,14 @@
     </div>
 </template>
 <script>
+    import {TransferUrl} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     export default {
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery"],
         data() {
             return {
                 expendStatus: true,
@@ -94,17 +95,66 @@
                 this.value.forEach((row, i) => {
                     this.$set(this.value[i], "__hideFields", !this.expendStatus)
                 })
+            },
+            //从接口初始化数据
+            itfDataInit() {
+                this.value = [];
+                let res_Url = TransferUrl(this.itfData.url || "", this.model);
+                this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "").then((res) => {
+                    //返回的res最终需要是一个对象数组
+                    if (this.itfData.afterQuery) {
+                        let _this = this
+                        try {
+                            res = eval(`(function(res) {
+                                ${this.itfData.afterQuery || 'return res;'}
+                            })(res)`)
+                        } catch (e) {
+                            console.error(e)
+                        }
+                    }
+
+                    if(!Array.isArray(res)) {
+                        this.$message.error("接口返回数据格式有误（需对象数组类型）")
+                        return
+                    }
+
+                    let rows = res || [];
+                    let keys = this.subs.map(m => m.options.field)
+                    rows.forEach((row, i) => {
+                        for(let key in row) {
+                            if(!keys.includes(key)) {
+                                delete row[key]
+                            }
+                        }
+                        this.$set(this.value, i, row);
+                    })
+                }).catch((e) => {
+                    console.log(e);
+                });
+            },
+            //重置数据
+            reset() {
+                if((this.itfData || {}).enable) {
+                    this.itfDataInit();
+                } else {
+                    this.value = this.initValue;
+                }
+            },
+        },
+        mounted() {
+            if(!this.value.length) {
+                //从接口初始化数据
+                if((this.itfData || {}).enable) {
+                    this.itfDataInit()
+                    return;
+                }
+
+                //添加一条空数据
+                this.addModel();
+            } else {
+                this.initValue = $.extend(true, [], this.value);
             }
         }
-        // mounted() {
-        //     this.$nextTick(() => {
-        //         this.$watch(() => {
-        //             return this.value
-        //         }, (v) => {
-        //             console.log(v)
-        //         }, {deep: true, immediate: true})
-        //     })
-        // }
     };
 </script>
 

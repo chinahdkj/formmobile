@@ -4,7 +4,7 @@
                     :format="format" :value-format="valueFormat" v-bind="$attrs">
     </el-date-picker>-->
     <mue-date-picker v-model="value" :format="fmt" :clearable="!required" :disabled="!!disabled || isDisabled"
-                     :min-date="minDate" :max-date="maxDate" v-bind="$attrs"/>
+                     :min-date="minDate" :max-date="maxDate" v-bind="$attrs" @confirm="onConfirm"/>
 </template>
 
 <script>
@@ -14,7 +14,7 @@
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue",
-            "readonly", "editable", "clearable", "dateType", "format", "valueFormat", "max", "min"],
+            "readonly", "editable", "clearable", "dateType", "format", "valueFormat", "max", "min", "dateChange"],
         data() {
             return {
                 maxWatch: null,
@@ -109,6 +109,18 @@
                     return base.add(limit.offset, limit.unit).toDate();
                 }
             },
+            onConfirm() {
+                if(this.dateChange) {
+                    try {
+                        let val = v;
+                        let model = this.model;
+                        let _this = this;
+                        eval(this.dateChange);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
+            }
         },
         mounted(){
             //最大值失效条件相关表单值改变时，重置时间选择
