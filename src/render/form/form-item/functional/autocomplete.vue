@@ -74,10 +74,10 @@ export default {
             //get请求
             if(this.autoType === 2) {
                 let targetUrl = url.replace("$self", this.q); //转换自身查询的值 $self
-                this.$server._Get({url: targetUrl}, this.$OPTS.urlPrefix || "").then((Response) => {
+                this.$server._Get({url: targetUrl}, this.$OPTS.urlPrefix || "").then((res) => {
                     this.loading = false;
-                    if(Response) {
-                        this.items = Response || [];
+                    if(res.Response) {
+                        this.items = res.Response || [];
                     } else {
                         this.$toast("接口数据读取失败");
                         this.items = [];
@@ -93,10 +93,10 @@ export default {
             //post请求
             let customParams = JSON.parse(TransferUrl(JSON.stringify(this.itfParams), this.model)); //自定义参数
             let params = {...customParams, ...{q: this.q || "", url, autoType: this.autoType}}
-            this.$server._Post(params, this.$OPTS.urlPrefix || "").then((result) => {
+            this.$server._Post(params, this.$OPTS.urlPrefix || "").then((res) => {
                 this.loading = false;
-                if(Response) {
-                    this.items = Response || [];
+                if(res.Response) {
+                    this.items = res.Response || [];
                 } else {
                     this.$toast("接口数据读取失败");
                     this.items = [];

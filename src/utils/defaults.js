@@ -26,7 +26,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, showCondition: null, placeholder: null, multiple: 0,
             expandTags: 'collapse', optionsType: "static", bindings: [], dataType: "String",
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null, labelLine: null,
-            required: 0
+            required: 0, autoType: 1, interface: "", itfParams: {}, afterQuery: ""
         };
     },
     radio() {
