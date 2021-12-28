@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspSwitch",
         inheritAttrs: false,
         components: {},
         props: ["value"],

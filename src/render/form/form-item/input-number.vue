@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmInputNumber",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue"],

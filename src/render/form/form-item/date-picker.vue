@@ -11,6 +11,7 @@
     import {DateFormat, GetDefaultValue, GetFormatString, needShow, EvalExpression} from '../../../utils/lib'
 
     export default {
+        name: "FtmDatePicker",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue",

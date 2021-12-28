@@ -13,6 +13,7 @@
 import BASE from "./base";
 
 export default {
+    name: "DspCardPanel",
     inheritAttrs: false,
     components: {},
     mixins: [BASE],

@@ -8,6 +8,7 @@
 
 <script>
     export default {
+        name: "FtmExpression",
         inheritAttrs: false,
         components: {},
         props: [

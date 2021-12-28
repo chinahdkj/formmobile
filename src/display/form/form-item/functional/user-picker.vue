@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "DspUserPicker",
         inheritAttrs: false,
         components: {},
         props: ["value", "field", "bindings", "model", "dict"],

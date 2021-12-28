@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspRate",
         components: {},
         props: ["value", "disabled"],
         data() {

@@ -8,6 +8,7 @@
 import {GetFormatString} from "../../../utils/lib";
 
 export default {
+    name: "DspDateRangePicker",
     inheritAttrs: false,
     components: {},
     props: ["value", "format", "isTimestamp"],

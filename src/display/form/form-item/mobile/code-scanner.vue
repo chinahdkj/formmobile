@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspCodeScanner",
         components: {},
         props: ["value"],
         data(){

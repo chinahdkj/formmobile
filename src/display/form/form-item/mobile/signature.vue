@@ -8,6 +8,7 @@
     import {strToArr} from '../../../../utils/lib'
 
     export default {
+        name: "DspSignature",
         components: {},
         props: ["value"],
         data(){

@@ -8,6 +8,7 @@
 import {strToArr, TreeDataTrans} from "../../../../utils/lib";
 
 export default {
+    name: "FtmUserPicker",
     inheritAttrs: false,
     components: {},
     props: [

@@ -9,6 +9,7 @@
 import {deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
 
 export default {
+    name: "FtmDepartmentPicker",
     inheritAttrs: false,
     components: {},
     props: [

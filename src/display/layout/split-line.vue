@@ -6,6 +6,7 @@ import BASE from "./base";
 import Divider from "../../components/divider";
 
 export default {
+    name: "DspSplitLine",
     inheritAttrs: false,
     components: {Divider},
     mixins: [BASE],

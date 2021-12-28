@@ -11,7 +11,8 @@ export const InputDefaults = {
         return {
             dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: "", showCondition: null,
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
-            labelLine: null, labelHidden: 0, required: 0, regular: null
+            labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
+            interface: "", itfParams: {}, afterQuery: ""
         };
     },
     textarea() {

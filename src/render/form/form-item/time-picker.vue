@@ -11,6 +11,7 @@
 import {GetFormatString} from "../../../utils/lib";
 
 export default {
+    name: "FtmTimePicker",
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "required", "disabled", "defaultValue",

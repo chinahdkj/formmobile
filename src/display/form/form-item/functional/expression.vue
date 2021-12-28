@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspExpression",
         inheritAttrs: false,
         components: {},
         props: ["value"],

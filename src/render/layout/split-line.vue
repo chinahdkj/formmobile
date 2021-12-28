@@ -6,6 +6,7 @@
     import Divider from "../../components/divider";
 
     export default {
+        name: "SplitLine",
         inheritAttrs: false,
         components: {Divider},
         mixins: [BASE],

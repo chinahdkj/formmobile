@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmColorPicker",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "disabled", "defaultValue"],

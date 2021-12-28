@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmSwitch",
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue", "dataType"],
         data(){

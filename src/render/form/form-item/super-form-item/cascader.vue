@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmCascader",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "dataType", "readonly", "disabled", "defaultValue","clearable", "multiple","bindings","placeholder"],

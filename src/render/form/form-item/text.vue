@@ -11,6 +11,7 @@
 
 <script>
     export default {
+        name: "FtmText",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "dataType", "readonly", "unit", "disabled"],

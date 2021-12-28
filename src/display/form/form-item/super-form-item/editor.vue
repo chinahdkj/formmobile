@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "DspEditor",
         inheritAttrs: false,
         components: {},
         props: ["value"],

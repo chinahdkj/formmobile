@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmRate",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "disabled", "defaultValue", "allowHalf"],

@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspColorPicker",
         inheritAttrs: false,
         components: {},
         props: ["value"],

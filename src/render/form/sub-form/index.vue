@@ -30,6 +30,7 @@
     import {TransferUrl} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     export default {
+        name: "SubForm",
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],

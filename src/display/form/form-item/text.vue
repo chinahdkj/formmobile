@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspText",
         inheritAttrs: false,
         components: {},
         props: ["value"],

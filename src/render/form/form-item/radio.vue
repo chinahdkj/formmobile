@@ -8,6 +8,7 @@
 import {BindRecords} from "../../../utils/lib";
 
 export default {
+    name: "FtmRadio",
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "bindings", "layoutMode", "optionsType",

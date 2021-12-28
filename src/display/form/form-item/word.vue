@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspWord",
         components: {},
         props: ["value", "fontSize", "fontWeight", "color", "customStyle"],
         data() {

@@ -10,6 +10,7 @@
     import {strToArr} from '../../../../utils/lib'
 
     export default {
+        name: "FtmAudio",
         inheritAttrs: false,
         components: {},
         props: [

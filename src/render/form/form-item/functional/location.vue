@@ -10,6 +10,7 @@
 
 <script>
 export default {
+    name: "FtmLocation",
     inheritAttrs: false,
     components: {},
     props: [

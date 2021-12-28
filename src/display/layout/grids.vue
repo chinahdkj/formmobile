@@ -13,6 +13,7 @@
 import BASE from "./base";
 
 export default {
+    name: "DspGridsPanel",
     inheritAttrs: false,
     components: {},
     mixins: [BASE],

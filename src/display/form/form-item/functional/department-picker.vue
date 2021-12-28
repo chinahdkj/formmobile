@@ -6,6 +6,7 @@
     import {formatFromBinding, BindRecords} from "../../../../utils/lib"
 
     export default {
+        name: "DspDepartmentPicker",
         inheritAttrs: false,
         components: {},
         props: ["value", "field", "model", "dict"],

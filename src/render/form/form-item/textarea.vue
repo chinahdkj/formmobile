@@ -10,6 +10,7 @@
 
 <script>
     export default {
+        name: "FtmTextarea",
         components: {},
         props: ["field", "model", "readonly", "disabled", "required", "defaultValue", "rows"],
         data(){

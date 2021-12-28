@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmEditor",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "dataType", "readonly", "disabled", "required", "defaultValue"],

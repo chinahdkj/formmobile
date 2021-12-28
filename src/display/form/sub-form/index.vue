@@ -26,6 +26,7 @@
 <script>
 import ItemHtml from "../../../display/form";
 export default {
+    name: "DspSubForm",
     inheritAttrs: false,
     components: {ItemHtml},
     mixins: [],

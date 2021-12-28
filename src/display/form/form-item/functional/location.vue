@@ -7,6 +7,7 @@
 
 <script>
     export default {
+        name: "DspLocation",
         props: ["value", "gislist", "customType"],
         data(){
             return {};

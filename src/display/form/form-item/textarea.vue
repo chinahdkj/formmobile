@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspTextarea",
         inheritAttrs: false,
         components: {},
         props: ["value"],

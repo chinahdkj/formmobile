@@ -12,6 +12,7 @@
 <script>
 import {strToArr} from "../../../../utils/lib";
 export default {
+    name: "FtmFile",
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "dataType", "disabled", "required",

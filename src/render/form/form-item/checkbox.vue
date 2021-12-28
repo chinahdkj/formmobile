@@ -10,6 +10,7 @@
 import {BindRecords} from "../../../utils/lib";
 
 export default {
+    name: "FtmCheckbox",
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "bindings", "layoutMode", "dataType",

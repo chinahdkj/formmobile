@@ -8,6 +8,7 @@
 import {strToArr} from '../../../../utils/lib'
 
 export default {
+    name: "DspAudio",
     components: {},
     props: ["value", "multiple"],
     data() {

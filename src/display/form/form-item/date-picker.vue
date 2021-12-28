@@ -8,6 +8,7 @@
 import {DateFormat} from "../../../utils/lib"
 
 export default {
+    name: "DspDatePicker",
     inheritAttrs: false,
     components: {},
     props: ["value", "format"],

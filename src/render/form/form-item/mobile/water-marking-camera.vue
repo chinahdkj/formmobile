@@ -7,6 +7,7 @@
     import {strToArr} from '../../../../utils/lib'
 
     export default {
+        name: "FtmWaterMarkingCamera",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "dataType", "readonly", "disabled", "required",

@@ -9,6 +9,7 @@
 <script>
     import { TransBindings, BindRecords, TransferUrl } from "../../../utils/lib";
     export default {
+        name: "FtmSelect",
         components: {},
         props: [
             "field", "model", "disabled", "required", "defaultValue", "placeholder",

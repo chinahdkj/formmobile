@@ -5,6 +5,7 @@
 
 <script>
     export default {
+        name: "FtmCodeScanner",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue"],

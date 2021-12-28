@@ -6,6 +6,7 @@
 <script>
 import {GetFormatString} from "../../../utils/lib";
 export default {
+    name: "FtmDateRangePicker",
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "required", "disabled", "defaultValue",

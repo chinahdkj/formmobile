@@ -8,6 +8,7 @@
     import {formatFromBinding, BindRecords} from "../../../utils/lib"
 
     export default {
+        name: "DspRadio",
         inheritAttrs: false,
         components: {},
         props: ["value", "field", "bindings", "model", "optionsType", "optionsDict"],

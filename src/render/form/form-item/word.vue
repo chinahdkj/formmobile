@@ -4,6 +4,7 @@
 
 <script>
     export default {
+        name: "FtmWord",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "disabled", "defaultValue", "fontSize", "fontWeight", "color", "customStyle"],

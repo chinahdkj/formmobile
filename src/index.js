@@ -3,8 +3,10 @@ import Server from './utils/server';
 import FormView from '../packages/form-view'
 import FormDisplay from '../packages/form-display'
 import {BindRecords, DateFormat} from "./utils/lib"
+import renders from "./render/index";
+import displays from "./display/index";
 
-const components = [FormView, FormDisplay];
+const components = [FormView, FormDisplay, ...Object.values(renders), ...Object.values(displays)];
 
 const install = (Vue, opts = {}) => {
     components.map(component => {

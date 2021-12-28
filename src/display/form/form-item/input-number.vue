@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: "DspInputNumber",
         inheritAttrs: false,
         components: {},
         props: ["value"],

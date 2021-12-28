@@ -36,6 +36,7 @@
 import {TransferUrl, objectGet} from "../../../../utils/lib";
 
 export default {
+    name: "FtmAutocomplete",
     inheritAttrs: false,
     components: {},
     /*

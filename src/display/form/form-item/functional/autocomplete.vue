@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name: "DspAutocomplete",
     inheritAttrs: false,
     components: {},
     props: ["value"],

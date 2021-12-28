@@ -14,6 +14,7 @@
 import {strToArr} from '../../../../utils/lib'
 
 export default {
+    name: "FtmVideo",
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "dataType", "readonly", "disabled", "required",
