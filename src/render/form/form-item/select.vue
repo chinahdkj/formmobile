@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import { TransBindings, BindRecords, TransferUrl } from "../../../utils/lib";
+    import { TransBindings, BindRecords, GetInterfaceData } from "../../../utils/lib";
     export default {
         name: "FtmSelect",
         components: {},
@@ -122,42 +122,11 @@
                 }
 
                 clearTimeout(this.timer);
-                this.timer = setTimeout(() => {
-                    let res_Url = TransferUrl(url, this.model);
-                    let success = (res) => {
-                        //接口返回数据结构处理，默认是{Code: 0, Message: "", Response: [{Value: "", Name: ""}]}形式
-                        console.log(res);
-                        if (this.afterQuery) {
-                            try {
-                                this.items = TransBindings(eval(`(function(res) {
-                                    ${this.afterQuery || 'return res;'}
-                                })(res)`))
-                            } catch (e) {
-                                this.items = []
-                                console.error(e)
-                            }
-                        } else {
-                            if (res.Code === 0) {
-                                this.items = TransBindings(res.Response || []);
-                            } else {
-                                this.items = [];
-                                console.error(res.Message);
-                            }
-                        }
-                    }
-
-                    let fail = (e) => {
-                        console.log(e);
-                        this.items = [];
-                    }
-
-                    if(this.autoType === 1) {
-                        let customParams = JSON.parse(TransferUrl(JSON.stringify(this.itfParams), this.model)); //自定义参数
-                        let params = {...customParams, ...{url: res_Url}}
-                        this.$server._Post(params, this.$OPTS.urlPrefix || "").then(success).catch(fail);
-                    } else {
-                        this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "").then(success).catch(fail);
-                    }
+                this.timer = setTimeout(async () => {
+                    //接口数据形式如{Code: 0, Message: "", Response: [{Value: "", Name: ""}]}
+                    let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
+                        this.model, this.afterQuery, this.autoType, this.itfParams);
+                    this.items = TransBindings(items);
                 }, 500)
             },
         },

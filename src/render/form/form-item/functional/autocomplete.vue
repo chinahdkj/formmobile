@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {TransferUrl, objectGet} from "../../../../utils/lib";
+import {TransferUrl, objectGet, EvalExpression} from "../../../../utils/lib";
 
 export default {
     name: "FtmAutocomplete",
@@ -44,7 +44,8 @@ export default {
     valueField => 最终存入字段对应接口中的映射字段,为空时候直接取字段标识field
     */
     props: [
-        "field", "model", "required", "disabled", "autoType", "showField", "valueField", "format", "saveFields", "itfParams"
+        "field", "model", "required", "disabled", "autoType", "showField", "valueField", "format", "saveFields",
+        "itfParams", "afterQuery"
     ],
     data() {
         return {
@@ -68,10 +69,48 @@ export default {
             this.$refs.search.Focus();
             this.query();
         },
-        query(){
+        async query(){
             this.loading = true;
-            let url = TransferUrl(this.format, this.model);  //转换表单中的值 ${}
 
+            let res_Url = TransferUrl(this.format, this.model).replace("$self", this.q);
+            let success = (res) => {
+                this.loading = false;
+                //接口返回数据结构处理
+                if (this.afterQuery) {
+                    try {
+                        this.items = eval(`(function (res) {
+                            ${this.afterQuery || "return []"}
+                        })(res)`)
+                    } catch (e) {
+                        this.items = [];
+                        console.error(e)
+                    }
+                } else {
+                    if (res.Code === 0) {
+                        this.items = res.Response || []
+                    } else {
+                        console.error(res.Message);
+                        this.items = []
+                    }
+                }
+            }
+
+            let fail = (e) => {
+                console.log(e);
+                this.loading = false;
+                this.items = [];
+            }
+
+            if (this.autoType === 1) {
+                let itfParams = this.itfParams.replace("$self", this.q || "\"\"");
+                let bodyParams = EvalExpression(itfParams, this.model)
+                let params = {url: res_Url, body: bodyParams}
+                this.$server._Post(params, this.$OPTS.urlPrefix || "").then(success).catch(fail);
+            } else {
+                this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "").then(success).catch(fail);
+            }
+
+            /*let url = TransferUrl(this.format, this.model);  //转换表单中的值 ${}
             //get请求
             if(this.autoType === 2) {
                 let targetUrl = url.replace("$self", this.q); //转换自身查询的值 $self
@@ -106,7 +145,7 @@ export default {
                 this.loading = false;
                 this.items = [];
                 this.$toast(e || "自动补全获取数据失败");
-            });
+            });*/
         },
         onSelectItem(r) {
             let key = this.valueField || this.field;

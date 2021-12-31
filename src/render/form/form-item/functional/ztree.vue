@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {TransferUrl, deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
+import {deepClone, strToArr, TreeDataTrans, BindRecords, GetInterfaceData} from "../../../../utils/lib";
 
 export default {
     name: "FtmZtree",
@@ -20,7 +20,7 @@ export default {
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
-        "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams"
+        "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams", "afterQuery"
     ],
     data() {
         return {
@@ -171,9 +171,7 @@ export default {
             // }
 
             clearTimeout(this.timer);
-            this.timer = setTimeout(() => {
-                let res_Url = TransferUrl(url, this.model);
-
+            this.timer = setTimeout(async () => {
                 let nodesTrans = (nodes = null) => {
                     if(!nodes) {
                         return
@@ -202,6 +200,11 @@ export default {
                     }
                 }
 
+                let nodes = await GetInterfaceData(url, this.$OPTS.urlPrefix,
+                    this.model, this.afterQuery, this.autoType, this.itfParams);
+                nodesTrans(nodes);
+
+                /*let res_Url = TransferUrl(url, this.model);
                 if(!this.autoType || this.autoType === 1) { //post类型接口
                     let customParams = JSON.parse(TransferUrl(JSON.stringify(this.itfParams), this.model)); //自定义参数
                     let params = {...customParams, ...{url: res_Url}}
@@ -228,7 +231,7 @@ export default {
                         this.$toast(e || "接口数据读取失败");
                         this.nodes = [];
                     });
-                }
+                }*/
             }, 500)
         },
 

@@ -12,14 +12,14 @@ export const InputDefaults = {
             dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: "", showCondition: null,
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
             labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
-            interface: "", itfParams: {}, afterQuery: ""
+            interface: "", itfParams: "", afterQuery: ""
         };
     },
     textarea() {
         return {
             hide: 0, disabled: 0, readonly: 0, defaultValue: "", showCondition: null, placeholder: null, rows: 3,
             customClass: null, width: "100%", labelWidth: null, labelHidden: 0, labelLine: null,
-            required: 0, regular: null
+            required: 0, regular: null, showWordLimit: 0
         };
     },
     select() {
@@ -27,7 +27,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, showCondition: null, placeholder: null, multiple: 0,
             expandTags: 'collapse', optionsType: "static", bindings: [], dataType: "String",
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null, labelLine: null,
-            required: 0, autoType: 1, interface: "", itfParams: {}, afterQuery: ""
+            required: 0, autoType: 1, interface: "", itfParams: "", afterQuery: ""
         };
     },
     radio() {
@@ -159,6 +159,14 @@ export const InputDefaults = {
         }
     },
     
+    dialog() {
+        return {
+            ide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
+            labelWidth: null, labelLine: null, labelHidden: 0, btnName: "操作按钮", url: "", fullscreen: 0,
+            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: ""
+        }
+    },
+    
     //布局组件
     tabs() {
         return {
@@ -219,8 +227,8 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
-            wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: {}
-        };
+            wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "" ,
+            afterQuery: ""};
     },
     location() {
         return {
@@ -235,7 +243,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, format: "", showField: "", valueField: "", saveFields: [],
-            autoType: 1, itfParams: {}
+            autoType: 1, itfParams: ""
         }
     },
     

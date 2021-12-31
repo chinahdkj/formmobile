@@ -1,3 +1,5 @@
+import $server from "./server";
+
 export const GlobalDefaultOptions = () => {
     return {
         base: {
@@ -341,4 +343,51 @@ export function TreeDataTrans(nodes) {
         
     });
     
+}
+
+/* 从接口获取数据
+* url 接口地址
+* urlPrefix 接口地址前缀
+* model 表单数据
+* afterQuery 查询接口处理钩子
+* autoType 接口类型 (POST/GET)
+* itfParams post传参参数
+* */
+export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, itfParams) => {
+    return new Promise((resolve, reject) => {
+        let res_Url = TransferUrl(url, model);
+        let success = (res) => {
+            let result = null;
+            //接口返回数据结构处理
+            if (afterQuery) {
+                try {
+                    result = eval(`(function (res) {
+                        ${afterQuery}
+                    })(res)`)
+                    resolve(result);
+                } catch (e) {
+                    resolve(result)
+                    console.error(e)
+                }
+            } else {
+                if (res.Code === 0) {
+                    resolve(res.Response)
+                } else {
+                    reject(res.Message)
+                }
+            }
+        }
+        
+        let fail = (e) => {
+            console.log(e);
+        }
+        
+        if (autoType === 1) {
+            let bodyParams = EvalExpression(itfParams, model)
+            let params = {url: res_Url, body: bodyParams}
+            $server._Post(params, urlPrefix || "").then(success).catch(fail);
+        } else {
+            $server._Get({url: res_Url}, urlPrefix || "").then(success).catch(fail);
+        }
+    });
 }

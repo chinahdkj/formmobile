@@ -18,6 +18,10 @@
                    :required="!!required"
                    :class="customClass"
                    :is-design="false"
+                   :itf-params="itfParams"
+                   :auto-type="autoType"
+                   :interface="interface"
+                   :after-query="afterQuery"
                    v-bind="$attrs"
                    v-on="$listeners"
                    ref="cpt"/>
@@ -27,7 +31,7 @@
 
 <script>
     import {ValidateCommon} from "../../utils/validate"
-    import {GetDefaultValue, TransferUrl} from "../../utils/lib"
+    import {GetDefaultValue, GetInterfaceData} from "../../utils/lib"
 
     export default {
         components: {},
@@ -54,44 +58,6 @@
             }
         },
         methods: {
-            initInterfaceData(url, showType) {
-                return new Promise((resolve, reject) => {
-                    let res_Url = TransferUrl(url, this.model);
-                    let success = (res) => {
-                        //接口返回数据结构处理，默认是{Code: 0, Message: "", Response: ""形式
-                        let result = ""
-                        if (this.afterQuery) {
-                            try {
-                                result = eval(`(function(res) {
-                                    ${this.afterQuery || 'return "";'}
-                                })(res)`)
-                                resolve(result);
-                            } catch (e) {
-                                resolve("")
-                                console.error(e)
-                            }
-                        } else {
-                            if (res.Code === 0) {
-                                resolve(res.Response || "")
-                            } else {
-                                reject(res.Message)
-                            }
-                        }
-                    }
-
-                    let fail = (e) => {
-                        console.log(e);
-                    }
-
-                    if(this.autoType === 1) {
-                        let customParams = JSON.parse(TransferUrl(JSON.stringify(this.itfParams), this.model)); //自定义参数
-                        let params = {...customParams, ...{url: res_Url}}
-                        this.$server._Post(params, this.$OPTS.urlPrefix || "").then(success).catch(fail);
-                    } else {
-                        this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "").then(success).catch(fail);
-                    }
-                })
-            },
             async setDefaultValue() {
                 if (this.model && (this.model[this.field] || this.model[this.field] === 0)) {
                     return;
@@ -110,7 +76,8 @@
 
                 //文本框默认值从接口获取
                 if(this.type === 'text' && this.defaultType === 'interface') {
-                    defaultValue = await this.initInterfaceData(this.interface, this.type);
+                    defaultValue = await GetInterfaceData(this.interface, this.$OPTS.urlPrefix,
+                        this.model, this.afterQuery, this.autoType, this.itfParams);
                 }
 
                 let dv = GetDefaultValue(defaultValue, {}, this.field);
