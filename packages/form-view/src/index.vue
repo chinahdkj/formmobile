@@ -120,7 +120,7 @@ export default {
         dataformat(model) {
             this.forms.forEach(f => {
                 //子表单数据处理
-                if(f.type === 'sub-form') {
+                if(f.type === 'sub-form' || f.type === "sub-user") {
                     if(f.options.field in model && f.options.dataType === "String") {
                         model[f.options.field] = JSON.stringify(model[f.options.field])
                     }

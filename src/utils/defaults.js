@@ -163,7 +163,16 @@ export const InputDefaults = {
         return {
             ide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
             labelWidth: null, labelLine: null, labelHidden: 0, btnName: "操作按钮", url: "", fullscreen: 0,
-            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: ""
+            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", btnWidth: ""
+        }
+    },
+    
+    custom() {
+        return {
+            ide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
+            labelWidth: null, labelLine: null, labelHidden: 0,
+            platType: "pc", customHandle: {}, customHandleMobile: {},
+            dspPlatType: "pc", dspCustomHandle: {}, dspCustomHandleMobile: {},
         }
     },
     
@@ -205,6 +214,13 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, linkage: ""
+        };
+    },
+    "sub-user"() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null,
+            customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
+            labelLine: null, required: 0, linkage: "", panelHeight: 300
         };
     },
     "department-picker"() {

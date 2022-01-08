@@ -36,7 +36,12 @@
     export default {
         components: {},
         inheritAttrs: false,
-        //parentField, index用于区分子表单校验, parent父组件(目前只有子表单中有传递)
+        /**
+         * 参数
+         * @param {父组件字段} parentField
+         * @param {子组件索引} index 用于区分子表单校验
+         * @param {父组件} parent  目前只有子表单中有传递
+         */
         props: ["name", "field", "type", "model", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",

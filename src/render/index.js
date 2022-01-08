@@ -25,6 +25,7 @@ import FtmCascader from "./form/form-item/super-form-item/cascader";
 
 //功能组件
 import FtmUserPicker from "./form/form-item/functional/user-picker";
+import FtmSubUser from "./form/form-item/functional/sub-user";
 import FtmDepartmentPicker from "./form/form-item/functional/department-picker";
 import FtmExpression from "./form/form-item/functional/expression";
 import FtmZtree from "./form/form-item/functional/ztree";
@@ -50,7 +51,7 @@ let components = [
     
     FtmFile, FtmVideo, FtmPicture, FtmEditor, FtmCascader,
     
-    FtmUserPicker, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete,
+    FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete,
     
     FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature,
     

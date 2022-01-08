@@ -19,7 +19,7 @@ import App from "./App.vue";
 import router from "./router";
 
 Vue.use(Mue);
-Vue.use(FormMobile, {urlPrefix: "/hddev"});
+Vue.use(FormMobile, {urlPrefix: "/app/redirect/hddev"});
 
 // 测试字典
 window.FORM_Bindings = {

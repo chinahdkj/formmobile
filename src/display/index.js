@@ -24,6 +24,7 @@ import DspCascader from "./form/form-item/super-form-item/cascader";
 
 //功能组件
 import DspUserPicker from "./form/form-item/functional/user-picker";
+import DspSubUser from "./form/form-item/functional/sub-user";
 import DspDepartmentPicker from "./form/form-item/functional/department-picker";
 import DspExpression from "./form/form-item/functional/expression";
 import DspZtree from "./form/form-item/functional/ztree";
@@ -50,7 +51,7 @@ let components = [
     
     DspFile,DspVideo,DspPicture,DspEditor,DspCascader,
     
-    DspUserPicker, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete,
+    DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete,
     
     DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature,
     
