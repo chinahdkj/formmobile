@@ -1112,6 +1112,23 @@ window.FORM_Bindings = {
     ]
 }
 
+window.FORM_CurrentUser = {
+    "duty": "su",
+    "email": "q253137466@qq.com",
+    "group_code": "csz",
+    "group_id": "5c9d7becff5c942dc8a8add3",
+    "group_nm": "测试组",
+    "mobile": "13736440358",
+    "roles": [
+        "5c9ca68cff5c942dc8a8ad46"
+    ],
+    "sex": 0,
+    "sn": "HD319",
+    "user_id": "5e623edcfdb792000acb505e",
+    "user_nm": "hu1",
+    "user_su": 0
+}
+
 Vue.config.productionTip = false;
 new Vue({
   router,

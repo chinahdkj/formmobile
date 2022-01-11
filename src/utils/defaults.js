@@ -243,8 +243,8 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
-            wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "" ,
-            afterQuery: ""};
+            wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "",
+            afterQuery: "", checkRules: ""};
     },
     location() {
         return {

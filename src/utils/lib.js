@@ -262,6 +262,7 @@ export const TransferUrl = (url, model) => {
         let ff = f.replace("${", "").replace("}", "");
         url = url.replace(f, model[ff]);
     });
+    url = url.replace("$token", window.sessionStorage.getItem("authortoken"))
     return url;
 }
 
