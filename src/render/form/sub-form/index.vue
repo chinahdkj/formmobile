@@ -10,7 +10,7 @@
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                     <div v-for="(sub, idx) in subs" :key="idx">
-                        <form-item :model="row"
+                        <form-item v-if="isShow(sub.options, row, model)" :model="row"
                                    :type="sub.type"
                                    v-bind="sub.options"
                                    :parent-field="field"
@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-    import {TransferUrl} from "../../../utils/lib";
+    import {TransferUrl, needShow} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     export default {
         name: "SubForm",
@@ -77,6 +77,9 @@
             },
             delModel(i){
                 this.value.splice(i, 1);
+            },
+            isShow(opts, model, vars) { //子表项配置 行数据 整个表单数据
+                return !opts.hide && needShow(opts.showCondition, {...vars, ...model});
             },
             isHide(i) {
                 return this.value[i].__hideFields;
