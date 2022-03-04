@@ -37,6 +37,7 @@ import FtmWaterMarkingCamera from "./form/form-item/mobile/water-marking-camera"
 import FtmCodeScanner from "./form/form-item/mobile/code-scanner";
 import FtmAudio from "./form/form-item/mobile/audio";
 import FtmSignature from "./form/form-item/mobile/signature";
+import FtmNfc from "./form/form-item/mobile/nfc";
 
 //布局组件
 import TabsPanel from "./layout/tabs";
@@ -53,7 +54,7 @@ let components = [
     
     FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete,
     
-    FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature,
+    FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature, FtmNfc,
     
     TabsPanel, GridsPanel, SplitLine, CardPanel, SubForm
 ]

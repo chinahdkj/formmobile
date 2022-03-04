@@ -751,6 +751,29 @@ export default {
                         }
                     },
                     {
+                        "id": "39453326-41e3-4cb2-884d-b6d6b98c0997",
+                        "type": "nfc",
+                        "icon": "fa-check-square-o",
+                        "description": "NFC读卡",
+                        "classify": "form",
+                        "options": {
+                            "hide": 0,
+                            "disabled": 0,
+                            "defaultValue": null,
+                            "showCondition": null,
+                            "placeholder": "电脑端nfc读卡，请手动输入",
+                            "customClass": null,
+                            "width": "100%",
+                            "labelHidden": 0,
+                            "labelWidth": 0,
+                            "labelLine": null,
+                            "required": 0,
+                            "name": "nfc读卡",
+                            "rules": [],
+                            "field": "phone"
+                        }
+                    },
+                    {
                         "id": "27ed1505-f634-45e7-8259-c484b0266623",
                         "type": "tabs",
                         "icon": "fa-tags",
@@ -1209,11 +1232,142 @@ export default {
                         }
                     }
                 ],
+                "sub": {
+                    "15675a558d344fe98094fa327a1cc86c": [
+                        {
+                            "id": "69570202-d81e-4c74-a712-0c33aeeb8c88",
+                            "type": "text",
+                            "icon": "fa-square-o",
+                            "description": "单行文本",
+                            "classify": "form",
+                            "options": {
+                                "dataType": "Text",
+                                "hide": 0,
+                                "disabled": 0,
+                                "readonly": 0,
+                                "defaultValue": "",
+                                "showCondition": null,
+                                "placeholder": null,
+                                "customClass": null,
+                                "width": "100%",
+                                "labelWidth": 0,
+                                "labelLine": null,
+                                "labelHidden": 0,
+                                "required": 0,
+                                "regular": 0,
+                                "defaultType": "static",
+                                "autoType": 1,
+                                "interface": "",
+                                "itfParams": "",
+                                "afterQuery": "",
+                                "name": "学生编号",
+                                "rules": [],
+                                "field": "s_id",
+                                "checkType": null
+                            }
+                        },
+                        {
+                            "id": "537fc2b7-e4ca-45b0-9004-3b07b0943475",
+                            "type": "text",
+                            "icon": "fa-square-o",
+                            "description": "单行文本",
+                            "classify": "form",
+                            "options": {
+                                "dataType": "Text",
+                                "hide": 0,
+                                "disabled": 0,
+                                "readonly": 0,
+                                "defaultValue": "",
+                                "showCondition": null,
+                                "placeholder": null,
+                                "customClass": null,
+                                "width": "100%",
+                                "labelWidth": 0,
+                                "labelLine": null,
+                                "labelHidden": 0,
+                                "required": 0,
+                                "regular": null,
+                                "defaultType": "static",
+                                "autoType": 1,
+                                "interface": "",
+                                "itfParams": "",
+                                "afterQuery": "",
+                                "name": "学生姓名",
+                                "rules": [],
+                                "field": "s_name"
+                            }
+                        }
+                    ],
+                    "33f60fd6e73a45afb3b66050b0eba6e9": [
+                        {
+                            "id": "a7c44a44-f11a-455e-b87e-69ef5e92135d",
+                            "type": "text",
+                            "icon": "fa-square-o",
+                            "description": "单行文本",
+                            "classify": "form",
+                            "options": {
+                                "dataType": "Text",
+                                "hide": 0,
+                                "disabled": 0,
+                                "readonly": 0,
+                                "defaultValue": "",
+                                "showCondition": null,
+                                "placeholder": null,
+                                "customClass": null,
+                                "width": "100%",
+                                "labelWidth": 0,
+                                "labelLine": null,
+                                "labelHidden": 0,
+                                "required": 0,
+                                "regular": null,
+                                "defaultType": "static",
+                                "autoType": 1,
+                                "interface": "",
+                                "itfParams": "",
+                                "afterQuery": "",
+                                "name": "教师编号",
+                                "rules": [],
+                                "field": "t_id"
+                            }
+                        },
+                        {
+                            "id": "20429d3d-1cc3-423f-8ae8-ebd18d29200a",
+                            "type": "text",
+                            "icon": "fa-square-o",
+                            "description": "单行文本",
+                            "classify": "form",
+                            "options": {
+                                "dataType": "Text",
+                                "hide": 0,
+                                "disabled": 0,
+                                "readonly": 0,
+                                "defaultValue": "",
+                                "showCondition": null,
+                                "placeholder": null,
+                                "customClass": null,
+                                "width": "100%",
+                                "labelWidth": 0,
+                                "labelLine": null,
+                                "labelHidden": 0,
+                                "required": 0,
+                                "regular": null,
+                                "defaultType": "static",
+                                "autoType": 1,
+                                "interface": "",
+                                "itfParams": "",
+                                "afterQuery": "",
+                                "name": "教师名称",
+                                "rules": [],
+                                "field": "t_name"
+                            }
+                        }
+                    ]
+                },
                 "globalConfig": {
                     "base": {
                         "formHtmlName": "表单aaaa",
                         "formHtmlCode": "my-form",
-                        "formHtmlType": "type1",
+                        "formHtmlType": "type0",
                         "formHtmlDescrip": "描述1111",
                         "formHtmlId": "",
                         "formHtmlEdition": "",

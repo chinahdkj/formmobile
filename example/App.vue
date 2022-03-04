@@ -7,6 +7,15 @@
     </div>
 </template>
 
+<script>
+import VConsole from './vconsole.min'
+const vConsole = new VConsole();
+
+export default {
+
+}
+</script>
+
 <style lang="less">
 #app {
     width: 100%;
