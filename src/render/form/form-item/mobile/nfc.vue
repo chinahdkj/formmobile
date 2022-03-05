@@ -8,7 +8,7 @@
         name: "FtmNfc",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "required", "disabled", "defaultValue"],
+        props: ["field", "model", "required", "disabled", "defaultValue", "afterRead"],
         data() {
             return {};
         },
@@ -33,6 +33,17 @@
                     cb: (res) => {
                         if(res.tag) {
                             this.value = res.tag;
+                            if(this.afterRead) {
+                                try {
+                                    let value = res.tag;
+                                    let _this = this;
+                                    let $post = this.$server._Post
+                                    let $get = this.$server._Get
+                                    eval(this.afterRead)
+                                } catch (e) {
+                                    console.error(e);
+                                }
+                            }
                         }
                     }
                 }

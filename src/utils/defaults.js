@@ -9,7 +9,7 @@ export const InputDefaultOptions = () => {
 export const InputDefaults = {
     text() {
         return {
-            dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: "", showCondition: null,
+            dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: null, showCondition: null,
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
             labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
             interface: "", itfParams: "", afterQuery: ""
@@ -125,7 +125,7 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
             labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 0, placeholder: "", accept:"",
-            dataType:"String", isDownload: 0
+            dataType:"String", isDownload: 0, urlPrefix: ""
         };
     },
     
@@ -141,7 +141,7 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, readonly: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
             labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 0,limit: 5,
-            accept:'.jpg,.jpeg,.png,.gif,.JPG,.JPEG,.GIF', dataType:"String", thumbZip: 0, isComment: 0
+            accept:'.jpg,.jpeg,.png,.gif,.JPG,.JPEG,.GIF', dataType:"String", thumbZip: 0, isComment: 0, urlPrefix: ""
         };
     },
     
@@ -161,15 +161,23 @@ export const InputDefaults = {
     
     dialog() {
         return {
-            ide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
             labelWidth: null, labelLine: null, labelHidden: 0, btnName: "操作按钮", url: "", fullscreen: 0,
             dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", btnWidth: ""
         }
     },
     
+    iframe() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
+            labelWidth: null, labelLine: null, labelHidden: 0, url: "",
+            iframeWidth: "100%", iframeHeight: "300px",
+        }
+    },
+    
     custom() {
         return {
-            ide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null,
             labelWidth: null, labelLine: null, labelHidden: 0,
             platType: "pc", customHandle: {}, customHandleMobile: {},
             dspPlatType: "pc", dspCustomHandle: {}, dspCustomHandleMobile: {},
@@ -244,7 +252,7 @@ export const InputDefaults = {
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
             wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "",
-            afterQuery: "", checkRules: ""};
+            afterQuery: "", checkRules: "", panelWidth: null, panelHeight: null};
     },
     location() {
         return {
@@ -291,5 +299,12 @@ export const InputDefaults = {
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0
         };
-    }
+    },
+    nfc() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null, showCondition: null,
+            placeholder: "电脑端nfc读卡，请手动输入", customClass: null,
+            width: "100%", labelHidden: 0, labelWidth: null, labelLine: null, required: 0
+        };
+    },
 };

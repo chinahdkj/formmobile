@@ -28,6 +28,8 @@ if (typeof window !== "undefined" && window.Vue) {
     install(window.Vue);
 }
 
+window.moment = moment;
+window.$ = $;
 window.FORM_Bindings = {}; //定义全局字典，在项目中进行字典赋值
 window.FORMMOBILE_VERSION = require("../package").version;
 
