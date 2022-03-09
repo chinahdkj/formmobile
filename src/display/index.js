@@ -21,6 +21,7 @@ import DspVideo from "./form/form-item/super-form-item/video";
 import DspPicture from "./form/form-item/super-form-item/picture";
 import DspEditor from "./form/form-item/super-form-item/editor";
 import DspCascader from "./form/form-item/super-form-item/cascader";
+import DspCustom from "./form/form-item/super-form-item/custom";
 
 //功能组件
 import DspUserPicker from "./form/form-item/functional/user-picker";
@@ -50,7 +51,7 @@ let components = [
     DspTimePicker, DspDatePicker, DspDateRangePicker, DspRate, DspColorPicker, DspSlider,
     DspWord, DspHtml,
     
-    DspFile,DspVideo,DspPicture,DspEditor,DspCascader,
+    DspFile,DspVideo,DspPicture,DspEditor,DspCascader, DspCustom,
     
     DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete,
     

@@ -241,6 +241,52 @@ export default {
                         }
                     },
                     {
+                        "id": "7c315b45-5c34-4b08-b4e9-79b8bbefc0f2",
+                        "type": "custom",
+                        "icon": "fa-check-square-o",
+                        "description": "自定义组件",
+                        "classify": "form",
+                        "options": {
+                            "hide": 0,
+                            "disabled": 0,
+                            "defaultValue": null,
+                            "customClass": null,
+                            "width": "100%",
+                            "showCondition": null,
+                            "labelWidth": 0,
+                            "labelLine": null,
+                            "labelHidden": 0,
+                            "platType": "mobile",
+                            "customHandle": {
+                                "template": "<template>\n    <el-input v-model=\"value\" :disabled=\"!!$disabled\" clearable></el-input>\n</template>",
+                                "script": "export default {\n    data() {\n        return {\n\n        }\n    },\n    computed: {\n        value: {\n          get() {\n            return this.$model[this.$field];\n          },\n          set(nv) {\n            this.$set(this.$model, this.$field, nv);\n          }\n        }\n    },\n    watch: {\n\n    },\n    methods: {\n\n    },\n    created() {\n\n    },\n    mounted() {\n\n    }\n}",
+                                "less": ".custom-handle-demo{\n\n}"
+                            },
+                            "customHandleMobile": {
+                                "template": "<template>\n    <mue-input v-model=\"value\" :disabled=\"!!$disabled\" clearable></mue-input>\n</template>",
+                                "script": "export default {\n    data() {\n        return {\n\n        }\n    },\n    computed: {\n        value: {\n          get() {\n            return this.$model[this.$field];\n          },\n          set(nv) {\n            this.$set(this.$model, this.$field, nv);\n          }\n        }\n    },\n    watch: {\n\n    },\n    methods: {\n\n    },\n    created() {\n\n    },\n    mounted() {\n\n    }\n}",
+                                "less": ".custom-handle-demo{\n\n}"
+                            },
+                            "dspPlatType": "mobile",
+                            "dspCustomHandle": {
+                                "template": "<template>\n    <div>{{$value}}</div>\n</template>",
+                                "script": "export default {\n    data() {\n        return {\n\n        }\n    },\n    computed: {\n    \n    },\n    watch: {\n\n    },\n    methods: {\n\n    },\n    created() {\n\n    },\n    mounted() {\n\n    }\n}",
+                                "less": ".custom-handle-demo{\n\n}"
+                            },
+                            "dspCustomHandleMobile": {
+                                "template": "<template>\n    <div>{{$value}}</div>\n</template>",
+                                "script": "export default {\n    data() {\n        return {\n\n        }\n    },\n    computed: {\n    \n    },\n    watch: {\n\n    },\n    methods: {\n\n    },\n    created() {\n\n    },\n    mounted() {\n\n    }\n}",
+                                "less": ".custom-handle-demo{\n\n}"
+                            },
+                            "name": "自定义组件",
+                            "rules": [],
+                            "required": 0,
+                            "checkType": null,
+                            "regular": 0,
+                            "field": "email"
+                        }
+                    },
+                    {
                         "id": "9629dee5-fd89-40cb-87bd-3f4fa6349e4b",
                         "type": "time-picker",
                         "icon": "fa-sticky-note-o",
@@ -770,6 +816,7 @@ export default {
                             "required": 0,
                             "name": "nfc读卡",
                             "rules": [],
+                            "afterRead": "let params = {\n    \"url\": \"http://192.168.100.179:8089/hddev/sys/sysauthority/getGroups.json\",\n    \"body\": {}\n}\n$post(params, _this.$OPTS.urlPrefix || \"\").then((res) => {\n\tconsole.log(\"res\", res)\n  _this.$set(_this.model, \"field_1634117033617\", res.Response[0].name);\n});",
                             "field": "phone"
                         }
                     },
