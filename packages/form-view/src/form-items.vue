@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isShow" class="panel-form-item" :data-id="item.id">
+    <div v-if="isShow" v-show="isShowOfVshow" class="panel-form-item" :data-id="item.id">
         <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" panel-type="view">
             <template slot-scope="{tab, items}">
                 <form-items v-for="item in items" :key="item.id" :item="item" :list="items"/>
@@ -61,8 +61,13 @@
             return {}
         },
         computed: {
+            //v-if隐藏
             isShow() {
-                return this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model)
+                return this.item.options.KeepDom || (this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model))
+            },
+            //v-show隐藏
+            isShowOfVshow() {
+                return !this.item.options.KeepDom && this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model)
             }
         },
         methods: {
