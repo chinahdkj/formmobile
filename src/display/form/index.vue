@@ -1,6 +1,6 @@
 <template>
     <div class="dsp-form-item" :class="['dsp-form-item__' + type, customClass, isLabelLine]" :style="boxstyle">
-        <div class="label" :style="labelStyle">{{name}}</div>
+        <div class="label" v-show="!labelHidden" :style="labelStyle">{{name}}</div>
 
         <div v-if="!type" class="value" :style="labelStyle">{{value}}</div>
         <component v-else class="value"
