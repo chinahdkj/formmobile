@@ -12,7 +12,7 @@
         name: "FtmSelect",
         components: {},
         props: [
-            "field", "model", "disabled", "required", "defaultValue", "placeholder",
+            "field", "model", "vars", "disabled", "required", "defaultValue", "placeholder",
             "multiple", "expandTags", "bindings", "dataType", "optionsType", "optionsDict", "linkage", "searchable",
             "limit", "autoType", "interface", "itfParams", "afterQuery"
         ],
@@ -89,8 +89,9 @@
                 }
                 //存在二级联动()
                 this.unwatch = this.$watch(() => {
-                    if(this.model && (this.linkage in this.model)){
-                        return this.model[this.linkage];
+                    let model = {...(this.model || {}), ...(this.vars || {})}
+                    if (this.linkage in model) {
+                        return model[this.linkage];
                     }
                     return null;
                 }, (v) => {

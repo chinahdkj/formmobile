@@ -19,7 +19,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: [
-        "field", "model", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
+        "field", "model", "vars", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
         "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams", "afterQuery"
     ],
     data() {
@@ -109,8 +109,9 @@ export default {
 
             //存在二级联动，nodes重新赋值（不存在默认值时，立即执行）
             this.unwatch = this.$watch(() => {
-                if(this.model && (this.linkage in this.model)){
-                    return this.model[this.linkage];
+                let model = {...(this.model || {}), ...(this.vars || {})}
+                if (this.linkage in model) {
+                    return model[this.linkage];
                 }
                 return null;
             }, (v, ov) => {

@@ -12,6 +12,7 @@
                     <div v-for="(sub, idx) in subs" :key="idx">
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
                                    :type="sub.type"
+                                   :vars="model"
                                    v-bind="sub.options"
                                    :parent-field="field"
                                    :index="i">

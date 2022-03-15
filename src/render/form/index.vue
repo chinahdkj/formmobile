@@ -13,6 +13,7 @@
         <component :is="'ftm-' + type"
                    :field="field"
                    :model="model"
+                   :vars="vars"
                    :placeholder="placeholder"
                    :default-value="defaultValue"
                    :required="!!required"
@@ -42,7 +43,7 @@
          * @param {子组件索引} index 用于区分子表单校验
          * @param {父组件} parent  目前只有子表单中有传递
          */
-        props: ["name", "field", "type", "model", "required", "labelLine", "width", "customClass",
+        props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
             "itfParams" ,"autoType", "interface", "afterQuery"],
