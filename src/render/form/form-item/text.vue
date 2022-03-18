@@ -4,6 +4,7 @@
                number-type="float"
                :disabled="!!disabled"
                :readonly="!!readonly"
+               @blur="onBlur"
                v-bind="$attrs">
         <template v-if="unit" slot="suffix">{{unit}}</template>
     </mue-input>
@@ -14,7 +15,7 @@
         name: "FtmText",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "dataType", "readonly", "unit", "disabled"],
+        props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur"],
         data(){
             return {};
         },
@@ -36,6 +37,20 @@
                 return this.dataType ? this.dataType.toLowerCase() : "text";
             }
         },
-        methods: {}
+        methods: {
+            onBlur() {
+                if(this.afterBlur) {
+                    try {
+                        let value = this.value;
+                        let _this = this;
+                        let $post = this.$server._Post
+                        let $get = this.$server._Get
+                        eval(this.afterBlur)
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+            }
+        }
     }
 </script>
