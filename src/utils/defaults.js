@@ -12,7 +12,7 @@ export const InputDefaults = {
             dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: null, showCondition: null, KeepDom: 0,
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
             labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
-            interface: "", itfParams: "", afterQuery: ""
+            interface: "", itfParams: "", afterQuery: "", afterBlur: ""
         };
     },
     textarea() {
@@ -74,7 +74,7 @@ export const InputDefaults = {
             defaultType: "static", dftActivity: "",
             max: {value: "", offsetType: "static", offset: 0, unit: "days"},
             min: {value: "", offsetType: "static", offset: 0, unit: "days"},
-            dateChange: ""
+            valChange: ""
         };
     },
     "date-range-picker"() {
@@ -199,14 +199,14 @@ export const InputDefaults = {
     "sub-form"() {
         return {
             hide: 0, customClass: null, disabled: 0, labelHidden: 0, labelWidth: null, showCondition: null, KeepDom: 0,
-            labelLine: null, width: "100%", showRowNum: true, subFormId: "", subFormEdition: "",
+            labelLine: null, width: "100%", showRowNum: true, subFormId: "", subFormEdition: "", align: "center",
             subObjectId: "", subObjectEdition: "", displayType: "default", colNum: 1, addHidden: 0, deleteHidden: 0,
             itfData: {enable: 0, url: "", afterQuery: null}, buttonName: "子表单明细",fullscreen: 0, dlgWidth: "50%"
         };
     },
     "split-line"() {
         return {
-            hide: 0, position: "left", showCondition: null, KeepDom: 0,
+            hide: 0, position: "left", showCondition: null, KeepDom: 0, backgroundLine: 0
         };
     },
     card() {
@@ -221,7 +221,7 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
-            labelLine: null, required: 0, multiple: 0, linkage: ""
+            labelLine: null, required: 0, multiple: 0, linkage: "", valChange: ""
         };
     },
     "sub-user"() {
@@ -236,7 +236,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
-            wholePath: 0
+            wholePath: 0, valChange: ""
         };
     },
     expression() {
@@ -252,7 +252,8 @@ export const InputDefaults = {
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
             wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "",
-            afterQuery: "", checkRules: "", panelWidth: null, panelHeight: null};
+            afterQuery: "", checkRules: "", panelWidth: null, panelHeight: null, valChange: ""
+        };
     },
     location() {
         return {

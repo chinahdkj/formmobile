@@ -15,7 +15,7 @@
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue",
-            "readonly", "editable", "clearable", "dateType", "format", "valueFormat", "max", "min", "dateChange"],
+            "readonly", "editable", "clearable", "dateType", "format", "valueFormat", "max", "min", "valChange"],
         data() {
             return {
                 maxWatch: null,
@@ -111,12 +111,12 @@
                 }
             },
             onConfirm() {
-                if(this.dateChange) {
+                if(this.valChange) {
                     try {
                         let val = v;
                         let model = this.model;
                         let _this = this;
-                        eval(this.dateChange);
+                        eval(this.valChange);
                     } catch (e) {
                         console.info(e)
                     }

@@ -20,7 +20,8 @@ export default {
     components: {},
     props: [
         "field", "model", "vars", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
-        "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams", "afterQuery"
+        "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams", "afterQuery",
+        "valChange"
     ],
     data() {
         return {
@@ -243,35 +244,45 @@ export default {
             if(!v) {
                 this.$set(this.model, `${this.field}$$text`, "");
                 this.autoComplateFields(null);
-                return
-            }
-
-            if(!!this.multiple && Array.isArray(v)) {
-                let nameArr = [];
-                v.forEach(id => {
-                    if(!id) {
-                        return
-                    }
-                    let node = this.$refs.tree.GetOptionInfo(id);
-                    if(this.wholePath) {
-                        nameArr.push(node.$nameRoad.join("-"))
-                    } else {
-                        nameArr.push(node.name)
-                    }
-                })
-                this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
             } else {
-                let node = this.$refs.tree.GetOptionInfo(v);
-                let name = "";
-                if(this.wholePath) {
-                    name = node.$nameRoad.join("-");
+                if(!!this.multiple && Array.isArray(v)) {
+                    let nameArr = [];
+                    v.forEach(id => {
+                        if(!id) {
+                            return
+                        }
+                        let node = this.$refs.tree.GetOptionInfo(id);
+                        if(this.wholePath) {
+                            nameArr.push(node.$nameRoad.join("-"))
+                        } else {
+                            nameArr.push(node.name)
+                        }
+                    })
+                    this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
                 } else {
-                    name = node.name;
+                    let node = this.$refs.tree.GetOptionInfo(v);
+                    let name = "";
+                    if(this.wholePath) {
+                        name = node.$nameRoad.join("-");
+                    } else {
+                        name = node.name;
+                    }
+                    this.$set(this.model, `${this.field}$$text`, name)
+                    this.autoComplateFields(node.data);
                 }
-                this.$set(this.model, `${this.field}$$text`, name)
-                this.autoComplateFields(node.data);
             }
 
+            if(this.valChange) {
+                try {
+                    let val = v;
+                    let model = this.model;
+                    let _this = this;
+                    let nodes = node;
+                    eval(this.valChange);
+                } catch (e) {
+                    console.info(e)
+                }
+            }
         },
         autoComplateFields(node) {
             //自动补全，目前只支持单选时补全

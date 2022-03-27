@@ -14,7 +14,7 @@ export default {
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
-        "wholePath"
+        "wholePath", "valChange"
     ],
     data() {
         return {
@@ -149,32 +149,43 @@ export default {
             //存入名称，不再次调用接口
             if(!v) {
                 this.$set(this.model, `${this.field}$$text`, "");
-                return
+            } else {
+                if(!!this.multiple && Array.isArray(v)) {
+                    let nameArr = [];
+                    v.forEach(id => {
+                        if(!id) {
+                            return
+                        }
+                        let node = this.$refs.tree.GetOptionInfo(id);
+                        if(this.wholePath) {
+                            nameArr.push(node.$nameRoad.join("-"))
+                        } else {
+                            nameArr.push(node.name)
+                        }
+                    })
+                    this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
+                } else {
+                    let node = this.$refs.tree.GetOptionInfo(v);
+                    let name = "";
+                    if(this.wholePath) {
+                        name = node.$nameRoad.join("-");
+                    } else {
+                        name = node.name;
+                    }
+                    this.$set(this.model, `${this.field}$$text`, name)
+                }
             }
 
-            if(!!this.multiple && Array.isArray(v)) {
-                let nameArr = [];
-                v.forEach(id => {
-                    if(!id) {
-                        return
-                    }
-                    let node = this.$refs.tree.GetOptionInfo(id);
-                    if(this.wholePath) {
-                        nameArr.push(node.$nameRoad.join("-"))
-                    } else {
-                        nameArr.push(node.name)
-                    }
-                })
-                this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
-            } else {
-                let node = this.$refs.tree.GetOptionInfo(v);
-                let name = "";
-                if(this.wholePath) {
-                    name = node.$nameRoad.join("-");
-                } else {
-                    name = node.name;
+            if(this.valChange) {
+                try {
+                    let val = v;
+                    let model = this.model;
+                    let _this = this;
+                    let nodes = node;
+                    eval(this.valChange);
+                } catch (e) {
+                    console.info(e)
                 }
-                this.$set(this.model, `${this.field}$$text`, name)
             }
 
         }

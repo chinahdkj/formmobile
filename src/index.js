@@ -32,6 +32,7 @@ window.moment = moment;
 window.$ = $;
 window.FORM_Bindings = {}; //定义全局字典，在项目中进行字典赋值
 window.FORMMOBILE_VERSION = require("../package").version;
+window.FORM_PLAT = "mobile"
 
 export default {
     version: "1.0.0",
