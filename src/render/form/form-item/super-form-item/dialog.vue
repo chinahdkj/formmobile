@@ -27,7 +27,7 @@ export default {
     name: "FtmDialog",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "disabled", "btnName", "url", "fullscreen", "dialogWidth", "dialogHeight",
+    props: ["field", "model", "disabled", "btnName", "url", "mobileUrl", "fullscreen", "dialogWidth", "dialogHeight",
         "dialogClass", "dialogTitle", "btnWidth"],
     data() {
         return {
@@ -47,7 +47,7 @@ export default {
             }
         },
         targetUrl() {
-            return TransferUrl(this.url, this.model)
+            return TransferUrl(this.mobileUrl || this.url, this.model)
         },
         btnStyle() {
             return this.btnWidth ? {width: this.btnWidth} : {}
