@@ -3,7 +3,7 @@
         <van-button :style="btnStyle" size="small" :disabled="!!disabled" native-type="button"
                    @click="dialog.visible = true">{{ btnName }}</van-button>
 
-        <van-popup v-model="dialog.visible" get-container="#app" :close-on-click-overlay="true"
+        <van-popup v-model="dialog.visible" get-container="body" :close-on-click-overlay="true"
             :class="dialogClass ? `form-custom-dialog ${dialogClass} ` : 'form-custom-dialog '"
             position="right" style="width:80%;height:100%;">
             <div class="form-custom-dialog-header">{{dialogTitle || btnName}}</div>
