@@ -1,8 +1,17 @@
 <template>
     <div style="width:100%">
-        <van-button :style="btnStyle" size="small" :disabled="!!disabled" native-type="button"
-                   @click="dialog.visible = true">{{ btnName }}</van-button>
-
+        <!-- <van-button :style="btnStyle" size="small" :disabled="!!disabled" native-type="button"
+                   @click="dialog.visible = true">{{ btnName }}</van-button> -->
+        <div class="mue-select">
+            <div class="mue-form-input has-suffix" @click="openPopup"
+                :class="{'mue-form-input__is-disabled': !!disabled}">
+                <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled"
+                    :placeholder="btnName" onfocus="this.blur()"/>
+                <slot name="icon">
+                    <i class="input__suffix input__suffix_icon iconfont icon-arrows-copy-copy"></i>
+                </slot>
+            </div>
+        </div>
         <van-popup v-model="dialog.visible" get-container="body" :close-on-click-overlay="true"
             :class="dialogClass ? `form-custom-dialog ${dialogClass} ` : 'form-custom-dialog '"
             position="right" style="width:80%;height:100%;">
