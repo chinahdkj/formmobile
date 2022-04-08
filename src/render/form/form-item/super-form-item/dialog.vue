@@ -1,19 +1,28 @@
 <template>
     <div style="width:100%">
-        <van-button :style="btnStyle" size="small" :disabled="!!disabled" native-type="button"
-                   @click="dialog.visible = true">{{ btnName }}</van-button>
-
-        <van-popup v-model="dialog.visible" get-container="#app" :close-on-click-overlay="false"
-            :class="(dialogClass ? `form-custom-dialog ${dialogClass} ` : 'form-custom-dialog ' ) + (!!fullscreen ? 'fullscreen' : '')"
-            :style="{width:!!fullscreen ? '100%' : (dialogWidth ? dialogWidth : '50%')}">
-            <div class="form-custom-dialog-header">{{dialogTitle || btnName}}
-                <div class="form-custom-dialog-header-close" @click="dialog.visible = false">
-                    <van-icon name="cross" />
-                </div>
+        <!-- <van-button :style="btnStyle" size="small" :disabled="!!disabled" native-type="button"
+                   @click="dialog.visible = true">{{ btnName }}</van-button> -->
+        <div class="mue-select">
+            <div class="mue-form-input has-suffix" @click="openPopup"
+                :class="{'mue-form-input__is-disabled': !!disabled}">
+                <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled"
+                    :placeholder="btnName" onfocus="this.blur()"/>
+                <slot name="icon">
+                    <i class="input__suffix input__suffix_icon iconfont icon-arrows-copy-copy"></i>
+                </slot>
             </div>
+        </div>
+        <van-popup v-model="dialog.visible" get-container="body" :close-on-click-overlay="true"
+            :class="dialogClass ? `form-custom-dialog ${dialogClass} ` : 'form-custom-dialog '"
+            position="right" style="width:80%;height:100%;">
+            <div class="form-custom-dialog-header">{{dialogTitle || btnName}}</div>
             <div class="form-custom-dialog-container">
                 <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl"
-                    :style="{width: '100%', height: !!fullscreen ? '100%' : (dialogHeight ? dialogHeight : '100%')}"/>
+                    :style="{width: '100%', height: '100%'}"/>
+            </div>
+            <div class="form-custom-dialog-footer">
+                <van-button size="large" type="default" @click="dialog.visible = false">取消</van-button>
+                <van-button size="large" type="primary" >确定</van-button>
             </div>
         </van-popup>
     </div>
@@ -27,7 +36,7 @@ export default {
     name: "FtmDialog",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "disabled", "btnName", "url", "fullscreen", "dialogWidth", "dialogHeight",
+    props: ["field", "model", "disabled", "btnName", "url", "mobileUrl", "fullscreen", "dialogWidth", "dialogHeight",
         "dialogClass", "dialogTitle", "btnWidth"],
     data() {
         return {
@@ -47,7 +56,7 @@ export default {
             }
         },
         targetUrl() {
-            return TransferUrl(this.url, this.model)
+            return TransferUrl(this.mobileUrl || this.url, this.model)
         },
         btnStyle() {
             return this.btnWidth ? {width: this.btnWidth} : {}
@@ -65,7 +74,12 @@ export default {
             }
         }
     },
-    methods: {}
+    methods: {
+        openPopup(){
+            if(!!this.disabled) return
+            this.dialog.visible = true
+        }
+    }
 }
 </script>
 
@@ -78,26 +92,35 @@ export default {
             padding: 0;
         }
         .form-custom-dialog-header{
-            height: 40px;
-            line-height: 40px;
+            height: 32px;
+            line-height: 32px;
             padding: 0 12px;
             position: relative;
-            padding-right: 40px;
+            font-size: 14px;
+            // padding-right: 40px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            .form-custom-dialog-header-close{
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 40px;
-                height: 40px;
-                text-align: center;
-                line-height: 42px;
-            }
+            background-color: #f0f0f0;
+            color: #757575;
         }
         .form-custom-dialog-container{
-            height: calc(100% - 40px);
+            height: calc(100% - 76px);
+        }
+        .form-custom-dialog-footer{
+            height: 44px;
+            padding: 0px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            .van-button{
+                flex: 1;
+                border-radius: 0px;
+                margin: 0;
+                &.van-button--default{
+                    color: #333333;
+                }
+            }
         }
     }
 </style>

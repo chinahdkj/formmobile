@@ -1,6 +1,16 @@
 <template>
     <div style="width:100%">
-        <van-button :style="btnStyle" size="small" :disabled="true" native-type="button">{{ btnName }}</van-button>
+        <!-- <van-button :style="btnStyle" size="small" :disabled="true" native-type="button">{{ btnName }}</van-button> -->
+        <div class="mue-select">
+            <div class="mue-form-input has-suffix"
+                :class="{'mue-form-input__is-disabled': !!disabled}">
+                <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled"
+                    :placeholder="btnName" onfocus="this.blur()"/>
+                <slot name="icon">
+                    <i class="input__suffix input__suffix_icon iconfont icon-arrows-copy-copy"></i>
+                </slot>
+            </div>
+        </div>        
     </div>
 </template>
 
