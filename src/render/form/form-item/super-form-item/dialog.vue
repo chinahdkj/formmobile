@@ -76,7 +76,7 @@ export default {
     },
     methods: {
         openPopup(){
-            if(!!disabled) return
+            if(!!this.disabled) return
             this.dialog.visible = true
         }
     }
