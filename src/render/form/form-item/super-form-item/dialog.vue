@@ -74,7 +74,12 @@ export default {
             }
         }
     },
-    methods: {}
+    methods: {
+        openPopup(){
+            if(!!disabled) return
+            this.dialog.visible = true
+        }
+    }
 }
 </script>
 
