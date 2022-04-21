@@ -20,10 +20,10 @@
                 <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl"
                     :style="{width: '100%', height: '100%'}"/>
             </div>
-            <div class="form-custom-dialog-footer">
+            <!-- <div class="form-custom-dialog-footer">
                 <van-button size="large" type="default" @click="dialog.visible = false">取消</van-button>
                 <van-button size="large" type="primary" >确定</van-button>
-            </div>
+            </div> -->
         </van-popup>
     </div>
 </template>
@@ -105,7 +105,7 @@ export default {
             color: #757575;
         }
         .form-custom-dialog-container{
-            height: calc(100% - 76px);
+            height: calc(100% - 32px);
         }
         .form-custom-dialog-footer{
             height: 44px;
