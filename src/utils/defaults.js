@@ -27,7 +27,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, showCondition: null, KeepDom: 0, placeholder: null, multiple: 0,
             expandTags: 'collapse', optionsType: "static", bindings: [], dataType: "String",
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null, labelLine: null,
-            required: 0, autoType: 1, interface: "", itfParams: "", afterQuery: ""
+            required: 0, autoType: 1, interface: "", itfParams: "", afterQuery: "", valChange: "", filterable: 0
         };
     },
     radio() {
@@ -124,7 +124,7 @@ export const InputDefaults = {
     file() {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
-            labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 0, placeholder: "", accept:"",
+            labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 1, placeholder: "", accept:"",
             dataType:"String", isDownload: 0, urlPrefix: ""
         };
     },
@@ -148,7 +148,7 @@ export const InputDefaults = {
     editor() {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
-            labelWidth: null, labelLine: null, labelHidden: 0, required: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, required: 0, height: 250
         };
     },
     
@@ -163,7 +163,8 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
             labelWidth: null, labelLine: null, labelHidden: 0, btnName: "操作按钮", url: "", fullscreen: 0,
-            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", btnWidth: ""
+            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", btnWidth: "", btnAlign: "left",
+            mobileUrl: ""
         }
     },
     
@@ -172,6 +173,15 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
             labelWidth: null, labelLine: null, labelHidden: 0, url: "",
             iframeWidth: "100%", iframeHeight: "300px",
+        }
+    },
+    
+    "input-dialog"() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            placeholder: null, labelWidth: null, labelLine: null, labelHidden: 0, url: "", fullscreen: 0,
+            dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", showIcon: 0, btnType: "icon",
+            iconBtn: "el-icon-plus", textBtn: "选择"
         }
     },
     
@@ -192,7 +202,7 @@ export const InputDefaults = {
     },
     grids() {
         return {
-            hide: 0, customClass: null, gutter: 20, showCondition: null, KeepDom: 0, isBorder: 0, isLast: 0, showInForm: 0,
+            hide: 0, customClass: null, gutter: 10, showCondition: null, KeepDom: 0, isBorder: 0, isLast: 0, showInForm: 0,
             showInDetail: 1
         };
     },
@@ -201,7 +211,8 @@ export const InputDefaults = {
             hide: 0, customClass: null, disabled: 0, labelHidden: 0, labelWidth: null, showCondition: null, KeepDom: 0,
             labelLine: null, width: "100%", showRowNum: true, subFormId: "", subFormEdition: "", align: "center",
             subObjectId: "", subObjectEdition: "", displayType: "default", colNum: 1, addHidden: 0, deleteHidden: 0,
-            itfData: {enable: 0, url: "", afterQuery: null}, buttonName: "子表单明细",fullscreen: 0, dlgWidth: "50%"
+            itfData: {enable: 0, url: "", afterQuery: null}, buttonName: "子表单明细",fullscreen: 0, dlgWidth: "50%",
+            initOneRow: 0, handleImport: 0
         };
     },
     "split-line"() {
@@ -212,7 +223,7 @@ export const InputDefaults = {
     card() {
         return {
             hide: 0, customClass: null, showTitle: 1, title: "标题", shadow: "never", showCondition: null, KeepDom: 0,
-            showBorder: 0, titleLine: 0,
+            showBorder: 0, titleLine: 0, isCuttle: 0
         };
     },
     
@@ -221,7 +232,7 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
-            labelLine: null, required: 0, multiple: 0, linkage: "", valChange: ""
+            labelLine: null, required: 0, multiple: 0, linkage: "", valChange: "", isCurrentUser: 0
         };
     },
     "sub-user"() {
@@ -236,14 +247,14 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
-            wholePath: 0, valChange: ""
+            wholePath: 0, valChange: "", isCurrentGroup: 0
         };
     },
     expression() {
         return {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
-            labelLine: null, required: 0, expression: null
+            labelLine: null, required: 0, expression: null, inputable: 0
         };
     },
     ztree() {
@@ -260,7 +271,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, center: null, saveFields: [],
-            gwtOption: "", customType: "", map_options: ""
+            gwtOption: "", customType: "", map_options: "", zoom: 18
         };
     },
     autocomplete() {
@@ -305,7 +316,8 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null, showCondition: null, KeepDom: 0,
             placeholder: "电脑端nfc读卡，请手动输入", customClass: null,
-            width: "100%", labelHidden: 0, labelWidth: null, labelLine: null, required: 0
+            width: "100%", labelHidden: 0, labelWidth: null, labelLine: null, required: 0,
+            dataType: "16",
         };
     },
 };

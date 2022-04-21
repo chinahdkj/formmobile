@@ -8,7 +8,7 @@
         name: "FtmNfc",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "required", "disabled", "defaultValue", "afterRead"],
+        props: ["field", "model", "required", "disabled", "defaultValue", "afterRead", "dataType"],
         data() {
             return {};
         },
@@ -31,11 +31,12 @@
             window.response2({
                     method: "nfcData",
                     cb: (res) => {
-                        if(res.tag) {
-                            this.value = res.tag;
+                        let val = this.dataType === "10" ? res.tag10 : res.tag
+                        if(val) {
+                            this.value = val;
                             if(this.afterRead) {
                                 try {
-                                    let value = res.tag;
+                                    let value = val;
                                     let _this = this;
                                     let $post = this.$server._Post
                                     let $get = this.$server._Get
