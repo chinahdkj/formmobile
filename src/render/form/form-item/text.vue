@@ -5,8 +5,12 @@
                :disabled="!!disabled"
                :readonly="!!readonly"
                @blur="onBlur"
-               v-bind="$attrs">
-        <template v-if="unit" slot="suffix">{{unit}}</template>
+               v-bind="$attrs"
+               :class="{'is-select':isSelect}">
+        <template v-if="unit || isSelect" slot="suffix">
+            {{unit}}
+            <i v-if="isSelect" class="input__suffix input__suffix_icon iconfont icon-arrows-copy-copy is-select-arrow"></i>
+        </template>
     </mue-input>
 </template>
 
@@ -15,7 +19,7 @@
         name: "FtmText",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur"],
+        props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur", "isSelect"],
         data(){
             return {};
         },
@@ -54,3 +58,24 @@
         }
     }
 </script>
+<style lang="less" scoped>
+.is-select{
+    .mue-form-input .input__suffix{
+        display: inline-flex;
+        .is-select-arrow{
+            pointer-events: none;
+            display: block;
+            right: 5px;
+            text-align: right;
+            height: 20px;
+            line-height: 20px;
+            color: #757575;
+            margin-left: 0;
+            flex: 0 0 auto;
+            transform: rotate(-90deg);
+            right: 0;
+        }
+    }
+}
+
+</style>
