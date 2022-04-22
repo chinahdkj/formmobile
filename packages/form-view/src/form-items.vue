@@ -24,7 +24,7 @@
         </sub-form>
 
         <template v-else-if="item.type === 'split-line'">
-            <split-line v-bind="item.options"></split-line>
+            <!-- <split-line v-bind="item.options"></split-line> -->
         </template>
 
         <template v-else>
