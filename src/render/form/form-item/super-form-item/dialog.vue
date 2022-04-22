@@ -124,3 +124,11 @@ export default {
         }
     }
 </style>
+<style lang="less">
+body .mue-form .custom-form-group-grids .mue-form-item  {
+    &.fpt__dialog {
+        margin-top: -40px;
+        opacity: 0;
+    }
+}
+</style>
