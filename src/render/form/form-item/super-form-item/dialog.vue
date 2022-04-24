@@ -14,7 +14,7 @@
         </div>
         <van-popup v-model="dialog.visible" get-container="body" :close-on-click-overlay="true"
             :class="dialogClass ? `form-custom-dialog ${dialogClass} ` : 'form-custom-dialog '"
-            position="right" style="width:80%;height:100%;">
+            position="right" style="width:90%;height:100%;">
             <div class="form-custom-dialog-header">{{dialogTitle || btnName}}</div>
             <div class="form-custom-dialog-container">
                 <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl"
