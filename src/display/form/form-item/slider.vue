@@ -35,4 +35,9 @@
             background-color: #4698eb;
         }
     }
+    .is-label-line {
+        .dsp__slider.value{
+            padding:  0 0 10px;
+        }
+    }
 </style>

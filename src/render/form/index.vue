@@ -97,5 +97,45 @@
 </script>
 
 <style lang="less">
+// .mue-form-item{
 
+//     &.not-inline{
+
+//         .mue-form-item-content{
+//             text-align: left;
+//             .mue-form-input{
+//                 .input__inner{
+//                     text-align: left !important;
+//                 }
+//             }
+//             .ftm__radio,.ftm__checkbox{
+//                 justify-content:flex-start;
+//                 .van-radio:first-child,.van-checkbox:first-child{
+//                     margin-left: 5px;
+//                 }
+//             }
+//             .van-switch{
+//                 margin-left: 5px;
+//             }
+//             .mue-img-upload-list,.mue-upload-list,.mue-sound-record-list,.mue-signature-list{
+//                 justify-content: flex-start;
+//             }
+//         }
+
+//     }
+// }
+
+// .sub-form-view{
+
+//     .mue-form-item{
+
+//         &.not-inline{
+
+//             .mue-form-item-content{
+//                 padding-left: 10px;
+//             }
+
+//         }
+//     }
+// }
 </style>
