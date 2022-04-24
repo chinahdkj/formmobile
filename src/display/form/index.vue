@@ -82,6 +82,9 @@
             }
             .value {
                 padding-left: 0;
+                width: 100% !important;
+                text-align: left;
+                justify-content: flex-start;
             }
         }
 
