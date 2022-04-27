@@ -201,6 +201,44 @@ export const needShow = (condition, model) => {
     return !!r;
 };
 
+//replace 表达式中的${}
+export const ReplaceFields = (expression) => {
+    let fields = expression.match(/\$\{([^.]|\n)+?\}/g) || []; //匹配不带"."的,如${xxx}
+    let pFields = expression.match(/\$\{parent.([^.]|\n)+?\}/g) || [] //匹配待“parent.”的，如${parent.xx}
+    
+    fields.forEach((f) => {
+        let ff = f.replace("${", "model['").replace("}", "']");
+        expression = expression.replace(f, ff);
+    });
+    
+    //子表中的表达式组件替换主表中的某个值
+    pFields.forEach((f) => {
+        let ff = f.replace("${parent.", "vars['").replace("}", "']");
+        expression = expression.replace(f, ff);
+    });
+    
+    return expression
+}
+
+
+//表单项禁用条件 参数：条件表达式 、 表单数据或子表行数据、 表单数据（为子表单项时才有值，否则为undefined）、 是否新增（or修改）模式
+export const needDisabled = (condition, model, vars, isNew) => {
+    if(!condition){
+        return false;
+    }
+    
+    // let fields = condition.match(/\$\{(.|\n)+?\}/g) || [];
+    let cdn = ReplaceFields(condition)
+    let r = false;
+    try{
+        r = eval(cdn);
+    } catch(e){
+        console.error(e);
+        r = false;
+    }
+    return !!r;
+};
+
 //从静态数据或者字典数据中转义获取text，返回字符串
 export const formatFromBinding = (value, bindings, bindKey) => { //值，字典数据， 字典key
     if(!value){
