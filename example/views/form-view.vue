@@ -1,7 +1,7 @@
 <template>
     <div class="form-view-demo">
         <div class="form-view-container">
-            <form-view ref="formView" v-model="model" :form-object="formObject"></form-view>
+            <form-view ref="formView" v-model="model" :form-object="formObject" :is-new="false"></form-view>
         </div>
         <div class="form-view-buttons">
             <van-button size="large" type="default" @click="resetForm">重置</van-button>

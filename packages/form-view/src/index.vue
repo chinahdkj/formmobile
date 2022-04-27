@@ -2,10 +2,10 @@
     <div class="form-view" v-loading.fullscreen.lock="loading">
         <mue-form v-if="!noForm && ready" v-model="model" ref="form" :class="globalConfig.customClass" v-bind="globalConfig"
                   :style="formStyle">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew"></form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew"></form-items>
         </div>
 
         <div v-if="!!globalConfig.disabled" class="readonly-shadow"></div>
@@ -33,6 +33,7 @@ export default {
             type: Object,
             default: () => {}
         },
+        isNew: {type: Boolean, default: true}, //表单模式（新增|修改）,默认新增
         noForm: {type: Boolean, default: false}, //不拥有自己的mue-form容器，默认拥有
         formSet: {type: Function, default: null}, //渲染结束前处理model的钩子，可用于设置初始值
         formGet: {type: Function, default: null} //获取model数据前的钩子，可用于修改结果

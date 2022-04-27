@@ -23,6 +23,8 @@
                    :auto-type="autoType"
                    :interface="interface"
                    :after-query="afterQuery"
+                   :disabled="isDisabled"
+                   :is-new="isNew"
                    v-bind="$attrs"
                    v-on="$listeners"
                    ref="cpt"/>
@@ -32,7 +34,7 @@
 
 <script>
     import {ValidateCommon} from "../../utils/validate"
-    import {GetDefaultValue, GetInterfaceData} from "../../utils/lib"
+    import {GetDefaultValue, GetInterfaceData, needDisabled} from "../../utils/lib"
 
     export default {
         components: {},
@@ -41,13 +43,17 @@
          * 参数
          * @param {父组件字段} parentField
          * @param {子组件索引} index 用于区分子表单校验
+         * @param {是否新增} isNew 要于区分新增和编辑模式
          * @param {父组件} parent  目前只有子表单中有传递
          */
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
-            "itfParams" ,"autoType", "interface", "afterQuery"],
+            "itfParams" ,"autoType", "interface", "afterQuery","disabled","disabledCondition","isNew"],
         computed: {
+            isDisabled() {
+                return this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+            },
             customRules() {
                 let rules = this.rules.map(m => {
                     if (m.type === "Regular") {

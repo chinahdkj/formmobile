@@ -15,6 +15,7 @@
                                    :vars="model"
                                    v-bind="sub.options"
                                    :parent-field="field"
+                                   :is-new="isNew"
                                    :index="i">
                         </form-item>
                     </div>
@@ -36,7 +37,7 @@
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery","isNew"],
         data() {
             return {
                 expendStatus: true,
