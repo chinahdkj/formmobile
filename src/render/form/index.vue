@@ -55,6 +55,10 @@
                 return this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
             },
             customRules() {
+                //空数据不做自定义校验
+                if (this.model && (this.model[this.field] === "" || this.model[this.field] == null)) {
+                    return [];
+                }       
                 let rules = this.rules.map(m => {
                     if (m.type === "Regular") {
                         return {
