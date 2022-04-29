@@ -373,17 +373,17 @@ export function strToArr(urlStrs){
 export function TreeDataTrans(nodes) {
     return nodes.map((v) => {
         const haveChildren = Array.isArray(v.children) && v.children.length > 0;
-        let obj = v;
-        obj.sourceCode = v.code
-        obj.code = v.id
-        obj.children = haveChildren ? TreeDataTrans(v.children) : []
-        return obj
-        // return {
-        //     ...v,
-        //     sourceCode: v.code,
-        //     code: v.id,
-        //     children: haveChildren ? TreeDataTrans(v.children) : []
-        // };
+        // let obj = v;
+        // obj.sourceCode = v.code
+        // obj.code = v.id
+        // obj.children = haveChildren ? TreeDataTrans(v.children) : []
+        // return obj
+        return {
+            ...v,
+            sourceCode: v.code,
+            code: v.id,
+            children: haveChildren ? TreeDataTrans(v.children) : []
+        };
         
     });
     

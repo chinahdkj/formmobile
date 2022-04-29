@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import Vue from 'vue'
 import Server from './utils/server';
 import FormView from '../packages/form-view'
