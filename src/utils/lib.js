@@ -378,13 +378,6 @@ export function TreeDataTrans(nodes) {
         obj.code = v.id
         obj.children = haveChildren ? TreeDataTrans(v.children) : []
         return obj
-        // return {
-        //     ...v,
-        //     sourceCode: v.code,
-        //     code: v.id,
-        //     children: haveChildren ? TreeDataTrans(v.children) : []
-        // };
-        
     });
     
 }
