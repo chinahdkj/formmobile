@@ -37,7 +37,7 @@
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery","isNew"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled"],
         data() {
             return {
                 expendStatus: true,

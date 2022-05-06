@@ -49,7 +49,8 @@
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
-            "itfParams" ,"autoType", "interface", "afterQuery","disabled","disabledCondition","isNew"],
+            "itfParams" ,"autoType", "interface", "afterQuery","disabled","disabledCondition","isNew",
+            "unique", "uniqueFields"],
         computed: {
             isDisabled() {
                 return this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
@@ -59,13 +60,15 @@
                 if (this.model && (this.model[this.field] === "" || this.model[this.field] == null)) {
                     return [];
                 }       
-                let rules = this.rules.map(m => {
+                let rules = this.rules.filter(f => f.type).map(m => {
                     if (m.type === "Regular") {
                         return {
                             validator: (r, v, c) => {
                                 eval(m.value).test(v) ? c() : c(new Error(m.message || '验证失败，请输入正确格式'));
                             }
                         }
+                    }  else if (m.type === "unique") {
+                        return m
                     } else {
                         return ValidateCommon(m.type)
                     }
