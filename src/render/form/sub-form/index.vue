@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-    import {TransferUrl, needShow} from "../../../utils/lib";
+    import {TransferUrl, needShow, deepClone} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     export default {
         name: "SubForm",
@@ -37,7 +37,7 @@
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery","isNew"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled"],
         data() {
             return {
                 expendStatus: true,
@@ -143,7 +143,7 @@
                 if((this.itfData || {}).enable) {
                     this.itfDataInit();
                 } else {
-                    this.value = this.initValue;
+                    this.value = deepClone(this.initValue);
                 }
             },
         },

@@ -1,7 +1,7 @@
 <template>
     <div class="form-view" v-loading.fullscreen.lock="loading">
         <mue-form v-if="!noForm && ready" v-model="model" ref="form" :class="globalConfig.customClass" v-bind="globalConfig"
-                  :style="formStyle">
+                  :style="formStyle" :crud="crud">
             <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew"></form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
@@ -30,6 +30,10 @@ export default {
             default: () => {}
         },
         value: {
+            type: Object,
+            default: () => {}
+        },
+        crud: { //唯一性校验需传递crud对象
             type: Object,
             default: () => {}
         },
