@@ -5,7 +5,7 @@
                        :data-field="field" :class="['fpt__' + type, customClass ? customClass : '']">
             <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
                 <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
-                    <van-icon v-if="!disabled" slot="tools" name="delete" style="line-height: inherit;"
+                    <van-icon v-if="!disabled && !deleteHidden" slot="tools" name="delete" style="line-height: inherit;"
                               @click="delModel(i)"/>
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
@@ -22,7 +22,7 @@
                 </mue-panel>
             </div>
             <div class="sub-form-handle-btn">
-                <van-button size="large" type="primary" native-type="button" @click="addModel">添加</van-button>
+                <van-button size="large" v-if="!addHidden" :disabled="!!disabled || !!addDisabled" type="primary" native-type="button" @click="addModel">添加</van-button>
             </div>
         </mue-form-item>
 
@@ -36,7 +36,7 @@
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],
-        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
+        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden"
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled"],
         data() {
             return {
