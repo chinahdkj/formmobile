@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-    import {TransferUrl, needShow} from "../../../utils/lib";
+    import {TransferUrl, needShow, deepClone} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     export default {
         name: "SubForm",
@@ -143,7 +143,7 @@
                 if((this.itfData || {}).enable) {
                     this.itfDataInit();
                 } else {
-                    this.value = this.initValue;
+                    this.value = deepClone(this.initValue);
                 }
             },
         },
