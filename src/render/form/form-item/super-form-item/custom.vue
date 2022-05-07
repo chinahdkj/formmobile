@@ -20,7 +20,8 @@ export default {
         isDesign: Boolean,
         field: String,
         model: Object,
-        disabled: Number,
+        disabled: [Number,String,Boolean],
+        isNew: [Boolean, Number],
         platType: String,
         customHandleMobile: {
             type: Object,
@@ -112,7 +113,8 @@ export default {
                 this.view.$parent = this;
                 this.view.$field = this.field;
                 this.view.$model = this.model;
-                this.view.$disabled = this.disabled;
+                this.view.$isNew = !!this.isNew;
+                this.view.$disabled = !!this.disabled;
                 this.view.$post = this.$post;
                 this.view.$get = this.$get;
                 this.view.$deepClone = this.$deepClone;
