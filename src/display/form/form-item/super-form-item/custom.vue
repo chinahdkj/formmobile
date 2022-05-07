@@ -18,6 +18,8 @@ export default {
         value: null,
         field: String,
         model: Object,
+        disabled: [Number,String,Boolean],
+        isNew: [Boolean, Number],
         dspPlatType: String,
         dspCustomHandleMobile: {
             type: Object,
@@ -91,6 +93,8 @@ export default {
                 this.view.$value = this.value
                 this.view.$field = this.field;
                 this.view.$model = this.model;
+                this.view.$isNew = !!this.isNew;
+                this.view.$disabled = !!this.disabled;
                 this.view.$post = this.$post;
                 this.view.$get = this.$get;
                 this.view.$deepClone = this.$deepClone;
