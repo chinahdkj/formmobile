@@ -23,6 +23,7 @@
                    :auto-type="autoType"
                    :interface="interface"
                    :after-query="afterQuery"
+                   :parent-field="parentField"
                    :disabled="isDisabled"
                    :is-new="isNew"
                    v-bind="$attrs"
@@ -34,7 +35,8 @@
 
 <script>
     import {ValidateCommon} from "../../utils/validate"
-    import {GetDefaultValue, GetInterfaceData, needDisabled} from "../../utils/lib"
+    import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone} from "../../utils/lib"
+
 
     export default {
         components: {},
@@ -44,13 +46,14 @@
          * @param {父组件字段} parentField
          * @param {子组件索引} index 用于区分子表单校验
          * @param {是否新增} isNew 要于区分新增和编辑模式
+         * @param {子表单配置信息} subOptions  目前只有子表单项使用
          * @param {父组件} parent  目前只有子表单中有传递
          */
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
             "itfParams" ,"autoType", "interface", "afterQuery","disabled","disabledCondition","isNew",
-            "unique", "uniqueFields"],
+            "unique", "uniqueFields", "subOptions"],
         computed: {
             isDisabled() {
                 return this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
@@ -60,7 +63,20 @@
                 if (this.model && (this.model[this.field] === "" || this.model[this.field] == null)) {
                     return [];
                 }       
-                let rules = this.rules.filter(f => f.type).map(m => {
+                let rules = this.rules;
+
+                //如果为子表单项，不走接口唯一性校验(确保mue-form-item不接收到unique相关的rules,改为subUnique最自定义前端校验)
+                if(this.parentField) {
+                    rules = rules.map(m => {
+                        let temp = deepClone(m);
+                        if(temp.type === "unique") {
+                            temp.type = "subUnique"
+                        }
+                        return temp
+                    })
+                }
+
+                rules = rules.filter(f => f.type).map(m => {
                     if (m.type === "Regular") {
                         return {
                             validator: (r, v, c) => {
@@ -69,6 +85,47 @@
                         }
                     }  else if (m.type === "unique") {
                         return m
+                    }  else if (m.type === "subUnique") {
+                        return {
+                            validator: (rule, value, callback) => {
+                                if(!this.unique) {
+                                    callback();
+                                }
+                                if(this.unique) {
+                                    if((this.uniqueFields || []).length) {
+                                        //字段组合唯一性校验
+                                        let namedict = {}; //名称字典
+                                        let items = this.vars[this.parentField].map(m => {
+                                            let obj = {};
+                                            for(let key of this.uniqueFields) {
+                                                if(key in m) {
+                                                    obj[key] = m[key]
+                                                    let target = this.subOptions.find(f => f.options.field === key)
+                                                    if(target) {
+                                                        namedict[key] = target.options.name
+                                                    }
+                                                }
+                                            }
+                                            return JSON.stringify(obj)
+                                        })
+                                        if([...new Set(items)].length < this.vars[this.parentField].length) {
+                                            callback(new Error(`字段 [${Object.values(namedict)}] 存在重复数据`))
+                                        } else {
+                                            callback();
+                                        }
+
+                                    } else {
+                                        let items = this.vars[this.parentField].map(m => m[this.field])
+                                        if([...new Set(items)].length < this.vars[this.parentField].length) {
+                                            callback(new Error(`字段 ${name} 存在重复数据`))
+                                        } else {
+                                            callback();
+                                        }
+                                    }
+                                }
+                                callback(new Error(m.message || '验证失败，请输入正确格式'))
+                            }
+                        }
                     } else {
                         return ValidateCommon(m.type)
                     }
