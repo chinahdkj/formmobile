@@ -16,6 +16,7 @@
                                    v-bind="sub.options"
                                    :parent-field="field"
                                    :is-new="isNew"
+                                   :sub-options="subs"
                                    :index="i">
                         </form-item>
                     </div>
