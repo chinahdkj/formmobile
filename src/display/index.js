@@ -23,6 +23,7 @@ import DspEditor from "./form/form-item/super-form-item/editor";
 import DspDialog from "./form/form-item/super-form-item/dialog";
 import DspCascader from "./form/form-item/super-form-item/cascader";
 import DspCustom from "./form/form-item/super-form-item/custom";
+import DspInputDialog from "./form/form-item/super-form-item/input-dialog";
 
 //功能组件
 import DspUserPicker from "./form/form-item/functional/user-picker";
@@ -58,7 +59,7 @@ let components = [
     
     DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature, DspNfc,
     
-    DspTabsPanel, DspGridsPanel, DspSplitLine, DspCardPanel, DspSubForm
+    DspTabsPanel, DspGridsPanel, DspSplitLine, DspCardPanel, DspSubForm, DspInputDialog
 ]
 
 components.forEach((cmp) => {

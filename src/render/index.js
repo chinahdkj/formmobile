@@ -23,6 +23,7 @@ import FtmEditor from "./form/form-item/super-form-item/editor";
 import FtmDialog from "./form/form-item/super-form-item/dialog";
 import FtmCascader from "./form/form-item/super-form-item/cascader";
 import FtmCustom from "./form/form-item/super-form-item/custom";
+import FtmInputDialog from "./form/form-item/super-form-item/input-dialog";
 
 
 //功能组件
@@ -58,7 +59,7 @@ let components = [
     
     FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature, FtmNfc,
     
-    TabsPanel, GridsPanel, SplitLine, CardPanel, SubForm
+    TabsPanel, GridsPanel, SplitLine, CardPanel, SubForm, FtmInputDialog
 ]
 
 components.forEach((cmp) => {
