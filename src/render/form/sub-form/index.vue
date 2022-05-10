@@ -17,6 +17,7 @@
                                    :parent-field="field"
                                    :is-new="isNew"
                                    :sub-options="subs"
+                                   :global-disabled="globalDisabled"
                                    :index="i">
                         </form-item>
                     </div>
@@ -38,7 +39,7 @@
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled"],
         data() {
             return {
                 expendStatus: true,
