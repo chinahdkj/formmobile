@@ -239,6 +239,24 @@ export const needDisabled = (condition, model, vars, isNew) => {
     return !!r;
 };
 
+//表单项必填条件 参数：条件表达式 、 表单数据或子表行数据、 表单数据（为子表单项时才有值，否则为undefined）、 是否新增（or修改）模式
+export const needMust = (condition, model, vars, isNew) => {
+    if(!condition){
+        return false;
+    }
+    
+    // let fields = condition.match(/\$\{(.|\n)+?\}/g) || [];
+    let cdn = ReplaceFields(condition)
+    let r = false;
+    try{
+        r = eval(cdn);
+    } catch(e){
+        console.error(e);
+        r = false;
+    }
+    return !!r;
+};
+
 //从静态数据或者字典数据中转义获取text，返回字符串
 export const formatFromBinding = (value, bindings, bindKey) => { //值，字典数据， 字典key
     if(!value){
