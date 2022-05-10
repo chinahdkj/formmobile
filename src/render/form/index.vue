@@ -2,21 +2,20 @@
     <mue-form-item class="custom-form-item"
                    :label="name"
                    :field="parentField ? `${parentField}.${index}.${field}` : field"
-                   :required="!!required"
+                   :required="isMust"
                    :label-width="labelWidth"
                    :inline="!labelLine"
                    :label-hidden="!!labelHidden"
                    :class="['fpt__' + type, customClass ? customClass : '']"
                    :data-field="field"
                    :rules="customRules">
-
         <component :is="'ftm-' + type"
                    :field="field"
                    :model="model"
                    :vars="vars"
                    :placeholder="placeholder"
                    :default-value="defaultValue"
-                   :required="!!required"
+                   :required="isMust"
                    :class="customClass"
                    :is-design="false"
                    :itf-params="itfParams"
@@ -35,7 +34,7 @@
 
 <script>
     import {ValidateCommon} from "../../utils/validate"
-    import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone} from "../../utils/lib"
+    import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone, needMust} from "../../utils/lib"
 
 
     export default {
@@ -52,11 +51,14 @@
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
-            "itfParams" ,"autoType", "interface", "afterQuery","disabled","disabledCondition","isNew",
-            "unique", "uniqueFields", "subOptions"],
+            "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
+            "unique", "uniqueFields", "subOptions", "globalDisabled"],
         computed: {
             isDisabled() {
-                return this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+                return !!this.globalDisabled || this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+            },
+            isMust() {
+                return !!this.required || needMust(this.mustCondition, this.model, this.vars || {}, this.isNew)
             },
             customRules() {
                 //空数据不做自定义校验

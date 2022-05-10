@@ -2,10 +2,10 @@
     <div class="form-view" v-loading.fullscreen.lock="loading">
         <mue-form v-if="!noForm && ready" v-model="model" ref="form" :class="globalConfig.customClass" v-bind="globalConfig"
                   :style="formStyle" :crud="crud">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :global-disabled="disabled"></form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :global-disabled="disabled"></form-items>
         </div>
 
         <div v-if="!!globalConfig.disabled" class="readonly-shadow"></div>
@@ -36,6 +36,10 @@ export default {
         crud: { //唯一性校验需传递crud对象
             type: Object,
             default: () => {}
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         },
         isNew: {type: Boolean, default: true}, //表单模式（新增|修改）,默认新增
         noForm: {type: Boolean, default: false}, //不拥有自己的mue-form容器，默认拥有
