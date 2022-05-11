@@ -52,7 +52,7 @@
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled || this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
@@ -156,6 +156,18 @@
                 if(this.type === 'text' && this.defaultType === 'interface') {
                     defaultValue = await GetInterfaceData(this.interface, this.$OPTS.urlPrefix,
                         this.model, this.afterQuery, this.autoType, this.itfParams);
+                }
+
+                //用户选择组件取当前登录人
+                if(this.type === "user-picker" && !!this.isCurrentUser) {
+                    defaultValue = window.FORM_CurrentUser.user_id || ""
+                    this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser.user_nm);
+                }
+
+                //部门选择组件取当前登录人部门
+                if(this.type === "department-picker" && !!this.isCurrentGroup) {
+                    defaultValue = window.FORM_CurrentUser.group_id || ""
+                    this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser.group_nm);
                 }
 
                 let dv = GetDefaultValue(defaultValue, {}, this.field);
