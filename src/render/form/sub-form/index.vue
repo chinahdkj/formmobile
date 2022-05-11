@@ -180,12 +180,10 @@
             right: 15px;
             z-index: 1;
             line-height: 36px;
+            z-index:100;
         }
 
         > .mue-form-item {
-            > label {
-                margin-bottom: 10px;
-            }
 
             > .mue-form-item-content {
                 background: #f0f0f0;
