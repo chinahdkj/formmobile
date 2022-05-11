@@ -161,6 +161,7 @@ export default {
         right: 15px;
         z-index: 1;
         line-height: 36px;
+        z-index: 100;
     }
 
 
