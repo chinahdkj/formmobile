@@ -97,9 +97,9 @@ export default {
     }
 </style>
 <style lang="less">
-body .mue-form .custom-form-group-grids .mue-form-item ,
-body .sub-form-view .form-part .mue-panel .mue-form-item {
-    &.fpt__dialog {
+body .mue-form .custom-form-group-grids .dsp-form-item ,
+body .sub-form-view .form-part .mue-panel .dsp-form-item {
+    &.dsp-form-item__dialog {
         margin-top: -41px;
         opacity: 0;
     }
