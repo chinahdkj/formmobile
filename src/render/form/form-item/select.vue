@@ -50,7 +50,7 @@
                     if(!v) return [];
                     return Array.isArray(v) ? v : v.split(",");
                 }
-                return v? String(v) : null;
+                return v;
             },
             commitValue(v){
                 if(!v){
