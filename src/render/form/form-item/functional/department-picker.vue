@@ -150,30 +150,32 @@ export default {
             if(!v) {
                 this.$set(this.model, `${this.field}$$text`, "");
             } else {
-                if(!!this.multiple && Array.isArray(v)) {
-                    let nameArr = [];
-                    v.forEach(id => {
-                        if(!id) {
-                            return
-                        }
-                        let node = this.$refs.tree.GetOptionInfo(id);
-                        if(this.wholePath) {
-                            nameArr.push(node.$nameRoad.join("-"))
-                        } else {
-                            nameArr.push(node.name)
-                        }
-                    })
-                    this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
-                } else {
-                    let node = this.$refs.tree.GetOptionInfo(v);
-                    let name = "";
-                    if(this.wholePath) {
-                        name = node.$nameRoad.join("-");
+                this.$nextTick(() => {
+                    if(!!this.multiple && Array.isArray(v)) {
+                        let nameArr = [];
+                        v.forEach(id => {
+                            if(!id) {
+                                return
+                            }
+                            let node = this.$refs.tree.GetOptionInfo(id);
+                            if(this.wholePath) {
+                                nameArr.push(node.$nameRoad.join("-"))
+                            } else {
+                                nameArr.push(node.name)
+                            }
+                        })
+                        this.$set(this.model, `${this.field}$$text`, nameArr.join(","))
                     } else {
-                        name = node.name;
+                        let node = this.$refs.tree.GetOptionInfo(v);
+                        let name = "";
+                        if(this.wholePath) {
+                            name = node.$nameRoad.join("-");
+                        } else {
+                            name = node.name;
+                        }
+                        this.$set(this.model, `${this.field}$$text`, name)
                     }
-                    this.$set(this.model, `${this.field}$$text`, name)
-                }
+                })
             }
 
             if(this.valChange) {
