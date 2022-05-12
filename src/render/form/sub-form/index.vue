@@ -13,6 +13,7 @@
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
                                    :type="sub.type"
                                    :vars="model"
+                                   :all-vars="allVars"
                                    v-bind="sub.options"
                                    :parent-field="field"
                                    :is-new="isNew"
@@ -38,7 +39,7 @@
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],
-        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden",
+        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled"],
         data() {
             return {

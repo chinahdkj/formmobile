@@ -2,10 +2,10 @@
     <div class="form-view" v-loading.fullscreen.lock="loading">
         <mue-form v-if="!noForm && ready" v-model="model" ref="form" :class="globalConfig.customClass" v-bind="globalConfig"
                   :style="formStyle" :crud="crud">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :global-disabled="disabled"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :all-vars="allVars" :global-disabled="disabled"></form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :global-disabled="disabled"></form-items>
+            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :all-vars="allVars" :global-disabled="disabled"></form-items>
         </div>
 
         <div v-if="!!globalConfig.disabled" class="readonly-shadow"></div>
@@ -34,6 +34,10 @@ export default {
             default: () => {}
         },
         crud: { //唯一性校验需传递crud对象
+            type: Object,
+            default: () => {}
+        },
+        allVars: { //所有节点数据对象（流程节点中使用）
             type: Object,
             default: () => {}
         },

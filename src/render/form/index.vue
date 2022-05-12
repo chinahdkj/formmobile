@@ -13,6 +13,7 @@
                    :field="field"
                    :model="model"
                    :vars="vars"
+                   :all-vars="allVars"
                    :placeholder="placeholder"
                    :default-value="defaultValue"
                    :required="isMust"
@@ -25,6 +26,7 @@
                    :parent-field="parentField"
                    :disabled="isDisabled"
                    :is-new="isNew"
+                   :user-key="userKey"
                    v-bind="$attrs"
                    v-on="$listeners"
                    ref="cpt"/>
@@ -47,12 +49,15 @@
          * @param {是否新增} isNew 要于区分新增和编辑模式
          * @param {子表单配置信息} subOptions  目前只有子表单项使用
          * @param {父组件} parent  目前只有子表单中有传递
+         * @param {当前整个表单数据} vars 子表单项中使用
+         * @param {流程中的所有表单数据结合} allVars 流程中使用
+         * @param {用户主键} userKey 子表用户字段检验用
          */
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
-            "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity",
+            "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled || this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)

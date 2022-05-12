@@ -312,11 +312,18 @@ export const GetFormatString = (fmt = "yyyy-MM-dd") => {
 };
 
 //解析路径
-export const TransferUrl = (url, model) => {
-    let fields = url.match(/\$\{(.|\n)+?\}/g) || [];
+export const TransferUrl = (url, model, vars) => {
+    let fields = url.match(/\$\{([^.]|\n)+?\}/g) || []; //匹配不带"."的,如${xxx}
+    let pFields = url.match(/\$\{parent.([^.]|\n)+?\}/g) || [] //匹配待“parent.”的，如${parent.xx}
+    
     fields.forEach((f) => {
         let ff = f.replace("${", "").replace("}", "");
         url = url.replace(f, model[ff]);
+    });
+    //子表中的表达式组件替换主表中的某个值
+    pFields.forEach((f) => {
+        let ff = f.replace("${parent.", "").replace("}", "");
+        url = url.replace(f, vars[ff]);
     });
     url = url.replace("$token", window.sessionStorage.getItem("authortoken"))
     return url;
@@ -358,12 +365,13 @@ export const TransBindings = (source) => {
     })
 };
 
-//解析表达式取值（表达式, 表单值集合）
-export const EvalExpression = (expression, vars) => {
+//解析表达式取值（表达式, 表单数据或子表行数据, 表单数据（为子表单项时才有值，否则为undefined））
+export const EvalExpression = (expression, model, vars) => {
     let result = "";
     try{
         if(/return\s+/.test(expression)){
-            let es = expression.replace(/\$\{(\S+)\}/g, `vars["$1"]`);
+            // let es = expression.replace(/\$\{(\S+)\}/g, `vars["$1"]`);
+            let es = ReplaceFields(expression);
             result = eval(`(function(){
                                 ${es};
                             })()`);
@@ -408,9 +416,10 @@ export function TreeDataTrans(nodes) {
 * autoType 接口类型 (POST/GET)
 * itfParams post传参参数
 * */
-export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, itfParams) => {
+export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, itfParams, vars) => {
     return new Promise((resolve, reject) => {
-        let res_Url = TransferUrl(url, model);
+        let res_Url = TransferUrl(url, model, vars);
+        console.log(model)
         let success = (res) => {
             let result = null;
             //接口返回数据结构处理
@@ -438,7 +447,7 @@ export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, it
         }
         
         if (autoType === 1) {
-            let bodyParams = EvalExpression(itfParams, model)
+            let bodyParams = EvalExpression(itfParams, model, vars)
             let params = {url: res_Url, body: bodyParams}
             $server._Post(params, urlPrefix || "").then(success).catch(fail);
         } else {
