@@ -117,18 +117,18 @@
                     this.$set(this.model, `${this.field}$$text`, name);
                 })
             },
-            initInterfaceData(url, val) {
+            async initInterfaceData(url, val) {
                 if(!url || this.optionsType !== "interface") {
                     return;
                 }
 
-                clearTimeout(this.timer);
-                this.timer = setTimeout(async () => {
+                // clearTimeout(this.timer);
+                // this.timer = setTimeout(async () => {
                     //接口数据形式如{Code: 0, Message: "", Response: [{Value: "", Name: ""}]}
                     let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
                         this.model, this.afterQuery, this.autoType, this.itfParams);
                     this.items = TransBindings(items);
-                }, 500)
+                // }, 500)
             },
         },
         mounted() {

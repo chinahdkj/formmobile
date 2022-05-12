@@ -163,7 +163,7 @@ export default {
             }
             return res;
         },
-        initInterfaceData(url, val) {
+        async initInterfaceData(url, val) {
             if(!url || this.sourceType !== "interface") {
                 return;
             }
@@ -172,8 +172,8 @@ export default {
             //     return
             // }
 
-            clearTimeout(this.timer);
-            this.timer = setTimeout(async () => {
+            // clearTimeout(this.timer);
+            // this.timer = setTimeout(async () => {
                 let nodesTrans = (nodes = null) => {
                     if(!nodes) {
                         return
@@ -234,7 +234,7 @@ export default {
                         this.nodes = [];
                     });
                 }*/
-            }, 500)
+            // }, 500)
         },
 
 
