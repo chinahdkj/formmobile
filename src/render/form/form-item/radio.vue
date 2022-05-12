@@ -1,18 +1,19 @@
 <template>
-    <van-radio-group v-model="value" class="ftm__radio" :disabled="!!disabled">
+    <van-radio-group v-model="value" class="ftm__radio" :disabled="!!disabled" @change="onChange">
         <van-radio v-for="(opt, i) in items" :key="i" :name="opt.Value">{{ opt.Name }}</van-radio>
     </van-radio-group>
 </template>
 
 <script>
 import {BindRecords} from "../../../utils/lib";
-
+import BASE from "./base";
 export default {
+    mixins:[BASE],
     name: "FtmRadio",
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "bindings", "layoutMode", "optionsType",
-        "optionsDict", "linkage", "isDesign"
+        "optionsDict", "linkage", "isDesign", "vars",
     ],
     data() {
         return {
@@ -77,6 +78,9 @@ export default {
                     return b.pid === v;
                 });
             }, {deep: true, immediate: true});
+        },
+        onChange(v) {
+            this.evalValChange(v);
         }
     },
     mounted() {

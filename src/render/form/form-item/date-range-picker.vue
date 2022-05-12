@@ -1,6 +1,6 @@
 <template>
     <mue-date-range-picker v-model="value" :disabled="!!disabled" :clearable="!!clearable"
-                           :format="fmt" v-bind="$attrs" :begin.sync="begin" :end.sync="end"></mue-date-range-picker>
+        :format="fmt" v-bind="$attrs" :begin.sync="begin" :end.sync="end" @confirm="onChange"></mue-date-range-picker>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
     name: "FtmDateRangePicker",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "required", "disabled", "defaultValue",
+    props: ["field", "model", "required", "disabled", "defaultValue", "vars", "valChange",
         "readonly", "editable", "clearable", "dataType", "format", "valueFormat", "isTimestamp"],
     data() {
         return {
@@ -63,6 +63,21 @@ export default {
         stringToUnix(date, format) {
             let arr = Array.isArray(date) ? date : date.split(",");
             return arr.map(m => moment(m, format).unix()).join(",")
+        },
+        onChange(v){
+            this.$nextTick(()=>{
+                if(this.valChange) {
+                    try {
+                        let val = this.value;
+                        let model = this.model;
+                        let vars = this.vars;
+                        let _this = this;
+                        eval(this.valChange);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
+            })
         }
     }
 }

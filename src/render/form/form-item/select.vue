@@ -14,7 +14,7 @@
         props: [
             "field", "model", "vars", "disabled", "required", "defaultValue", "placeholder",
             "multiple", "expandTags", "bindings", "dataType", "optionsType", "optionsDict", "linkage", "searchable",
-            "limit", "autoType", "interface", "itfParams", "afterQuery"
+            "limit", "autoType", "interface", "itfParams", "afterQuery", "valChange"
         ],
         data() {
             return {
@@ -116,19 +116,30 @@
                     let name = this.$refs.select.text;
                     this.$set(this.model, `${this.field}$$text`, name);
                 })
+                if(this.valChange) {
+                    try {
+                        let val = v;
+                        let model = this.model;
+                        let vars = this.vars;
+                        let _this = this;
+                        eval(this.valChange);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
             },
-            initInterfaceData(url, val) {
+            async initInterfaceData(url, val) {
                 if(!url || this.optionsType !== "interface") {
                     return;
                 }
 
-                clearTimeout(this.timer);
-                this.timer = setTimeout(async () => {
+                // clearTimeout(this.timer);
+                // this.timer = setTimeout(async () => {
                     //接口数据形式如{Code: 0, Message: "", Response: [{Value: "", Name: ""}]}
                     let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
                         this.model, this.afterQuery, this.autoType, this.itfParams);
                     this.items = TransBindings(items);
-                }, 500)
+                // }, 500)
             },
         },
         mounted() {

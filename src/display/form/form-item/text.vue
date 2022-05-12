@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__text">
-        {{value}}
+        {{value}}{{unit}}
     </div>
 </template>
 
@@ -9,7 +9,7 @@
         name: "DspText",
         inheritAttrs: false,
         components: {},
-        props: ["value"],
+        props: ["value", "unit"],
         data(){
             return {};
         },
