@@ -39,7 +39,7 @@
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],
-        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars",
+        props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled"],
         data() {
             return {
@@ -162,7 +162,8 @@
                 }
 
                 //添加一条空数据
-                this.addModel();
+                if(this.initOneRow)
+                    this.addModel();
             } else {
                 this.initValue = $.extend(true, [], this.value);
             }
