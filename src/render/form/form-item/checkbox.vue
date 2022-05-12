@@ -1,5 +1,5 @@
 <template>
-    <van-checkbox-group v-model="value" :disabled="!!disabled" class="ftm__checkbox">
+    <van-checkbox-group v-model="value" :disabled="!!disabled" class="ftm__checkbox" @change="onChange">
         <van-checkbox v-for="(opt, i) in items" :key="i" :name="opt.Value">
             {{ opt.Name }}
         </van-checkbox>
@@ -8,13 +8,14 @@
 
 <script>
 import {BindRecords} from "../../../utils/lib";
-
+import BASE from "./base";
 export default {
+    mixins: [BASE],
     name: "FtmCheckbox",
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "bindings", "layoutMode", "dataType",
-        "optionsType", "optionsDict", "linkage", "isDesign"
+        "optionsType", "optionsDict", "linkage", "isDesign", "vars",
     ],
     data() {
         return {
@@ -93,6 +94,9 @@ export default {
                     return b.pid === v;
                 });
             }, {deep: true, immediate: true});
+        },
+        onChange(v) {
+            this.evalValChange(v);
         }
     },
     mounted() {

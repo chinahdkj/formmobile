@@ -14,7 +14,7 @@
         name: "FtmDatePicker",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "required", "disabled", "defaultValue",
+        props: ["field", "model", "required", "disabled", "defaultValue", "vars",
             "readonly", "editable", "clearable", "dateType", "format", "valueFormat", "max", "min", "valChange"],
         data() {
             return {
@@ -115,6 +115,7 @@
                     try {
                         let val = v;
                         let model = this.model;
+                        let vars = this.vars;
                         let _this = this;
                         eval(this.valChange);
                     } catch (e) {

@@ -5,7 +5,8 @@
                 :multiple="!!multiple"
                 :readonly="!!disabled"
                 :accept="accept"
-                :is-download="!!isDownload">
+                :is-download="!!isDownload"
+                @input="onChange">
     </mue-upload>
 </template>
 
@@ -15,7 +16,7 @@ export default {
     name: "FtmFile",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "dataType", "disabled", "required",
+    props: ["field", "model", "dataType", "disabled", "required", "vars",
         "defaultValue", "multiple", "placeholder", "accept", "isDownload"],
     data() {
         return {};
@@ -40,7 +41,20 @@ export default {
             } else {
                 this.$set(this.model, this.field, temp.length === 0 ? null : temp.join(","));
             }
-        }
+        },
+        onChange(v) {
+            if(this.valChange) {
+                try {
+                    let val = v;
+                    let model = this.model;
+                    let vars = this.vars;
+                    let _this = this;
+                    eval(this.valChange);
+                } catch (e) {
+                    console.info(e)
+                }
+            }
+        },
     }
 }
 </script>

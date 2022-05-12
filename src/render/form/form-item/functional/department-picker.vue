@@ -14,7 +14,7 @@ export default {
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
-        "wholePath", "valChange"
+        "wholePath", "valChange", "vars",
     ],
     data() {
         return {
@@ -180,6 +180,7 @@ export default {
                 try {
                     let val = v;
                     let model = this.model;
+                    let vars = this.vars;
                     let _this = this;
                     let nodes = node;
                     eval(this.valChange);

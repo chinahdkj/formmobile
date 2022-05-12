@@ -14,7 +14,7 @@
         props: [
             "field", "model", "vars", "disabled", "required", "defaultValue", "placeholder",
             "multiple", "expandTags", "bindings", "dataType", "optionsType", "optionsDict", "linkage", "searchable",
-            "limit", "autoType", "interface", "itfParams", "afterQuery"
+            "limit", "autoType", "interface", "itfParams", "afterQuery", "valChange"
         ],
         data() {
             return {
@@ -116,6 +116,17 @@
                     let name = this.$refs.select.text;
                     this.$set(this.model, `${this.field}$$text`, name);
                 })
+                if(this.valChange) {
+                    try {
+                        let val = v;
+                        let model = this.model;
+                        let vars = this.vars;
+                        let _this = this;
+                        eval(this.valChange);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
             },
             async initInterfaceData(url, val) {
                 if(!url || this.optionsType !== "interface") {

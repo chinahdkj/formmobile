@@ -276,6 +276,7 @@ export default {
                 try {
                     let val = v;
                     let model = this.model;
+                    let vars = this.vars;
                     let _this = this;
                     let nodes = node;
                     eval(this.valChange);

@@ -12,7 +12,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: [
-        "field", "model", "disabled", "required", "defaultValue", "multiple", "linkage", "valChange"
+        "field", "model", "disabled", "required", "defaultValue", "multiple", "linkage", "valChange", "vars",
     ],
     data() {
         return {
@@ -132,6 +132,7 @@ export default {
                     let val = v;
                     let model = this.model;
                     let _this = this;
+                    let vars = this.vars;
                     let nodes = node;
                     eval(this.valChange);
                 } catch (e) {

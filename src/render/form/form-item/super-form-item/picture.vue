@@ -6,7 +6,8 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
-        :is-comment="!!isComment">
+        :is-comment="!!isComment"
+        @input="onChange">
     </mue-img-upload>
 </template>
 
@@ -17,7 +18,7 @@ export default {
     name: "FtmPicture",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "dataType", "readonly", "disabled", "required",
+    props: ["field", "model", "dataType", "readonly", "disabled", "required", "vars",
         "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit"],
     data() {
         return {};
@@ -41,6 +42,19 @@ export default {
                 this.$set(this.model, this.field, temp.length === 0 ? null : temp);
             } else {
                 this.$set(this.model, this.field, temp.length === 0 ? null : temp.join(","));
+            }
+        },
+        onChange(v) {
+            if(this.valChange) {
+                try {
+                    let val = v;
+                    let model = this.model;
+                    let vars = this.vars;
+                    let _this = this;
+                    eval(this.valChange);
+                } catch (e) {
+                    console.info(e)
+                }
             }
         }
     }
