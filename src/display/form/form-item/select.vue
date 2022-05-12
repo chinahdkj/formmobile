@@ -21,6 +21,8 @@
                 let text = "";
                 if(this.optionsType === "dynamic") {
                     text = formatFromBinding(this.value, BindRecords(this.optionsDict))
+                } else if(this.optionsType === "interface") {
+
                 } else {
                     text = formatFromBinding(this.value, this.bindings)
                 }

@@ -142,14 +142,24 @@
                 }
                 let defaultValue = this.defaultValue;
 
-                //动态时间默认值
-                if(this.type === 'date-picker' && this.defaultType === 'activity') {
-                    try {
-                        let Moment = moment;
-                        defaultValue = eval(`(function(moment) { ${this.dftActivity} })(Moment)`)
-                    } catch (e) {
-                        console.error(e);
-                    }
+                //日期组件特殊处理
+                if(this.type === 'date-picker'){
+                    //动态时间默认值
+                    if (this.defaultType === 'activity') {
+                        try {
+                            let Moment = moment;
+                            let model = this.model;
+                            let vars = this.vars;
+                            defaultValue = eval(`(function (moment, model, vars) {
+                            ${this.dftActivity}
+                        })(Moment, model, vars)`)
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    } else {
+                        //转换成秒
+                        if (typeof defaultValue === "number") defaultValue = defaultValue / 1000
+                    }                    
                 }
 
                 //文本框默认值从接口获取
