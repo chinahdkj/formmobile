@@ -43,7 +43,8 @@ export default {
             dialog: {
                 visible: false
             },
-            postMessageModel: {}
+            postMessageModel: {},
+            pushPostMessageModel: {}
         };
     },
     computed: {
@@ -70,6 +71,24 @@ export default {
                 }
                 for(let [key, value] of Object.entries(v)) {
                     if(key in this.model) this.$set(this.model, key, value);
+                }
+            }
+        },
+        //子表专用新增数据
+        pushPostMessageModel: {
+            deep: true, immediate: true, handler(v, ov) {
+                if (!Object.keys(v).length) {
+                    return
+                }
+                let model = deepClone(v);
+                for (let [key, value] of Object.entries(model)) {
+                    if (key in this.model) {
+                        if (Array.isArray(value)) {
+                            value.forEach(f => {
+                                this.model[key].push(f);
+                            })
+                        }
+                    }
                 }
             }
         }

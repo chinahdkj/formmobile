@@ -82,7 +82,6 @@
                 if(this.defaultValue) {
                     this.onChange(this.defaultValue);
                 }
-
                 //无二级联动
                 if(!this.linkage){
                     return;
@@ -132,12 +131,11 @@
                 if(!url || this.optionsType !== "interface") {
                     return;
                 }
-
                 // clearTimeout(this.timer);
                 // this.timer = setTimeout(async () => {
                     //接口数据形式如{Code: 0, Message: "", Response: [{Value: "", Name: ""}]}
                     let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
-                        this.model, this.afterQuery, this.autoType, this.itfParams);
+                        this.model, this.afterQuery, this.autoType, this.itfParams, this.vars);
                     this.items = TransBindings(items);
                 // }, 500)
             },

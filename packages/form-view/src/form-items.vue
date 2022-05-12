@@ -2,25 +2,25 @@
     <div v-if="isShow" v-show="isShowOfVshow" class="panel-form-item" :data-id="item.id">
         <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" panel-type="view">
             <template slot-scope="{tab, items}">
-                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :global-disabled="!!globalDisabled"/>
+                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :all-vars="allVars" :global-disabled="!!globalDisabled"/>
             </template>
         </tabs-panel>
 
         <grids-panel v-else-if="item.type === 'grids'" v-bind="item.options" :id="item.id" :cols="item.cols" panel-type="view">
             <template slot-scope="{grid, items}">
-                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :global-disabled="!!globalDisabled"/>
+                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :all-vars="allVars" :global-disabled="!!globalDisabled"/>
             </template>
         </grids-panel>
 
         <card-panel v-else-if="item.type === 'card'" v-bind="item.options" :id="item.id" :card="item" panel-type="view">
             <template slot-scope="{tab, items}">
-                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :global-disabled="!!globalDisabled"/>
+                <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :all-vars="allVars" :global-disabled="!!globalDisabled"/>
             </template>
         </card-panel>
 
         <!-- 子表单参数区别于设计模式 -->
         <sub-form v-else-if="item.type === 'sub-form'" v-bind="item.options"
-                  :id="item.id" :subs="item.subs" :model="PREVIEW.model" :is-new="isNew" :global-disabled="!!globalDisabled">
+                  :id="item.id" :subs="item.subs" :model="PREVIEW.model" :is-new="isNew" :all-vars="allVars" :global-disabled="!!globalDisabled">
         </sub-form>
 
         <template v-else-if="item.type === 'split-line'">
@@ -28,7 +28,7 @@
         </template>
 
         <template v-else>
-            <item :model="PREVIEW.model" :type="item.type" v-bind="item.options" :is-new="isNew" :global-disabled="!!globalDisabled"></item>
+            <item :model="PREVIEW.model" :type="item.type" v-bind="item.options" :is-new="isNew" :all-vars="allVars" :global-disabled="!!globalDisabled"></item>
         </template>
     </div>
 </template>
@@ -56,7 +56,7 @@
         inject: {
             PREVIEW: "PREVIEW"
         },
-        props: ["list", "item","isNew","globalDisabled"],
+        props: ["list", "item", "isNew", "allVars", "globalDisabled"],
         data() {
             return {}
         },
