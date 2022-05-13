@@ -57,7 +57,15 @@ export default {
             }
         },
         targetUrl() {
-            return TransferUrl(this.mobileUrl || this.url, this.model)
+            const sn = `/${sessionStorage.getItem('app_sn')}/`
+            const pp = path.split(sn)[0] + '/hddev'
+            const url = TransferUrl(this.mobileUrl || this.url, this.model)
+            const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
+            ur.searchParams.set('appid',sessionStorage.getItem('appid'))
+            ur.searchParams.set('token',sessionStorage.getItem('authortoken'))
+            ur.searchParams.set('app',sessionStorage.getItem('authorapp'))
+            ur.searchParams.set('host',sessionStorage.getItem('host'))
+            return this.checkURL(url) ? url : ur.href
         },
         btnStyle() {
             return this.btnWidth ? {width: this.btnWidth} : {}
@@ -97,7 +105,16 @@ export default {
         openPopup(){
             if(!!this.disabled) return
             this.dialog.visible = true
-        }
+        },
+        checkURL(URL){
+            let str=URL;
+            let objExp=new RegExp(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/);
+            if(objExp.test(str)==true){
+                return true;
+            }else{
+                return false;
+            }
+        } 
     }
 }
 </script>

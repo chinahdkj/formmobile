@@ -143,7 +143,13 @@ export default {
         }
     },
     mounted() {
-
+        // 设置客户编码
+        this.$native.sysInfo({
+            params: {},
+            cb:(sysInfo)=>{
+                sessionStorage.setItem('app_sn',sysInfo.sn)
+            }
+        })
     }
 };
 </script>
