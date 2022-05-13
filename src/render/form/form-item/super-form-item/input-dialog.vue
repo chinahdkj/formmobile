@@ -64,9 +64,16 @@ export default {
             }
         },
         targetUrl() {
-            let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars);
+            const sn = `/${sessionStorage.getItem('app_sn')}/`
+            const pp = path.split(sn)[0] + '/hddev'
+            let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars)
             url = url.replace("$rowIndex", this.rowIndex)
-            return url;
+            const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
+            ur.searchParams.set('appid',sessionStorage.getItem('appid'))
+            ur.searchParams.set('token',sessionStorage.getItem('authortoken'))
+            ur.searchParams.set('app',sessionStorage.getItem('authorapp'))
+            ur.searchParams.set('host',sessionStorage.getItem('host'))
+            return this.checkURL(url) ? url : ur.href
         },
         btnStyle() {
             return this.btnWidth ? {width: this.btnWidth} : {}
@@ -106,7 +113,16 @@ export default {
         onClear() {
             this.$set(this.model, this.field, "");
             this.$set(this.model, `${this.field}$$text`, "");
-        }
+        },
+        checkURL(URL){
+            let str=URL;
+            let objExp=new RegExp(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/);
+            if(objExp.test(str)==true){
+                return true;
+            }else{
+                return false;
+            }
+        } 
     },
     mounted() {
         this.$set(this.model, `${this.field}$$text`, this.model[`${this.field}$$text`] || "");
