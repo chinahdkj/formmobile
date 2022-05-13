@@ -57,14 +57,17 @@ export default {
             }
         },
         targetUrl() {
+            const path = location.origin + location.pathname
             const sn = `/${sessionStorage.getItem('app_sn')}/`
-            const pp = path.split(sn)[0] + '/hddev'
+            let pp = path.split(sn)[0]
+            pp = pp + (pp.endsWith('/') ? 'hddev' : '/hddev')
             const url = TransferUrl(this.mobileUrl || this.url, this.model)
             const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
-            ur.searchParams.set('appid',sessionStorage.getItem('appid'))
+            ur.searchParams.set('appid',sessionStorage.getItem('hddevappid') || sessionStorage.getItem('appid'))
             ur.searchParams.set('token',sessionStorage.getItem('authortoken'))
             ur.searchParams.set('app',sessionStorage.getItem('authorapp'))
-            ur.searchParams.set('host',sessionStorage.getItem('host'))
+            sessionStorage.getItem('host') && ur.searchParams.set('host',sessionStorage.getItem('host'))
+            console.log(this.checkURL(url) ? url : ur.href)
             return this.checkURL(url) ? url : ur.href
         },
         btnStyle() {
