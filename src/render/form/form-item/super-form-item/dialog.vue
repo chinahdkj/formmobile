@@ -57,6 +57,7 @@ export default {
             }
         },
         targetUrl() {
+            const path = location.origin + location.pathname
             const sn = `/${sessionStorage.getItem('app_sn')}/`
             const pp = path.split(sn)[0] + '/hddev'
             const url = TransferUrl(this.mobileUrl || this.url, this.model)
