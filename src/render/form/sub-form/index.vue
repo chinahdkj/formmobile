@@ -1,8 +1,8 @@
 <template>
     <div class="sub-form-view">
         <van-icon class="do-expand" :name="expendStatus ? 'arrow-up' : 'arrow-down'" @click="onExpand" />
-        <mue-form-item :label="name" :field="field" :inline="false"
-                       :data-field="field" :class="['fpt__' + type, customClass ? customClass : '']">
+        <mue-form-item :label="name" :field="field" :inline="false" :rules="subFormRules"
+                       :data-field="field" :class="['fpt__subform', customClass ? customClass : '']">
             <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
                 <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
                     <van-icon v-if="!isDisabled && !deleteHidden" slot="tools" name="delete" style="line-height: inherit;"
@@ -40,7 +40,8 @@
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
-            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled"],
+            "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
+            "initNums", "maxNums", "minNums"],
         data() {
             return {
                 expendStatus: true,
@@ -59,6 +60,32 @@
                 set(nv){
                     this.$set(this.model, this.field, nv);
                 }
+            },
+            subFormRules() {
+                let rules = [];
+                if(this.minNums) {
+                    rules.push({
+                        validator: (rule, value, callback) => {
+                            if(this.value.length < this.minNums) {
+                                callback(new Error(`数据量不得少于${this.minNums}条`))
+                            } else {
+                                callback();
+                            }
+                        }
+                    })
+                }
+                if(this.maxNums) {
+                    rules.push({
+                        validator: (rule, value, callback) => {
+                            if(this.value.length > this.maxNums) {
+                                callback(new Error(`数据量不得多于${this.maxNums}条`))
+                            } else {
+                                callback();
+                            }
+                        }
+                    })
+                }
+                return rules;
             }
         },
         watch: {
@@ -163,7 +190,13 @@
 
                 //添加一条空数据
                 if(this.initOneRow)
-                    this.addModel();
+                    if(this.initNums) {
+                        for(let i=1; i<=this.initNums; i++) {
+                            this.addModel();
+                        }
+                    } else {
+                        this.addModel();
+                    }
             } else {
                 this.initValue = $.extend(true, [], this.value);
             }
@@ -239,5 +272,15 @@
             }
         }
     }
+
+    // .fpt__subform.mue-form-item.is-error .el-input__inner,
+    // .fpt__subform.mue-form-item.is-error .el-input__inner:focus,
+    // .fpt__subform.mue-form-item.is-error .el-textarea__inner,
+    // .fpt__subform.mue-form-item.is-error .el-textarea__inner:focus,
+    // .fpt__subform.mue-form-item.is-error .cue-rich-editor > .tox-tinymce,
+    // .fpt__subform.mue-form-item.is-error .cue-rich-editor.is-focus > .tox-tinymce {
+    //     border-color: #d0d0d0
+    // }
+
 
 </style>
