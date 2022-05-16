@@ -1,6 +1,6 @@
 <template>
     <div v-if="isShow" v-show="isShowOfVshow" class="panel-form-item-display" :data-id="item.id">
-        <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" panel-type="view">
+        <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" :model="model" panel-type="view">
             <template slot-scope="{tab, items}">
                 <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model"/>
             </template>
