@@ -10,17 +10,21 @@ const actions = {
     },
     //表单赋值
     "FRD-SET-MODEL": (view, params) => {
-        console.log("FRD-SET-MODEL:表单赋值", params);
+        console.log("表单赋值", params);
+        //确保只在当前组件接收此postMessage
         if("$$field" in params && params["$$field"] !== view.field) {
-            //确保只在当前组件接收此postMessage
             return
-        } else {
-            delete params["$$field"]
+        }
+        //子表需单个表单项取值需加上$$rowIndex 行索引
+        if("$$rowIndex" in params && view.rowIndex !== undefined && params["$$rowIndex"] != view.rowIndex) {
+            return
         }
         
         if (Object.keys(params || {}).length) {
             for(let [key, value] of Object.entries(params)) {
-                view.$set(view.postMessageModel, key, value);
+                if(key !== "$$field" && key !== "$$rowIndex") {
+                    view.$set(view.postMessageModel, key, value);
+                }
             }
         }
     },

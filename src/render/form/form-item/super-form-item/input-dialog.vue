@@ -69,7 +69,11 @@ export default {
             let pp = path.split(`/${sn}/`)[0]
             pp = pp + (pp.endsWith('/') ? `${sn}/hddev` : `/${sn}/hddev`)
             let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars)
-            url = url.replace("$rowIndex", this.rowIndex)
+            // url = url.replace("$rowIndex", this.rowIndex)
+            //子表链接自动携带上rowIndex
+            if(this.rowIndex !== undefined) {
+                url = (url || "").includes("?") ? `${url}&rowIndex=${this.rowIndex}` : `${this.url}?rowIndex=${this.rowIndex}`
+            }
             const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
             ur.searchParams.set('appid',sessionStorage.getItem('hddevappid') || sessionStorage.getItem('appid'))
             ur.searchParams.set('token',sessionStorage.getItem('authortoken'))
