@@ -7,12 +7,13 @@
 </template>
 
 <script>
+    import { ReplaceFields } from '../../../../utils/lib'
     export default {
         name: "FtmExpression",
         inheritAttrs: false,
         components: {},
         props: [
-            "field", "model", "disabled", "expression"
+            "field", "model", "disabled", "expression", "rowIndex"
         ],
         data() {
             return {
@@ -32,13 +33,19 @@
                     }
 
                     try{
-                        let vars = {...this.model};
+                        let model = deepClone(this.model);
+                        let vars = deepClone(this.vars || {});
+                        let rowIndex = this.rowIndex;
 
-                        if(/return\s+/.test(this.expression)){
-                            let es = this.expression.replace(/\$\{(\S+)\}/g, `vars["$1"]`);
-                            this.value = eval(`(function(){
-                                ${es};
-                            })()`);
+                        if (/return\s+/.test(this.expression)) {
+                            // let es = this.expression.replace(/\$\{(\S+)\}/g, `vars["$1"]`);
+                            // let es = this.expression.replace(/\$\{([^.]|\n)+?\}/g, `model["$1"]`);
+                            // es.replace(/\$\{parent.([^.]|\n)+?\}/g, `vars["$1"]`);
+                            let es = ReplaceFields(this.expression);
+                            console.log("expression", es);
+                            this.value = eval(`(function () {
+                                    ${es};
+                                })()`);
                         }
                         if(!this.value && (this.value !== "" && this.value !== 0)){
                             this.value = null;
