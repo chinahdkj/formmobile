@@ -181,7 +181,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
             placeholder: null, labelWidth: null, labelLine: null, labelHidden: 0, url: "", fullscreen: 0,
             dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", showIcon: 0, btnType: "icon",
-            iconBtn: "el-icon-plus", textBtn: "选择"
+            iconBtn: "el-icon-plus", iconBtnMobile: "icon-tianjia", mobileUrl: "", textBtn: "选择"
         }
     },
     
