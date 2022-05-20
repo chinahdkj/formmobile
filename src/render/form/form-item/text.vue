@@ -33,7 +33,7 @@
                         let v = nv == null ? "" : String(nv).trim();
                         this.$set(this.model, this.field, !v || isNaN(v) ? 0 : Number(v));
                     } else {
-                        this.$set(this.model, this.field, (String(nv) || "").trim());
+                        this.$set(this.model, this.field, nv.replace(/\s*/g,""));
                     }
                 }
             },
