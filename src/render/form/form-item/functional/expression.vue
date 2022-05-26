@@ -13,7 +13,8 @@
         inheritAttrs: false,
         components: {},
         props: [
-            "field", "model", "disabled", "expression", "rowIndex"
+            "field", "model", "disabled", "expression", "autoFields", "inputable", "vars", "unit", "errMessage",
+            "parentField", "rowIndex", "dataType"
         ],
         data() {
             return {
@@ -22,13 +23,19 @@
         },
         computed: {},
         watch: {
+            value: {
+                immediate: true, deep: true, handler(v, ov) {
+                    let vv = this.dataType === "Number" ? Number(v) : v
+                    this.$set(this.model, this.field, vv);
+                }
+            },
             model: {
                 immediate: true, deep: true,
                 handler(){
                     // 判断 ${field}
                     if(!/\$\{\S+\}/.test(this.expression)){
                         this.value = this.expression;
-                        this.$set(this.model, this.field, this.value);
+                        // this.$set(this.model, this.field, this.value);
                         return;
                     }
 
@@ -50,12 +57,12 @@
                         if(!this.value && (this.value !== "" && this.value !== 0)){
                             this.value = null;
                         }
-                        this.$set(this.model, this.field, this.value);
+                        // this.$set(this.model, this.field, this.value);
                         this.error = false;
 
                     } catch(e){
                         this.value = null;
-                        this.$set(this.model, this.field, null);
+                        // this.$set(this.model, this.field, null);
                         this.error = true;
                     }
                 }
