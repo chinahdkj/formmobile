@@ -74,7 +74,7 @@ export default {
         value: {
             immediate: true, deep: true, handler(v, ov) {
                 if(JSON.stringify(v) === JSON.stringify(ov)) return;
-                this.model = deepClone(v);
+                this.model = v;
             }
         },
         model: {
