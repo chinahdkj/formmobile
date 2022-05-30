@@ -20,6 +20,7 @@ import DspFile from "./form/form-item/super-form-item/file";
 import DspVideo from "./form/form-item/super-form-item/video";
 import DspPicture from "./form/form-item/super-form-item/picture";
 import DspEditor from "./form/form-item/super-form-item/editor";
+import DspIframe from "./form/form-item/super-form-item/iframe";
 import DspDialog from "./form/form-item/super-form-item/dialog";
 import DspCascader from "./form/form-item/super-form-item/cascader";
 import DspCustom from "./form/form-item/super-form-item/custom";
@@ -53,7 +54,7 @@ let components = [
     DspTimePicker, DspDatePicker, DspDateRangePicker, DspRate, DspColorPicker, DspSlider,
     DspWord, DspHtml,
     
-    DspFile,DspVideo,DspPicture,DspEditor,DspCascader, DspCustom, DspDialog,
+    DspFile,DspVideo,DspPicture,DspEditor,DspCascader, DspCustom, DspDialog, DspIframe,
     
     DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete,
     

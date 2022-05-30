@@ -21,6 +21,7 @@ import FtmVideo from "./form/form-item/super-form-item/video";
 import FtmPicture from "./form/form-item/super-form-item/picture";
 import FtmEditor from "./form/form-item/super-form-item/editor";
 import FtmDialog from "./form/form-item/super-form-item/dialog";
+import FtmIframe from "./form/form-item/super-form-item/iframe";
 import FtmCascader from "./form/form-item/super-form-item/cascader";
 import FtmCustom from "./form/form-item/super-form-item/custom";
 import FtmInputDialog from "./form/form-item/super-form-item/input-dialog";
@@ -53,7 +54,7 @@ let components = [
     FtmText, FtmTextarea, FtmSelect, FtmRadio, FtmCheckbox, FtmSwitch, FtmInputNumber,
     FtmTimePicker, FtmDatePicker, FtmDateRangePicker, FtmRate, FtmColorPicker, FtmSlider, FtmWord, FtmHtml,
     
-    FtmFile, FtmVideo, FtmPicture, FtmEditor, FtmCascader, FtmCustom, FtmDialog,
+    FtmFile, FtmVideo, FtmPicture, FtmEditor, FtmCascader, FtmCustom, FtmDialog, FtmIframe,
     
     FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete,
     
