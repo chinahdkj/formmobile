@@ -6,7 +6,8 @@
                 :readonly="!!disabled"
                 :accept="accept"
                 :is-download="true"
-                @input="onChange">
+                @input="onChange"
+                isFrame>
     </mue-upload>
 </template>
 

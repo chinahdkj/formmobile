@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__file" :class="{'single': files.length === 1}">
-        <mue-upload v-model="files" :multiple="!!multiple" readonly></mue-upload>
+        <mue-upload v-model="files" :multiple="!!multiple" readonly isFrame></mue-upload>
     </div>
 </template>
 
