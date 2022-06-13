@@ -5,27 +5,28 @@
                        :data-field="field" :class="['fpt__subform', customClass ? customClass : '']">
             <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
                 <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
-                    <van-icon v-if="!isDisabled && !deleteHidden" slot="tools" name="delete" style="line-height: inherit;"
+                    <van-icon v-if="!isDisabled && !hideDelete" slot="tools" name="delete" style="line-height: inherit;"
                               @click="delModel(i)"/>
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                     <div v-for="(sub, idx) in subs" :key="idx">
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
-                                   :type="sub.type"
-                                   :vars="model"
-                                   :all-vars="allVars"
-                                   v-bind="sub.options"
-                                   :parent-field="field"
-                                   :is-new="isNew"
-                                   :sub-options="subs"
-                                   :global-disabled="globalDisabled"
-                                   :index="i">
+                                    :type="sub.type"
+                                    :vars="model"
+                                    :all-vars="allVars"
+                                    v-bind="sub.options"
+                                    :parent-field="field"
+                                    :is-new="isNew"
+                                    :sub-options="subs"
+                                    :global-disabled="globalDisabled"
+                                    :index="i"
+                                    :authority="authority">
                         </form-item>
                     </div>
                 </mue-panel>
             </div>
-            <div class="sub-form-handle-btn">
-                <van-button size="large" v-if="!addHidden" :disabled="isDisabled || !!addDisabled" type="primary" native-type="button" @click="addModel">添加</van-button>
+            <div class="sub-form-handle-btn" v-if="addShow">
+                <van-button size="large" :disabled="isDisabled || !!addDisabled" type="primary" native-type="button" @click="addModel">添加</van-button>
             </div>
         </mue-form-item>
 
@@ -34,14 +35,16 @@
 <script>
     import {TransferUrl, needShow, deepClone} from "../../../utils/lib";
     import FormItem from "../../../render/form";
+    import Authority from "../../../components/authority"
     export default {
+        mixins: [Authority],
         name: "SubForm",
         inheritAttrs: false,
         components: {FormItem},
         mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums"],
+            "initNums", "maxNums", "minNums", "authority"],
         data() {
             return {
                 expendStatus: true,
@@ -49,8 +52,14 @@
             };
         },
         computed: {
+            addShow() {
+                return !this.addHidden && this.currentFieldAuth.add
+            },
+            hideDelete() {
+                return !!this.deleteHidden || !this.currentFieldAuth.remove
+            },
             isDisabled() {
-                return !!this.globalDisabled || !!this.disabled
+                return !!this.globalDisabled || !!this.disabled || !this.currentFieldAuth.edit
             },
             value: {
                 get(){
@@ -114,7 +123,7 @@
                 this.value.splice(i, 1);
             },
             isShow(opts, model, vars) { //子表项配置 行数据 整个表单数据
-                return !opts.hide && needShow(opts.showCondition, {...vars, ...model});
+                return !opts.hide && needShow(opts.showCondition, {...vars, ...model}) && this.authIsShow(opts.field, this.field);
             },
             isHide(i) {
                 return this.value[i].__hideFields;
@@ -134,6 +143,23 @@
                 this.value.forEach((row, i) => {
                     this.$set(this.value[i], "__hideFields", !this.expendStatus)
                 })
+            },
+            //表单权限-子表字段显示隐藏条件
+            authIsShow(subfield, parentField) {
+                if(!(this.authority || []).length) {
+                    return true
+                }
+                let hide = false
+                let subForm = this.authority.find(f => f.name === parentField)
+                if(subForm) {
+                    let targetField = subForm.fields.find(f => f.name === subfield)
+                    if(targetField) {
+                        //是否隐藏
+                        if((targetField.hide || []).length)
+                            hide = this.getAuth(targetField.hide, false);
+                    }
+                }
+                return !hide
             },
             //从接口初始化数据
             itfDataInit() {

@@ -37,9 +37,10 @@
 <script>
     import {ValidateCommon} from "../../utils/validate"
     import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone, needMust} from "../../utils/lib"
-
+    import Authority from "../../components/authority"
 
     export default {
+        mixins: [Authority], //混入表单权限，取currentFieldAuth 当前字段权限对象
         components: {},
         inheritAttrs: false,
         /**
@@ -52,18 +53,24 @@
          * @param {当前整个表单数据} vars 子表单项中使用
          * @param {流程中的所有表单数据结合} allVars 流程中使用
          * @param {用户主键} userKey 子表用户字段检验用
+         * @param authority {Array} 表单权限
          */
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "authority"],
         computed: {
             isDisabled() {
-                return !!this.globalDisabled || this.disabled || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+                return !!this.globalDisabled
+                || this.disabled
+                || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+                || !this.currentFieldAuth.edit
             },
             isMust() {
-                return !!this.required || needMust(this.mustCondition, this.model, this.vars || {}, this.isNew)
+                return !!this.required
+                || needMust(this.mustCondition, this.model, this.vars || {}, this.isNew)
+                || this.currentFieldAuth.required
             },
             customRules() {
                 //空数据不做自定义校验
