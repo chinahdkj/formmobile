@@ -18,7 +18,7 @@
             </template>
         </card-panel>
 
-        <sub-form v-else-if="item.type === 'sub-form'" v-bind="item.options"
+        <sub-form v-else-if="item.type === 'sub-form'" v-bind="item.options" :type="item.type"
                   :id="item.id" :subs="item.subs" :model="model">
         </sub-form>
 
