@@ -2,10 +2,27 @@
     <div class="form-view" v-loading.fullscreen.lock="loading">
         <mue-form v-if="!noForm && ready" v-model="model" ref="form" :class="globalConfig.customClass" v-bind="globalConfig"
                   :style="formStyle" :crud="crud">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :all-vars="allVars" :global-disabled="disabled" :authority="authority"></form-items>
+            <form-items v-for="item in forms" :key="item.id" 
+                :item="item" 
+                :list="forms" 
+                :is-new="isNew"
+                :all-vars="allVars"
+                :nodes-values-dict="nodesValuesDict" 
+                :global-disabled="disabled" 
+                :authority="authority">
+            </form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
-            <form-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :is-new="isNew" :all-vars="allVars" :global-disabled="disabled" :authority="authority"></form-items>
+            <form-items v-for="item in forms" 
+                :key="item.id" 
+                :item="item" 
+                :list="forms" 
+                :is-new="isNew" 
+                :all-vars="allVars" 
+                :nodes-values-dict="nodesValuesDict" 
+                :global-disabled="disabled" 
+                :authority="authority">
+            </form-items>
         </div>
 
         <div v-if="!!globalConfig.disabled" class="readonly-shadow"></div>
@@ -38,6 +55,10 @@ export default {
             default: () => {}
         },
         allVars: { //所有节点数据对象（流程节点中使用）
+            type: Object,
+            default: () => {}
+        },
+        nodesValuesDict: { //所有节点数据字典（流程节点中使用）
             type: Object,
             default: () => {}
         },

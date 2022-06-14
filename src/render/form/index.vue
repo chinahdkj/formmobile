@@ -13,7 +13,6 @@
                    :field="field"
                    :model="model"
                    :vars="vars"
-                   :all-vars="allVars"
                    :placeholder="placeholder"
                    :default-value="defaultValue"
                    :required="isMust"
@@ -26,6 +25,8 @@
                    :parent-field="parentField"
                    :disabled="isDisabled"
                    :is-new="isNew"
+                   :all-vars="allVars"
+                   :nodes-values-dict="nodesValuesDict"
                    :user-key="userKey"
                    v-bind="$attrs"
                    v-on="$listeners"
@@ -59,13 +60,14 @@
          * @param {当前整个表单数据} vars 子表单项中使用
          * @param {流程中的所有表单数据结合} allVars 流程中使用
          * @param {用户主键} userKey 子表用户字段检验用
-         * @param authority {Array} 表单权限
+         * @param {Object/String} nodesValuesDict  所有节点数据字典 流程中使用
+         * @param {Array} authority  表单权限
          */
         props: ["name", "field", "type", "model", "vars", "required", "labelLine", "width", "customClass",
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "authority"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled
