@@ -36,10 +36,16 @@
 
 <script>
     import {ValidateCommon} from "../../utils/validate"
-    import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone, needMust} from "../../utils/lib"
+    import {GetDefaultValue, GetInterfaceData, needDisabled, deepClone, needMust, ReplaceFields} from "../../utils/lib"
     import Authority from "../../components/authority"
 
     export default {
+        inject: {
+            SUBFORM: {
+                from: "SUBFORM",
+                default: null
+            },
+        },
         mixins: [Authority], //混入表单权限，取currentFieldAuth 当前字段权限对象
         components: {},
         inheritAttrs: false,
@@ -64,7 +70,7 @@
             isDisabled() {
                 return !!this.globalDisabled
                 || this.disabled
-                || needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew)
+                || this.needDisabled(this.disabledCondition, this.model, this.vars || {}, this.isNew, this.index)
                 || !this.currentFieldAuth.edit
             },
             isMust() {
@@ -148,6 +154,22 @@
             }
         },
         methods: {
+            //子表中，当前表单项所在行索引
+            needDisabled(condition, model, vars, isNew, index) {
+                if(!condition){
+                    return false;
+                }
+
+                let cdn = ReplaceFields(condition)
+                let r = false;
+                try{
+                    r = eval(cdn);
+                } catch(e){
+                    console.error(e);
+                    r = false;
+                }
+                return !!r;
+            },
             async setDefaultValue() {
                 if (this.model && (this.model[this.field] || this.model[this.field] === 0)) {
                     return;
