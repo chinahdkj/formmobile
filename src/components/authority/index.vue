@@ -136,10 +136,7 @@
                         let roles = (item.code || "").split(",");
                         if(roles.length) {
                             let r = [...roles, ...(this.frRoles || [])]
-                            if([...new Set(r)].length < r.length) {
-                                //存在交集
-                                flag = true
-                            }
+                            flag = ([...new Set(r)].length < r.length)
                             if(flag) {
                                 break;
                             }
