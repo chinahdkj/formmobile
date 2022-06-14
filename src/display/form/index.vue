@@ -1,6 +1,9 @@
 <template>
     <div class="dsp-form-item" :class="['dsp-form-item__' + type, customClass, isLabelLine]" :style="boxstyle">
-        <div class="label" v-show="!labelHidden" :style="labelStyle">{{name}}</div>
+        <div class="label" v-show="!labelHidden" :style="labelStyle">
+            <div v-if="labelHtml" v-html="labelHtml"></div>
+            <span v-else>{{name}}</span>
+        </div>
 
         <div v-if="!type" class="value" :style="labelStyle">{{value}}</div>
         <component v-else class="value"
@@ -10,6 +13,8 @@
                    :model="model"
                    :default-value="defaultValue"
                    :class="customClass"
+                   :all-vars="allVars"
+                   :nodes-values-dict="nodesValuesDict"
                    v-bind="$attrs">
         </component>
     </div>
@@ -22,7 +27,7 @@
         props: [
             "value", "model", "type",
             "name", "field", "labelLine", "width", "customClass", "labelWidth", "labelHidden",
-            "defaultValue", "showCondition", "isDesign"
+            "defaultValue", "showCondition", "isDesign", "labelHtml", "allVars", "nodesValuesDict",
         ],
         computed: {
             boxstyle() {

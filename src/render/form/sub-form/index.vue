@@ -13,13 +13,14 @@
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
                                     :type="sub.type"
                                     :vars="model"
-                                    :all-vars="allVars"
                                     v-bind="sub.options"
                                     :parent-field="field"
                                     :is-new="isNew"
                                     :sub-options="subs"
                                     :global-disabled="globalDisabled"
                                     :index="i"
+                                    :all-vars="allVars"
+                                    :nodes-values-dict="nodesValuesDict"
                                     :authority="authority">
                         </form-item>
                     </div>
@@ -43,7 +44,7 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "authority"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority"],
         data() {
             return {
                 expendStatus: true,

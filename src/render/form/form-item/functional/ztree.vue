@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {deepClone, strToArr, TreeDataTrans, BindRecords, GetInterfaceData} from "../../../../utils/lib";
+import {deepClone, strToArr, TreeDataTrans, BindRecords, GetInterfaceData, TransferUrl} from "../../../../utils/lib";
 
 export default {
     name: "FtmZtree",
@@ -64,11 +64,18 @@ export default {
                 }
                 return result;
             }
-        }
+        },
+        apiUrl() {
+            if (!this.interface) {
+                return ""
+            }
+            return TransferUrl(this.interface, this.model, this.vars)
+        },
     },
     watch: {
-        interface: {
+        apiUrl: {
             immediate: true, handler(v) {
+                //请求接口数据
                 this.initInterfaceData(v)
             }
         },
@@ -122,7 +129,7 @@ export default {
                 this.value = null;
                 this.$set(this.model, `${this.field}$$text`, "");
                 if(this.sourceType === "interface") {
-                    this.initInterfaceData(this.interface, v)
+                    this.initInterfaceData(this.apiUrl, v)
                 } else {
                     if (v == null || v == "") {
                         this.nodes = nodes;
@@ -203,7 +210,7 @@ export default {
                 }
 
                 let nodes = await GetInterfaceData(url, this.$OPTS.urlPrefix,
-                    this.model, this.afterQuery, this.autoType, this.itfParams);
+                    this.model, this.afterQuery, this.autoType, this.itfParams, this.vars);
                 nodesTrans(nodes);
 
                 /*let res_Url = TransferUrl(url, this.model);

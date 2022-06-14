@@ -1,7 +1,8 @@
 <template>
     <div class="form-display" v-loading.fullscreen.lock="loading">
         <div :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
-            <display-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :model="model"></display-items>
+            <display-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :model="model"  :all-vars="allVars"
+            :nodes-values-dict="nodesValuesDict"></display-items>
         </div>
     </div>
 </template>
@@ -20,6 +21,14 @@
                 default: () => {}
             },
             formObject: {
+                type: Object,
+                default: () => {}
+            },
+            allVars: { //所有节点数据对象（流程节点中使用）
+                type: Object,
+                default: () => {}
+            },
+            nodesValuesDict: { //所有节点数据字典（流程节点中使用）
                 type: Object,
                 default: () => {}
             },
