@@ -41,7 +41,6 @@
         name: "SubForm",
         inheritAttrs: false,
         components: {FormItem},
-        mixins: [],
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
             "initNums", "maxNums", "minNums", "authority"],
