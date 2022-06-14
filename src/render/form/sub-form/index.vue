@@ -5,7 +5,7 @@
                        :data-field="field" :class="['fpt__subform', customClass ? customClass : '']">
             <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
                 <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
-                    <van-icon v-if="!isDisabled && !hideDelete" slot="tools" name="delete" style="line-height: inherit;"
+                    <van-icon v-if="!isDisabled && !hideDelete && !deleteDisabledCondition(row, i)" slot="tools" name="delete" style="line-height: inherit;"
                               @click="delModel(i)"/>
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
@@ -33,7 +33,7 @@
     </div>
 </template>
 <script>
-    import {TransferUrl, needShow, deepClone} from "../../../utils/lib";
+    import {TransferUrl, needShow, deepClone, ReplaceFields} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     import Authority from "../../../components/authority"
     export default {
@@ -112,6 +112,25 @@
             }
         },
         methods: {
+            deleteDisabledCondition(row, index) {
+                return this.needDisabled(this.delDisabledCondition, row, this.model, this.isNew, index)
+            },
+            //index 子表行数据索引
+            needDisabled(condition, model, vars, isNew, index) {
+                if(!condition){
+                    return false;
+                }
+
+                let cdn = ReplaceFields(condition)
+                let r = false;
+                try{
+                    r = eval(cdn);
+                } catch(e){
+                    console.error(e);
+                    r = false;
+                }
+                return !!r;
+            },
             addModel() {
                 let fields = {}
                 for(let sub of this.subs) {
