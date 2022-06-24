@@ -63,7 +63,11 @@
             },
             //v-show隐藏
             isShowOfVshow() {
-                return !this.item.options.KeepDom && !this.item.options.hide && needShow(this.item.options.showCondition, this.model)
+                // return !this.item.options.KeepDom && !this.item.options.hide && needShow(this.item.options.showCondition, this.model)
+                if(this.item.options.showCondition && needShow(this.item.options.showCondition, this.model)) {
+                    return true
+                }
+                return !this.item.options.KeepDom
             }
         },
         methods: {
