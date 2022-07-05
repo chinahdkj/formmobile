@@ -2,14 +2,14 @@
   <div class="frd-signature">
     <template v-if="signImgs.length">
       <div class="sign-image-box" v-for="(img, i) in signImgs" :key="i">
-        <img class="img-url" :src="img"  style="object-fit: cover;" @click="previewImg(i)"/>
+        <img class="img-url" :src="img" style="object-fit: cover;" @click="previewImg(i)"/>
         <van-button class="frd-signature-del" native-type="button" v-if="!disabled" size="mini" type="danger" round @click="deleteSign(i)">删除</van-button>
       </div>
-      <mue-img-preview :visible.sync="preview.visible" :images="signImgs" :start-position="preview.start" />
     </template>
     <div class="sign-image-box btn">
       <van-button native-type="button" class="add-sign" size="mini" round :disabled="!!disabled" @click="addSign">添加签名</van-button>
     </div>
+    <mue-img-preview :visible.sync="preview.visible" :images="preview.images" :start-position="preview.start" />
     <van-popup v-model="dialog.visible" position="bottom" get-container="body"
                :close-on-click-overlay="true" :safe-area-inset-bottom="true">
       <div class="frd-signature-dialog">
@@ -42,6 +42,7 @@ export default {
       },
       preview:{
         visible:false,
+        images:[],
         start:0,
       }
     };
@@ -94,12 +95,13 @@ export default {
       post(`/user/getAutograph.json`, params, {baseURL: this.prefix}).then(res => {
         if(res.autograph){
           this.signImgs.push(res.autograph)
-          this.$set(this.model, this.field, this.signImgs.join(","))
+          this.$set(this.model, this.field, this.signImgs.join(","));
+          this.dialog.visible = false;
         }else{
           this.$toast.fail("密码错误/未匹配到签名文件");
         }
       }).catch(err => {
-        this.$toast.fail(`接口出错: ${err}`);
+        this.$toast.fail(`${err.Message || err.message || err}`);
       })
     },
     deleteSign(i) {
@@ -107,8 +109,9 @@ export default {
       this.$set(this.model, this.field, this.signImgs.join(","))
     },
     previewImg(i){
-      this.preview.start = i;
       this.preview.visible = true;
+      this.preview.images = [...this.signImgs]
+      this.preview.start = i;
     }
   }
 }
