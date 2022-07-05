@@ -40,6 +40,7 @@ import DspWaterMarkingCamera from "./form/form-item/mobile/water-marking-camera"
 import DspCodeScanner from "./form/form-item/mobile/code-scanner";
 import DspAudio from "./form/form-item/mobile/audio";
 import DspSignature from "./form/form-item/mobile/signature";
+import DspSignatureWrite from "./form/form-item/mobile/signature-write";
 import DspNfc from "./form/form-item/mobile/nfc";
 
 //布局组件
@@ -58,7 +59,7 @@ let components = [
     
     DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete,
     
-    DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature, DspNfc,
+    DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature, DspSignatureWrite, DspNfc,
     
     DspTabsPanel, DspGridsPanel, DspSplitLine, DspCardPanel, DspSubForm, DspInputDialog
 ]
