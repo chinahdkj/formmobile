@@ -1,37 +1,37 @@
 <template>
-    <div class="dsp__signature">
-        <mue-signature v-model="imgs" readonly></mue-signature>
-    </div>
+  <div className="dsp__signature">
+    <mue-signature v-model="imgs" readonly></mue-signature>
+  </div>
 </template>
 
 <script>
-    import {strToArr} from '../../../../utils/lib'
+import { strToArr } from '../../../../utils/lib'
 
-    export default {
-        name: "DspSignature",
-        components: {},
-        props: ["value"],
-        data(){
-            return {};
-        },
-        computed: {
-            imgs: {
-                get() {
-                    if(Array.isArray(this.value)) return this.value;
-                    return strToArr(this.value)
-                },
-                set() {
+export default {
+  name: "DspSignatureWrite",
+  components: {},
+  props: ["value"],
+  data () {
+    return {};
+  },
+  computed: {
+    imgs: {
+      get () {
+        if (Array.isArray (this.value)) return this.value;
+        return strToArr (this.value)
+      },
+      set () {
 
-                }
-            }
-        },
-        methods: {}
+      }
     }
+  },
+  methods: {}
+}
 </script>
 
 <style lang="less">
-    .dsp__signature {
-        width: 100%;
-        box-sizing: border-box;
-    }
+.dsp__signature {
+  width: 100%;
+  box-sizing: border-box;
+}
 </style>

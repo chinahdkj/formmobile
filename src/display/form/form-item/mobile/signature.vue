@@ -4,20 +4,23 @@
       <div class="sign-image-box" v-for="(img, i) in signImgs" :key="i">
         <img class="img-url" :src="img"  style="object-fit: cover;" @click="previewImg(i)"/>
       </div>
+      <mue-img-preview :visible.sync="preview.visible" :images="signImgs" :start-position="preview.start" />
     </template>
   </div>
 </template>
 
 <script>
-import Vue from "vue"
-import { ImagePreview } from 'vant';
-Vue.use(ImagePreview);
 export default {
   name: "DspSignature",
   components: {},
   props: ["value", "model", "field"],
   data(){
-    return {};
+    return {
+      preview:{
+        visible:false,
+        start:0,
+      }
+    };
   },
   computed: {
     signImgs() {
@@ -27,10 +30,8 @@ export default {
   },
   methods: {
     previewImg(i){
-      ImagePreview({
-        images: this.signImgs,
-        startPosition: i,
-      });
+      this.preview.start = i;
+      this.preview.visible = true;
     }
   }
 }
