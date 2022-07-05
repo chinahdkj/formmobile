@@ -29,9 +29,6 @@
 
 <script>
 import { post } from "../../../../../../../src/modules/service";
-import Vue from "vue"
-import { ImagePreview } from 'vant';
-Vue.use(ImagePreview);
 export default {
   name: "FtmSignature",
   inheritAttrs: false,
@@ -83,7 +80,7 @@ export default {
     },
     getAutograph() {
       if(!this.pwd) {
-        this.$toast.error("请先输入密钥");
+        this.$toast.fail("请先输入密钥");
         return
       }
       let params = {
@@ -99,10 +96,10 @@ export default {
           this.signImgs.push(res.autograph)
           this.$set(this.model, this.field, this.signImgs.join(","))
         }else{
-          this.$toast.error("密码错误/未匹配到签名文件");
+          this.$toast.fail("密码错误/未匹配到签名文件");
         }
       }).catch(err => {
-        this.$toast.error(`接口出错: ${err}`);
+        this.$toast.fail(`接口出错: ${err}`);
       })
     },
     deleteSign(i) {
