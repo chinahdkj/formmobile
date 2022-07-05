@@ -11,7 +11,7 @@
       <van-button native-type="button" class="add-sign" size="mini" round :disabled="!!disabled" @click="addSign">添加签名</van-button>
     </div>
     <van-popup v-model="dialog.visible" position="bottom" get-container="body"
-               :close-on-click-overlay="false" :safe-area-inset-bottom="true">
+               :close-on-click-overlay="true" :safe-area-inset-bottom="true">
       <div class="frd-signature-dialog">
         <div class="frd-signature-dialog__label">签名密钥</div>
         <div class="frd-signature-dialog__content">
