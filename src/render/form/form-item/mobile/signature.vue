@@ -5,6 +5,7 @@
         <img class="img-url" :src="img"  style="object-fit: cover;" @click="previewImg(i)"/>
         <van-button class="frd-signature-del" native-type="button" v-if="!disabled" size="mini" type="danger" round @click="deleteSign(i)">删除</van-button>
       </div>
+      <mue-img-preview :visible.sync="preview.visible" :images="signImgs" :start-position="preview.start" />
     </template>
     <div class="sign-image-box btn">
       <van-button native-type="button" class="add-sign" size="mini" round :disabled="!!disabled" @click="addSign">添加签名</van-button>
@@ -42,6 +43,10 @@ export default {
       dialog: {
         visible: false
       },
+      preview:{
+        visible:false,
+        start:0,
+      }
     };
   },
   computed: {
@@ -105,10 +110,8 @@ export default {
       this.$set(this.model, this.field, this.signImgs.join(","))
     },
     previewImg(i){
-      ImagePreview({
-        images: this.signImgs,
-        startPosition: i,
-      });
+      this.preview.start = i;
+      this.preview.visible = true;
     }
   }
 }
