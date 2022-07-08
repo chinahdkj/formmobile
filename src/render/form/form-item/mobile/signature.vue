@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { post } from "../../../../../../../src/modules/service";
 export default {
   name: "FtmSignature",
   inheritAttrs: false,
@@ -92,7 +91,7 @@ export default {
       if(this.disabledPwd) {
         params.disabledPwd = 1
       }
-      post(`/user/getAutograph.json`, params, {baseURL: this.prefix}).then(res => {
+      this.$http.post(`/user/getAutograph.json`, params, {baseURL: this.prefix}).then(res => {
         if(res.autograph){
           this.signImgs.push(res.autograph)
           this.$set(this.model, this.field, this.signImgs.join(","));
