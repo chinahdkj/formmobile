@@ -58,9 +58,12 @@ export default {
         },
         targetUrl() {
             const path = location.origin + location.pathname
-            const sn = `${sessionStorage.getItem('app_sn')}`
+            const sn = sessionStorage.getItem('app_sn') ? `${sessionStorage.getItem('app_sn')}` : '';
             let pp = path.split(`/${sn}/`)[0]
             pp = pp + (pp.endsWith('/') ? `${sn}/hddev` : `/${sn}/hddev`)
+            if(!sn){
+                pp = location.origin
+            }
             let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars)
             // url = url.replace("$rowIndex", this.rowIndex)
             //子表链接自动携带上rowIndex
