@@ -208,13 +208,13 @@ export const ReplaceFields = (expression) => {
     
     fields.forEach((f) => {
         let ff = f.replace("${", "model['").replace("}", "']");
-        expression = expression.replace(f, ff);
+        expression = expression.replace(f, () => ff);
     });
     
     //子表中的表达式组件替换主表中的某个值
     pFields.forEach((f) => {
         let ff = f.replace("${parent.", "vars['").replace("}", "']");
-        expression = expression.replace(f, ff);
+        expression = expression.replace(f, () => ff);
     });
     
     return expression
