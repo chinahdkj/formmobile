@@ -19,7 +19,7 @@
         name: "FtmText",
         inheritAttrs: false,
         components: {},
-        props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur", "isSelect", "required", "defaultValue", 
+        props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur", "isSelect", "required", "defaultValue",
             "viewerType", "keepSpaces"],
         data(){
             return {};
@@ -32,7 +32,7 @@
                 set(nv){
                     if (this.type === "number") {
                         let v = nv == null ? "" : String(nv).trim();
-                        this.$set(this.model, this.field, !v || isNaN(v) ? 0 : Number(v));
+                        this.$set(this.model, this.field, v === '-' ? '-' : (!v || isNaN(v) ? 0 : Number(v)));
                     } else {
                         // this.$set(this.model, this.field, nv.replace(/\s*/g,""));
                         if(this.viewerType === "bank") {
