@@ -470,7 +470,8 @@ export const EvalExpression = (expression, model, vars) => {
 //字符串转数组
 export function strToArr(urlStrs){
     let arr = [];
-    (urlStrs || "").split(",").forEach((f) => {
+    let str = urlStrs || "";
+    String(str).split(",").forEach((f) => {
         f = f.trim();
         if(f){
             arr.push(f);
