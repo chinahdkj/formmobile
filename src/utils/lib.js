@@ -410,6 +410,16 @@ export const TransferUrl = (url, model, vars) => {
         url = url.replace(f, vars[ff]);
     });
     url = url.replace("$token", window.sessionStorage.getItem("authortoken"))
+    //支持表达式
+    try{
+        if (/return\s+/.test(url)) {
+            url = eval(`(function () {
+                ${url};
+            })()`);
+        }
+    } catch(e){
+        console.error(e);
+    }
     return url;
 }
 
