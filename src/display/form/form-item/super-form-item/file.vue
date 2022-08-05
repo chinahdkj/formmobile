@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__file" :class="{'single': files.length === 1}">
-        <mue-upload v-model="files" :multiple="!!multiple" readonly isFrame></mue-upload>
+        <mue-upload v-model="files" :multiple="!!multiple" readonly isFrame :uploadPrefix="uploadPrefix"></mue-upload>
     </div>
 </template>
 
@@ -10,11 +10,14 @@ import {strToArr} from '../../../../utils/lib'
 export default {
     name: "DspFile",
     components: {},
-    props: ["value", "multiple"],
+    props: ["value", "multiple", "urlPrefix"],
     data() {
         return {};
     },
     computed: {
+        uploadPrefix() {
+            return this.urlPrefix || this.$OPTS.urlPrefix || "";
+        },
         files: {
             get() {
                 if(Array.isArray(this.value)) return this.value;
