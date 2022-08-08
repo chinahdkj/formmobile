@@ -13,7 +13,9 @@ const actions = {
     if (view.$refs.formView) {
       view.$refs.formView._getFormData ().then (({ model }) => {
         if (window.parent) {
-          window.parent.postMessage ({ action: "SEND-MODEL-TO-BPM", params: { model, status: "success" } }, "*");
+          setTimeout(() => {
+            window.parent.postMessage({action: "SEND-MODEL-TO-BPM", params: {model, status: "success"}}, "*")
+          }, 2000)
         }
       }).catch ((err) => {
         if (window.parent) {

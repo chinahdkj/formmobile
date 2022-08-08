@@ -26,6 +26,7 @@
 </template>
 <script>
 import ItemHtml from "../../../display/form";
+import UUID from "uuid/v4";
 export default {
     name: "DspSubForm",
     inheritAttrs: false,
@@ -56,7 +57,8 @@ export default {
                 this.value.forEach(row => {
                     for(let sub of v) {
                         if(!(sub.options.field in row)) {
-                            row[sub.options.field] = sub.options.defaultValue
+                            let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
+                            row[sub.options.field] = defaultValue
                         }
                     }
                 })
@@ -68,7 +70,10 @@ export default {
         addModel() {
             let fields = {}
             for(let sub of this.subs) {
-                fields[sub.options.field] = sub.options.defaultValue
+              let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
+                fields[sub.options.field] = defaultValue
+                fields['$$innerIsEdit'] = true;
+                fields['$$innerId'] = UUID();
             }
             this.value.push(fields);
         },
