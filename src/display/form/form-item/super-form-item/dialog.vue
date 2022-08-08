@@ -97,8 +97,8 @@ export default {
     }
 </style>
 <style lang="less">
-body .form-display .custom-form-group-grids .dsp-form-item ,
-body .sub-form-view .form-part .mue-panel .dsp-form-item {
+body .form-display .custom-form-group-grids .dsp-form-item:not(.default-dialog-btn) ,
+body .sub-form-view .form-part .mue-panel .dsp-form-item:not(.default-dialog-btn) {
     &.dsp-form-item__dialog {
         margin-top: -41px;
         top:0;
