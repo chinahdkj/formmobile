@@ -154,6 +154,11 @@ export const formItemList = {
 
 //初始赋值
 export const GetDefaultValue = (dv, vars, field) => {
+    //默认值设置字符串null时，不继承vars数据
+    if(dv === '$$notExtend') {
+        return undefined
+    }
+
     if(vars && field && field in vars){
         return vars[field];
     }
