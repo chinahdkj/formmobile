@@ -5,7 +5,7 @@
         <div class="mue-select">
             <div class="mue-form-input has-suffix" @click="openPopup"
                 :class="{'mue-form-input__is-disabled': !!disabled}">
-                <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled"
+                <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled && !displayReadonly"
                     :placeholder="btnName" onfocus="this.blur()"/>
                 <slot name="icon">
                     <i class="input__suffix input__suffix_icon iconfont icon-arrows-copy-copy"></i>
@@ -37,7 +37,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "disabled", "btnName", "url", "mobileUrl", "fullscreen", "dialogWidth", "dialogHeight",
-        "dialogClass", "dialogTitle", "btnWidth", "rowIndex", "vars"],
+        "dialogClass", "dialogTitle", "btnWidth", "rowIndex", "vars", "displayReadonly"],
     data() {
         return {
             dialog: {
@@ -64,11 +64,15 @@ export default {
             if(!sn){
                 pp = location.origin
             }
-            let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars)
+            let trans_url = this.mobileUrl || this.url
+            let url = TransferUrl(trans_url, this.model, this.vars)
             // url = url.replace("$rowIndex", this.rowIndex)
             //子表链接自动携带上rowIndex
             if(this.rowIndex !== undefined) {
-                url = (url || "").includes("?") ? `${url}&rowIndex=${this.rowIndex}` : `${this.url}?rowIndex=${this.rowIndex}`
+                url = (url || "").includes("?") ? `${url}&rowIndex=${this.rowIndex}` : `${trans_url}?rowIndex=${this.rowIndex}`
+            }
+            if(!!this.displayReadonly) {
+                url = (url || "").includes("?") ? `${url}&isDetail=1` : `${trans_url}?isDetail=1`
             }
             const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
             ur.searchParams.set('appid',sessionStorage.getItem('hddevappid') || sessionStorage.getItem('appid'))
