@@ -13,8 +13,9 @@
 
 <script>
 import {strToArr} from '../../../../utils/lib'
-
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     name: "FtmImgVideo",
     inheritAttrs: false,
     components: {},
@@ -45,17 +46,7 @@ export default {
             }
         },
         onChange(v) {
-            if(this.valChange) {
-                try {
-                    let val = v;
-                    let model = this.model;
-                    let vars = this.vars;
-                    let _this = this;
-                    eval(this.valChange);
-                } catch (e) {
-                    console.info(e)
-                }
-            }
+            this.evalValChange(v);
         }
     }
 }

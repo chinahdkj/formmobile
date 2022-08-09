@@ -15,7 +15,9 @@
 </template>
 
 <script>
+    import BASE from "./base";
     export default {
+        mixins: [BASE],
         name: "FtmText",
         inheritAttrs: false,
         components: {},

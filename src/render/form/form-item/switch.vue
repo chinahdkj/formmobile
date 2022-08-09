@@ -1,9 +1,11 @@
 <template>
-    <van-switch v-model="value" :active-value="1" :inactive-value="0" :disabled="!!disabled"/>
+    <van-switch v-model="value" :active-value="1" :inactive-value="0" :disabled="!!disabled" @change="onChange"/>
 </template>
 
 <script>
+    import BASE from "./base";
     export default {
+        mixins: [BASE],
         name: "FtmSwitch",
         components: {},
         props: ["field", "model", "required", "disabled", "defaultValue", "dataType"],
@@ -19,6 +21,11 @@
                 set(nv){
                     this.$set(this.model, this.field, this.dataType === "Number" ? nv : String(nv));
                 }
+            }
+        },
+        methods:{
+            onChange(v) {
+                this.evalValChange(v);
             }
         }
     }

@@ -14,13 +14,16 @@
 
 <script>
 import {strToArr} from "../../../../utils/lib";
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     name: "FtmFile",
     inheritAttrs: false,
     components: {},
-    props: ["field", "model", "dataType", "disabled", "required", "vars",
-        "defaultValue", "multiple", "placeholder", "accept", "isDownload", 
-        "urlPrefix", "valChange", "toKnowledge", "isPreview", "previewUrl", "keyWord", "summary"],
+    props: ["field", "model", "dataType", "readonly", "disabled", "required", "vars",
+      "defaultValue", "multiple", "placeholder","accept", "isDownload", "urlPrefix",
+      "valChange", "toKnowledge", "isPreview", "previewUrl", "keyWord", "summary",
+      "customKeyWord", "customSummary", "tag", "customTag", "sliceUpload", "chunkSize"],
     data() {
         return {};
     },
@@ -73,17 +76,7 @@ export default {
             }
         },
         onChange(v) {
-            if(this.valChange) {
-                try {
-                    let val = v;
-                    let model = this.model;
-                    let vars = this.vars;
-                    let _this = this;
-                    eval(this.valChange);
-                } catch (e) {
-                    console.info(e)
-                }
-            }
+            this.evalValChange(v);
         },
         onSuccess(r, file, fileList) {
             if(this.toKnowledge) {

@@ -5,7 +5,9 @@
 
 <script>
 import {GetFormatString} from "../../../utils/lib";
+import BASE from "./base";
 export default {
+    mixins: [BASE],
     name: "FtmDateRangePicker",
     inheritAttrs: false,
     components: {},
@@ -65,19 +67,7 @@ export default {
             return arr.map(m => moment(m, format).unix()).join(",")
         },
         onChange(v){
-            this.$nextTick(()=>{
-                if(this.valChange) {
-                    try {
-                        let val = this.value;
-                        let model = this.model;
-                        let vars = this.vars;
-                        let _this = this;
-                        eval(this.valChange);
-                    } catch (e) {
-                        console.info(e)
-                    }
-                }
-            })
+            this.evalValChange(v);
         }
     }
 }

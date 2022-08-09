@@ -8,7 +8,9 @@
 
 <script>
     import { TransBindings, BindRecords, GetInterfaceData, TransferUrl } from "../../../utils/lib";
+    import BASE from "./base";
     export default {
+        mixins: [BASE],
         name: "FtmSelect",
         components: {},
         props: [
@@ -184,17 +186,7 @@
                     let name = this.$refs.select.text;
                     this.$set(this.model, `${this.field}$$text`, name);
                 })
-                if(this.valChange) {
-                    try {
-                        let val = v;
-                        let model = this.model;
-                        let vars = this.vars;
-                        let _this = this;
-                        eval(this.valChange);
-                    } catch (e) {
-                        console.info(e)
-                    }
-                }
+                this.evalValChange(v);
             },
             async initInterfaceData(url, val) {
                 if(!url || this.optionsType !== "interface") {

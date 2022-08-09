@@ -8,8 +8,9 @@
 <script>
 /* 后续移动端异步树开发后以此替换 */
 import {deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
-
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     inheritAttrs: false,
     components: {},
     props: [
