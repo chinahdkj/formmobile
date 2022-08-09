@@ -9,8 +9,9 @@
 
 <script>
     import {DateFormat, GetDefaultValue, GetFormatString, needShow, EvalExpression} from '../../../utils/lib'
-
+    import BASE from "./base";
     export default {
+        mixins: [BASE],
         name: "FtmDatePicker",
         inheritAttrs: false,
         components: {},
@@ -111,18 +112,8 @@
                 }
             },
             onConfirm() {
-                if(this.valChange) {
-                    try {
-                        let val = v;
-                        let model = this.model;
-                        let vars = this.vars;
-                        let _this = this;
-                        eval(this.valChange);
-                    } catch (e) {
-                        console.info(e)
-                    }
-                }
-            }
+                this.evalValChange(v);
+            },
         },
         mounted(){
             //最大值失效条件相关表单值改变时，重置时间选择

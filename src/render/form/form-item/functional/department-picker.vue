@@ -7,8 +7,9 @@
 
 <script>
 import {deepClone, strToArr, TreeDataTrans, BindRecords} from "../../../../utils/lib";
-
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     name: "FtmDepartmentPicker",
     inheritAttrs: false,
     components: {},

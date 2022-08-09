@@ -6,8 +6,9 @@
 
 <script>
 import {strToArr, TreeDataTrans} from "../../../../utils/lib";
-
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     name: "FtmUserPicker",
     inheritAttrs: false,
     components: {},
