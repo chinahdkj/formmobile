@@ -37,6 +37,7 @@
     import {TransferUrl, needShow, deepClone, ReplaceFields} from "../../../utils/lib";
     import FormItem from "../../../render/form";
     import Authority from "../../../components/authority"
+    import UUID from "uuid/v4";
     export default {
         mixins: [Authority],
         name: "SubForm",
@@ -103,7 +104,8 @@
                     this.value.forEach(row => {
                         for(let sub of v) {
                             if(!(sub.options.field in row)) {
-                                row[sub.options.field] = sub.options.defaultValue
+                              let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
+                              row[sub.options.field] = defaultValue
                             }
                         }
                     })
@@ -134,7 +136,10 @@
             addModel() {
                 let fields = {}
                 for(let sub of this.subs) {
-                    fields[sub.options.field] = sub.options.defaultValue
+                  let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
+                  fields[sub.options.field] = defaultValue
+                  fields['$$innerIsEdit'] = true;
+                  fields['$$innerId'] = UUID();
                 }
                 this.value.push(fields);
             },
