@@ -7,6 +7,8 @@
                 :accept="accept"
                 :is-download="true"
                 :uploadPrefix="uploadPrefix"
+                :is-preview="!!isPreview"
+                :preview-url="prevUrl"
                 @input="onChange"
                 isFrame>
     </mue-upload>
@@ -40,6 +42,11 @@ export default {
         },
         uploadPrefix() {
             return this.urlPrefix || this.$OPTS.urlPrefix || "";
+        },
+        prevUrl() {
+            let prefix = window.FORM_Bindings.onlineViewerPrefix && (window.HDDEV_Bindings.onlineViewerPrefix || []).length ?
+              window.FORM_Bindings.onlineViewerPrefix[0].Value : ""
+            return this.previewUrl || prefix || ""
         },
         extralParams() {
             let params = {};
