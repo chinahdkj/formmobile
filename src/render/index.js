@@ -37,6 +37,7 @@ import FtmZtree from "./form/form-item/functional/ztree";
 import FtmLocation from "./form/form-item/functional/location";
 import FtmAutocomplete from "./form/form-item/functional/autocomplete";
 import FtmRegion from "./form/form-item/functional/region";
+import FtmDrawLayer from "./form/form-item/functional/draw-layer";
 
 //移动端组件
 import FtmWaterMarkingCamera from "./form/form-item/mobile/water-marking-camera";
@@ -59,7 +60,7 @@ let components = [
     
     FtmFile, FtmVideo, FtmPicture, FtmImgVideo, FtmEditor, FtmCascader, FtmCustom, FtmDialog, FtmIframe,
     
-    FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete, FtmRegion,
+    FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete, FtmRegion, FtmDrawLayer,
     
     FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature, FtmSignatureWrite, FtmNfc,
     
