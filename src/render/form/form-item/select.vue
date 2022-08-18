@@ -16,7 +16,8 @@
         props: [
             "field", "model", "vars", "disabled", "required", "defaultValue", "placeholder",
             "multiple", "expandTags", "bindings", "dataType", "optionsType", "optionsDict", "linkage", "searchable",
-            "limit", "autoType", "interface", "itfParams", "afterQuery", "valChange", "linkageNoClear",
+            "limit", "autoType", "interface", "itfParams", "afterQuery", "valChange", "linkageNoClear", "afterInitData",
+            "parentField"
         ],
         data() {
             return {
@@ -68,7 +69,7 @@
                 for(let [k,v] of valuesArr.entries()) {
                     items.push({Value: v, Name: namesArr[k] || ""})
                 }
-                this.items = items;
+                this.items = TransBindings(items);
             },
             transValue(v){
                 if(this.isMultiple){
@@ -198,13 +199,14 @@
                     // let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
                     //     this.model, this.afterQuery, this.autoType, this.itfParams, this.vars);
                     // this.items = TransBindings(items);
-                    this.items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
+                    let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
                         this.model, this.afterQuery, this.autoType, this.itfParams, this.vars, this.field, this.parentField);
+                    this.items = TransBindings(items);
                     if (!this.items) {
                         this.items = [];
                     }
                     this.evalAfterInitData()
-                    if (linkage) {
+                    if (this.linkage) {
                         this.checkValueExist();
                     }
                 }, 100)
