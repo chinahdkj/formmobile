@@ -13,8 +13,9 @@
 
 <script>
 import {deepClone, strToArr, TreeDataTrans, BindRecords, GetInterfaceData, TransferUrl} from "../../../../utils/lib";
-
+import BASE from "../base";
 export default {
+    mixins: [BASE],
     name: "FtmZtree",
     inheritAttrs: false,
     components: {},
