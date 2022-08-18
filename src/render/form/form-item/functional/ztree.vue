@@ -32,10 +32,17 @@ export default {
     computed: {
         value: {
             get(){
-                //转数组（组件需要）
-                let v = this.model[this.field];
-                if(Array.isArray(v)) return v;
-                return strToArr(v)
+              //转数组（组件需要）
+              let v = this.model[this.field];
+              if(!!this.multiple){
+                if(Array.isArray(v)){
+                  return v
+                }else{
+                  return strToArr(v)
+                }
+              }else{
+                  return v
+              }
             },
             set(nv){
                 //传递时转字符串（数据库限制）
