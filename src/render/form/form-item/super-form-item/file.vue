@@ -10,6 +10,7 @@
                 :is-preview="!!isPreview"
                 :preview-url="prevUrl"
                 @input="onChange"
+                @on-success="onSuccess"
                 isFrame>
     </mue-upload>
 </template>
@@ -50,7 +51,7 @@ export default {
         },
         extralParams() {
             let params = {};
-            if(this.keyWord) {
+            if(this.keyWord || this.customKeyWord) {
                 let vals = [];
                 let keys = String(this.keyWord).split(",");
                 for(let k of keys) {
@@ -58,9 +59,11 @@ export default {
                         vals.push(this.model[k])
                     }
                 }
-                params.keyWord = vals.join(",");
+                let vals2 =  (this.customKeyWord || "").split(",");
+                let ValsResult = [...vals, ...vals2] ;
+                params.keyWord = ValsResult.join(",");
             }
-            if(this.summary) {
+            if(this.summary || this.customSummary) {
                 let vals = [];
                 let keys = String(this.summary).split(",");
                 for(let k of keys) {
@@ -68,7 +71,21 @@ export default {
                         vals.push(this.model[k])
                     }
                 }
-                params.summary = vals.join(",");
+                let vals2 =  (this.customSummary || "").split(",");
+                let ValsResult = [...vals, ...vals2] ;
+                params.summary = ValsResult.join(",");
+            }
+            if(this.tag || this.customTag) {
+                let vals = [];
+                let keys = String(this.tag).split(",");
+                for(let k of keys) {
+                    if(k in this.model) {
+                        vals.push(this.model[k])
+                    }
+                }
+                let vals2 =  (this.customTag || "").split(",");
+                let ValsResult = [...vals, ...vals2] ;
+                params.tag = ValsResult.join(",");
             }
             return params
         }
@@ -85,31 +102,22 @@ export default {
         onChange(v) {
             this.evalValChange(v);
         },
-        onSuccess(r, file, fileList) {
+        onSuccess(r, file) {
             if(this.toKnowledge) {
                 //同步上传知识库
                 let form = new FormData();
-                form.append("file", file.raw)
+                form.append("file", file.raw || file)
                 form.append("keyWord", this.extralParams.keyWord || "")
                 form.append("summary", this.extralParams.summary || "")
-                $.ajax({
-                    type: "POST", contentType: false, dataType: "json",
-                    processData: false, data: form, url: `${this.uploadPrefix}/api/external/hdfs/upload`,
-                    beforeSend: (xhr) => {
-                        if(!(Object.keys(this.FORMRENDER_HEADER).length)) {
-                            return
-                        }
-                        for(let [key, value] of Object.entries(this.FORMRENDER_HEADER)) {
-                            xhr.setRequestHeader(key, value);
-                        }
-                    },
-                    success: (res) => {
-                        console.log("upload-to-knowledge", res);
-                    },
-                    error: (err) => {
-                        console.error(err);
-                    }
-                });
+                form.append("tag", this.extralParams.tag || "")
+                this.$http.post(`${this.uploadPrefix}/api/external/hdfs/upload`, form, {
+                    processData: false,
+                    contentType: false
+                }).then(res => {
+                    console.log("upload-to-knowledge", res);
+                }).catch(err => {
+                    console.error(err);
+                })
             }
         }
     }

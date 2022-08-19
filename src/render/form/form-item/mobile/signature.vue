@@ -91,7 +91,7 @@ export default {
       if(this.disabledPwd) {
         params.disabledPwd = 1
       }
-      this.$http.post(`/user/getAutograph.json`, params, {baseURL: this.prefix}).then(res => {
+      this.$http.post(`${this.prefix}/user/getAutograph.json`, params, ).then(res => {
         if(res.autograph){
           this.signImgs.push(res.autograph)
           this.$set(this.model, this.field, this.signImgs.join(","));
