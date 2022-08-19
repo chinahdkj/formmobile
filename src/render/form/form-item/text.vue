@@ -16,20 +16,49 @@
 
 <script>
     import BASE from "./base";
+    import {Validate} from "../../../utils/validate"
     export default {
         mixins: [BASE],
         name: "FtmText",
         inheritAttrs: false,
         components: {},
         props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur", "isSelect", "required", "defaultValue",
-            "viewerType", "keepSpaces"],
+            "viewerType", "keepSpaces", "vars", "decimalLength", "desensitization", "ndType",
+            "bankCardNumbers"],
         data(){
             return {};
         },
         computed: {
             value: {
                 get(){
-                    return this.model[this.field];
+                    // return this.model[this.field];
+                    let val = this.model[this.field]
+                    if(this.desensitization) {
+                        //手机号脱敏
+                        if(val && this.ndType === "mobile" && Validate.checkIsTelephone(val)) {
+                            return val.replace(/^(.{3})(?:\d+)(.{4})$/, "$1****$2");
+                        }
+
+                        //身份证号脱敏
+                        if(val && this.ndType === "idCard" && Validate.checkIsIdcard(val)) {
+                            return val.replace(/^(.{8})(?:\d+)(.{4})$/, "$1******$2");
+                        }
+
+                        //银行卡脱敏
+                        if(val && this.ndType === "bank") {
+                            if(this.bankCardNumbers === 16 && Validate.checkIsBankCard16(val)) {
+                                return val.replace(/^(.{6})(?:\d+)(.{4})$/, "$1******$2");
+                            } else if(this.bankCardNumbers === 19 && Validate.checkIsBankCard19(val)){
+                                return val.replace(/^(.{6})(?:\d+)(.{4})$/, "$1*********$2");
+                            } else {
+                                return val
+                            }
+                        }
+
+                        return val;
+                    }
+
+                    return val;
                 },
                 set(nv){
                     if (this.type === "number") {

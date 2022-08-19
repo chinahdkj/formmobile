@@ -12,7 +12,8 @@ export const InputDefaults = {
             dataType: "Text", hide: 0, disabled: 0, readonly: 0, defaultValue: null, showCondition: null, KeepDom: 0,
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
             labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
-            interface: "", itfParams: "", afterQuery: "", afterBlur: ""
+            interface: "", itfParams: "", afterQuery: "", afterBlur: "", isSelect: 0, viewerType: "default", keepSpaces: 0,
+            decimalLength: null, desensitization: 0, ndType: "", bankCardNumbers: 19
         };
     },
     textarea() {

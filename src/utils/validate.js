@@ -91,5 +91,14 @@ export const Validate = {
     },
     checkIsIdcard(v) {
         return /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(v);
-    }
+    },
+    checkIsBankCard(v) {
+        return /^([1-9]{1})(\d{15}|\d{18})$/.test(v);
+    },
+    checkIsBankCard16(v) {
+        return /^([1-9]{1})(\d{15})$/.test(v);
+    },
+    checkIsBankCard19(v) {
+        return /^([1-9]{1})(\d{18})$/.test(v);
+    },
 }
