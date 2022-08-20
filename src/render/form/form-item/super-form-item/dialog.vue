@@ -4,7 +4,7 @@
                    @click="dialog.visible = true">{{ btnName }}</van-button> -->
         <div class="mue-select">
             <div class="mue-form-input has-suffix" @click="openPopup"
-                :class="{'mue-form-input__is-disabled': !!disabled}">
+                :class="{'mue-form-input__is-disabled': !!disabled && !displayReadonly}">
                 <input type="text" class="input__inner" readonly :value="btnName" :disabled="!!disabled && !displayReadonly"
                     :placeholder="btnName" onfocus="this.blur()"/>
                 <slot name="icon">
