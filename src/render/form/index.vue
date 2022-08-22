@@ -67,7 +67,7 @@
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority", "colWidth"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled
@@ -76,6 +76,14 @@
                 || !this.currentFieldAuth.edit
             },
             isMust() {
+                //子表项宽度小于0，处于隐藏状态的，跳过必填校验
+                if(this.colWidth) {
+                    let num  = this.colWidth.includes("px") ? Number(this.colWidth.slice(0, this.colWidth.length - 2)) : Number(this.colWidth);
+                    if(num < 0) {
+                        return false
+                    }
+                }
+
                 return !!this.required
                 || needMust(this.mustCondition, this.model, this.vars || {}, this.isNew)
                 || this.currentFieldAuth.required
