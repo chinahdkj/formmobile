@@ -11,6 +11,7 @@
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                     <div v-for="(sub, idx) in subs" :key="idx">
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
+                                    :style="colWidthStyle(sub.options.colWidth)"
                                     :type="sub.type"
                                     :vars="model"
                                     v-bind="sub.options"
@@ -45,7 +46,7 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth"],
         data() {
             return {
                 expendStatus: true,
@@ -229,6 +230,37 @@
                     this.value = deepClone(this.initValue);
                 }
             },
+            //列宽表达式
+            transColWidth(width) {
+                if(width && width.includes("return")) {
+                    try {
+                        let model = deepClone(this.model);
+                        let _this = this;
+
+                        let es = ReplaceFields(width);
+                        return eval(`(function(model, _this) {
+                                        ${es || 'return "";'}
+                                    })(model, _this)`)
+                    } catch (e) {
+                        console.info(e);
+                        return ""
+                    }
+                } else {
+                    return width
+                }
+            },
+            colWidthStyle(colwidth){
+                if(!colwidth) return
+                let result = this.transColWidth(colwidth)
+                let num  = result.includes("px") ? Number(result.slice(0, result.length - 2)) : Number(result);
+                if(num <= 0){
+                    return {
+                        height:0,
+                        minHeight:0,
+                        overflow:'hidden'
+                    }
+                }
+            }
         },
         mounted() {
             if(!this.value.length) {

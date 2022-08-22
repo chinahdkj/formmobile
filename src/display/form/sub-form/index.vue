@@ -12,6 +12,7 @@
                         <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                         <div v-for="(sub, idx) in subs" :key="idx">
                             <item-html :model="row"
+                                       :style="colWidthStyle(sub.options.colWidth || '')"
                                        :type="sub.type"
                                        :value="row[sub.options.field]"
                                        v-bind="sub.options"
@@ -26,6 +27,7 @@
 </template>
 <script>
 import ItemHtml from "../../../display/form";
+import { deepClone, ReplaceFields } from "../../../utils/lib"
 import UUID from "uuid/v4";
 export default {
     name: "DspSubForm",
@@ -98,6 +100,37 @@ export default {
             this.value.forEach((row, i) => {
                 this.$set(this.value[i], "__hideFields", !this.expendStatus)
             })
+        },
+        //列宽表达式
+        transColWidth(width) {
+            if(width && width.includes("return")) {
+                try {
+                    let model = deepClone(this.model);
+                    let _this = this;
+
+                    let es = ReplaceFields(width);
+                    return eval(`(function(model, _this) {
+                                                ${es || 'return "";'}
+                                            })(model, _this)`)
+                } catch (e) {
+                    console.info(e);
+                    return ""
+                }
+            } else {
+                return width
+            }
+        },
+        colWidthStyle(colwidth){
+            if(!colwidth) return
+            let result = this.transColWidth(colwidth)
+            let num  = result.includes("px") ? Number(result.slice(0, result.length - 2)) : Number(result);
+            if(num <= 0){
+                return {
+                    height:0,
+                    minHeight:0,
+                    overflow:'hidden'
+                }
+            }
         }
     }
 };
