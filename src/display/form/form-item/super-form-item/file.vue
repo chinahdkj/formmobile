@@ -1,9 +1,15 @@
 <template>
     <div class="dsp__file" :class="{'single': files.length === 1}">
-        <mue-upload v-model="files" :multiple="!!multiple" readonly isFrame
-                    :uploadPrefix="uploadPrefix"
-                    :is-preview="!!isPreview"
-                    :preview-url="prevUrl"></mue-upload>
+        <mue-upload
+            v-model="files"
+            :multiple="!!multiple"
+            readonly
+            isFrame
+            :uploadPrefix="uploadPrefix"
+            :is-preview="!!isPreview"
+            :preview-url="prevUrl"
+            :preview-source="sourceUrl">
+        </mue-upload>
     </div>
 </template>
 
@@ -22,9 +28,14 @@ export default {
             return this.urlPrefix || this.$OPTS.urlPrefix || "";
         },
         prevUrl() {
-            let prefix = window.FORM_Bindings.onlineViewerPrefix && (window.HDDEV_Bindings.onlineViewerPrefix || []).length ?
+            let prefix = window.FORM_Bindings.onlineViewerPrefix && (window.FORM_Bindings.onlineViewerPrefix || []).length ?
                 window.FORM_Bindings.onlineViewerPrefix[0].Value : ""
             return this.previewUrl || prefix || ""
+        },
+        sourceUrl() {
+            let prefix = window.FORM_Bindings.onlineViewerSource && (window.FORM_Bindings.onlineViewerSource || []).length ?
+              window.FORM_Bindings.onlineViewerSource[0].Value : ""
+            return prefix || ""
         },
         files: {
             get() {
