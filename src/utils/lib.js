@@ -460,7 +460,7 @@ export const objectGet = (object, expression) => {
 export const TransBindings = (source) => {
     let bindings = source || [];
     return bindings.map(m => {
-        return { ...m, name: m.Name, code: m.Value, pid: m.pid, children: []}
+        return $.extend(true, {}, m, {name: m.Name, code: m.Value, pid: m.pid, children: []})
     })
 };
 
