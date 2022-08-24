@@ -13,7 +13,7 @@ export const InputDefaults = {
             placeholder: null, customClass: null, width: "100%", labelWidth: null,
             labelLine: null, labelHidden: 0, required: 0, regular: null, defaultType: "static", autoType: 1,
             interface: "", itfParams: "", afterQuery: "", afterBlur: "", isSelect: 0, viewerType: "default", keepSpaces: 0,
-            decimalLength: null, desensitization: 0, ndType: "", bankCardNumbers: 19
+            decimalLength: null, desensitization: 0, ndType: "", bankCardNumbers: 19, thousandSp: 0
         };
     },
     textarea() {
@@ -28,7 +28,8 @@ export const InputDefaults = {
             hide: 0, disabled: 0, defaultValue: null, showCondition: null, KeepDom: 0, placeholder: null, multiple: 0,
             expandTags: 'collapse', optionsType: "static", bindings: [], dataType: "String",
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null, labelLine: null,
-            required: 0, autoType: 1, interface: "", itfParams: "", afterQuery: "", valChange: "", filterable: 0
+            required: 0, autoType: 1, interface: "", itfParams: "", afterQuery: "", valChange: "", filterable: 0,
+            linkageNoClear: 0
         };
     },
     radio() {
@@ -83,7 +84,7 @@ export const InputDefaults = {
             hide: 0, disabled: 0, editable: 0, clearable: 1, readonly: 0, placeholder: null, showCondition: null, KeepDom: 0,
             defaultValue: null, customClass: null,  width: "100%",
             labelHidden: 0, labelWidth: null, labelLine: null, required: 0, format: "yyyy-MM-dd", dataType: "Array",
-            isTimestamp: 0
+            isTimestamp: 0, unlinkPanels: 0
         };
     },
     rate() {
@@ -126,7 +127,8 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
             labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 1, placeholder: "", accept:"",
-            dataType:"String", isDownload: 0, urlPrefix: ""
+            dataType:"String", isDownload: 0, urlPrefix: "", toKnowledge: 0, isPreview: 0, previewUrl: "", keyWord: "",
+            summary: "", customKeyWord: "", customSummary: "", sliceUpload: 1, chunkSize: null, isInput: 0,
         };
     },
     
@@ -146,6 +148,14 @@ export const InputDefaults = {
         };
     },
     
+    "img-video"() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, required: 0, multiple: 1,placeholder: "",
+            dataType:"String", readonly: 0, thumbZip: 0,urlPrefix: "", limit: 9,
+        };
+    },
+    
     editor() {
         return {
             hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
@@ -162,10 +172,10 @@ export const InputDefaults = {
     
     dialog() {
         return {
-            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            hide: 0, disabled: 0, defaultValue: null,customClass: "default-dialog-btn", width: "100%", showCondition: null, KeepDom: 0,
             labelWidth: null, labelLine: null, labelHidden: 0, btnName: "操作按钮", url: "", fullscreen: 0,
             dialogWidth: "50%", dialogHeight: "", dialogClass: "", dialogTitle: "", btnWidth: "", btnAlign: "left",
-            mobileUrl: ""
+            mobileUrl: "", displayReadonly: 0
         }
     },
     
@@ -195,6 +205,14 @@ export const InputDefaults = {
         }
     },
     
+    report() {
+        return {
+            hide: 0,defaultValue: null, customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, height: "400px", noBorder: 0, padding: "12px",
+            isPrint: 1,
+        };
+    },
+    
     //布局组件
     tabs() {
         return {
@@ -211,9 +229,11 @@ export const InputDefaults = {
         return {
             hide: 0, customClass: null, disabled: 0, labelHidden: 0, labelWidth: null, showCondition: null, KeepDom: 0,
             labelLine: null, width: "100%", showRowNum: true, subFormId: "", subFormEdition: "", align: "center",
-            subObjectId: "", subObjectEdition: "", displayType: "default", colNum: 1, addHidden: 0, deleteHidden: 0,
+            subObjectId: "", subObjectEdition: "", displayType: "default", colNum: 1, addHidden: 0, addDisabled: 0, deleteHidden: 0,
             itfData: {enable: 0, url: "", afterQuery: null}, buttonName: "子表单明细",fullscreen: 0, dlgWidth: "50%",
-            initOneRow: 0, handleImport: 0
+            initOneRow: 0, handleImport: 0, tmpImport: null, tmpImportApi: "", dataImportApi: "", uniqueFields: [], initNums: 1,
+            maxNums: null, minNums: null, beforeImport: null, handleExport: 0, showSummary: 0, sumText: "合计", summaryMethodTmp: "",
+            summaryCols: [], rowNoTitle: "", delDisabledCondition: "", loadMode: "normal", separateBtns: 0, isPager: 0, multiple: 0
         };
     },
     "split-line"() {
@@ -224,7 +244,7 @@ export const InputDefaults = {
     card() {
         return {
             hide: 0, customClass: null, showTitle: 1, title: "标题", shadow: "never", showCondition: null, KeepDom: 0,
-            showBorder: 0, titleLine: 0, isCuttle: 0
+            showBorder: 0, titleLine: 0, isCuttle: 0, showEmpty: 0
         };
     },
     
@@ -233,7 +253,8 @@ export const InputDefaults = {
         return {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
-            labelLine: null, required: 0, multiple: 0, linkage: "", valChange: "", isCurrentUser: 0
+            labelLine: null, required: 0, multiple: 0, linkage: "", valChange: "", isCurrentUser: 0,
+            panelWidth: null
         };
     },
     "sub-user"() {
@@ -264,7 +285,8 @@ export const InputDefaults = {
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, multiple: 0, bindings: [], dataMode: "simple", linkage: "",
             wholePath: 0, dict: "", sourceType: "dict", interface: "", saveFields: [], autoType: 1, itfParams: "",
-            afterQuery: "", checkRules: "", panelWidth: null, panelHeight: null, valChange: ""
+            afterQuery: "", checkRules: "", panelWidth: null, panelHeight: null, valChange: "", linkageNoClear: 0,
+            expandAll: 0
         };
     },
     location() {
@@ -275,12 +297,42 @@ export const InputDefaults = {
             gwtOption: "", customType: "", map_options: "", zoom: 18
         };
     },
+    "draw-layer"() {
+        return {
+            hide: 0, disabled: 0, readonly: 0, placeholder: null, showCondition: null, KeepDom: 0,
+            customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
+            labelLine: null, required: 0, center: null, gwtOption: "", offOption: "", currentLocation: 0,
+            gislist: "", zoom: 8, polyType: "polygon"
+        };
+    },
     autocomplete() {
         return {
             hide: 0, disabled: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
             labelLine: null, required: 0, format: "", showField: "", valueField: "", saveFields: [],
             autoType: 1, itfParams: ""
+        }
+    },
+    
+    "update-history"() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, url: "",
+            boxWidth: "100%", boxHeight: "300px", valueField: ""
+        }
+    },
+    region() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, panelWidth: null,
+            array: 0, placeholder: "请选择省市区"
+        }
+    },
+    "process-history"() {
+        return {
+            hide: 0, disabled: 0, defaultValue: null,customClass: null, width: "100%", showCondition: null, KeepDom: 0,
+            labelWidth: null, labelLine: null, labelHidden: 0, hideCols: [], dynamicCols: [],
+            boxWidth: "100%", boxHeight: "300px",
         }
     },
     
@@ -307,6 +359,13 @@ export const InputDefaults = {
         };
     },
     signature() {
+        return {
+            hide: 0, disabled: 0, readonly: 0, defaultValue: null, placeholder: null, showCondition: null, KeepDom: 0,
+            customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
+            labelLine: null, required: 0, disabledPwd: 0
+        };
+    },
+    "signature-write"() {
         return {
             hide: 0, disabled: 0, readonly: 0, placeholder: null, showCondition: null, KeepDom: 0,
             customClass: null, width: "100%", labelHidden: 0, labelWidth: null,
