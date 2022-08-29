@@ -230,6 +230,18 @@
         mounted() {
             this.$set(this.model, `${this.field}$$text`, this.model[`${this.field}$$text`] || "");
             this.initBindings();
+
+            let unwatch = this.$watch(() => {
+              return this.items
+            }, (v) => {
+              if(this.interface && (v || []).length) {
+                let item = v.find(f => f.Value === this.value)
+                if(item) {
+                  this.$set(this.model, `${this.field}$$text`, item.Name);
+                }
+              }
+              unwatch && unwatch()
+            }, {immediate: true})
         },
         beforeMount(){
             if(this.unwatch){
