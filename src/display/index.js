@@ -37,6 +37,7 @@ import DspLocation from "./form/form-item/functional/location";
 import DspAutocomplete from "./form/form-item/functional/autocomplete";
 import DspRegion from "./form/form-item/functional/region";
 import DspDrawLayer from "./form/form-item/functional/draw-layer";
+import DspProcessHistory from "./form/form-item/functional/process-history";
 
 //移动端组件
 import DspWaterMarkingCamera from "./form/form-item/mobile/water-marking-camera";
@@ -61,6 +62,7 @@ let components = [
     DspFile, DspVideo, DspPicture, DspImgVideo, DspEditor,DspCascader, DspCustom, DspDialog, DspIframe,
     
     DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete, DspRegion, DspDrawLayer,
+    DspProcessHistory,
     
     DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature, DspSignatureWrite, DspNfc,
     
