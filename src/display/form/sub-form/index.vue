@@ -44,20 +44,32 @@ export default {
     components: {ItemHtml},
     mixins: [],
     props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-        "customClass", "labelWidth", "labelHidden", "showRowNum", "allVars", "nodesValuesDict", "isPager",],
+        "customClass", "labelWidth", "labelHidden", "showRowNum", "allVars", "nodesValuesDict", "isPager","pageSize"],
     data() {
         return {
             expendStatus: true,
             flags: [], //{index:0, hideFields: false}
-            pagination: {
-                size: 10,
-                index: 1,
-                total: 0,
-            },
+            // pagination: {
+            //     size: 10,
+            //     index: 1,
+            //     total: 0,
+            // },
             currentPageVals: [] //分页数据，开启分页时使用
         };
     },
     computed: {
+        pagination: {
+            get() {
+                return {
+                    size: this.pageSize || 10,
+                    index: 1,
+                    total: 0,
+                }
+            },
+            set(nv) {
+
+            }
+        },
         value: {
             get(){
                 let v = this.model[this.field] || []
