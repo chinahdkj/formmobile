@@ -2,9 +2,9 @@
     <div class="sub-form-view">
         <van-icon class="do-expand" :name="expendStatus ? 'arrow-up' : 'arrow-down'" @click="onExpand" />
         <mue-form-item :label="name" :field="field" :inline="false" :rules="subFormRules"
-                       :data-field="field" :class="['fpt__subform', customClass ? customClass : '']">
-            <div class="form-part" v-for="(row, i) in value" :key="i" :class="{'hide': isHide(i)}">
-                <mue-panel :title="!!showRowNum ? `#${i+1}` : ''">
+                       :data-field="field" :class="['fpt__subform', customClass ? customClass : '', !!isPager ? 'is-pager' : '']">
+            <div class="form-part" v-for="(row, i) in (!!isPager ? currentPageVals : value)" :key="i" :class="{'hide': isHide(i)}">
+                <mue-panel :title="!!showRowNum ? `#${!!isPager ? ((pagination.index - 1) * pagination.size + i + 1) : (i + 1)}` : ''">
                     <van-icon v-if="!isDisabled && !hideDelete && !deleteDisabledCondition(row, i)" slot="tools" name="delete" style="line-height: inherit;"
                               @click="delModel(i)"/>
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
@@ -30,6 +30,14 @@
             <div class="sub-form-handle-btn" v-if="addShow">
                 <van-button size="large" :disabled="isDisabled || !!addDisabled" type="primary" native-type="button" @click="addModel">添加</van-button>
             </div>
+            <van-pagination
+                v-if="!!isPager"
+                v-model="pagination.index"
+                :items-per-page="pagination.size"
+                :total-items="pagination.total"
+                :show-page-size="5"
+                force-ellipses
+                @change="pageIndexChange"/>
         </mue-form-item>
 
     </div>
@@ -46,11 +54,18 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager"],
         data() {
             return {
                 expendStatus: true,
-                flags: [] //{index:0, hideFields: false}
+                flags: [], //{index:0, hideFields: false}
+                currentIndex:null,
+                pagination: {
+                    size: 10,
+                    index: 1,
+                    total: 0,
+                },
+                currentPageVals: [] //分页数据，开启分页时使用
             };
         },
         computed: {
@@ -112,9 +127,31 @@
                     })
                     this.$set(this.model, this.field, this.value);
                 }
-            }
+            },
+            "value.length": {
+                immediate: true, handler(v) {
+                    if(!!this.isPager) {
+                        this.pagination.total = v;
+                        this.getCurrentPageDatas();
+                    }
+                }
+            },
         },
         methods: {
+            pageSizeChange(size) {
+                this.pagination.index = 1;
+                this.pagination.size = size;
+                this.getCurrentPageDatas();
+            },
+            pageIndexChange(index) {
+                this.pagination.index = index;
+                this.getCurrentPageDatas();
+            },
+            getCurrentPageDatas() {
+                let currentIndex = this.pagination.index - 1;
+                let size = this.pagination.size;
+                this.currentPageVals = this.value.slice(currentIndex*size, (currentIndex + 1)*size);
+            },
             deleteDisabledCondition(row, index) {
                 return this.needDisabled(this.delDisabledCondition, row, this.model, this.isNew, index)
             },
@@ -142,7 +179,13 @@
                   fields['$$innerIsEdit'] = true;
                   fields['$$innerId'] = UUID();
                 }
-                this.value.push(fields);
+                //有分页的情况，新增放置顶层,并且将分页切换到第一页
+                if(!!this.isPager) {
+                    this.pagination.index = 1
+                    this.value.unshift(fields);
+                } else {
+                    this.value.push(fields);
+                }
             },
             delModel(i){
                 this.value.splice(i, 1);
@@ -363,6 +406,27 @@
     // .fpt__subform.mue-form-item.is-error .cue-rich-editor.is-focus > .tox-tinymce {
     //     border-color: #d0d0d0
     // }
+    // 翻页
+    .fpt__subform.mue-form-item.is-pager{
+        .van-pagination{
+            margin-top: 5px;
+              .van-pagination__item{
+                  color: #4796e3;
+                  &--active{
+                      color: #ffffff;
+                      background: #4796e3;
+                  }
+                &.van-pagination__prev:after{
+                    border-top-left-radius: 3px;
+                    border-bottom-left-radius: 3px;
+                }
+                &.van-pagination__next:after{
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+            }
+        }
+    }
 
 
 </style>
