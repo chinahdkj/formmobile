@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {strToArr, TreeDataTrans} from "../../../../utils/lib";
+import {strToArr, TreeDataTrans, ReplaceFields, deepClone} from "../../../../utils/lib";
 import BASE from "../base";
 export default {
     mixins: [BASE],
@@ -13,7 +13,8 @@ export default {
     inheritAttrs: false,
     components: {},
     props: [
-        "field", "model", "disabled", "required", "defaultValue", "multiple", "linkage", "valChange", "vars",
+        "field", "model", "disabled", "required", "defaultValue", "multiple", "linkage", "valChange", "vars", "isAuth",
+        "defaultPid", "defaultPidMode", "defaultPidExp", "rowIndex"
     ],
     data() {
         return {
@@ -33,7 +34,42 @@ export default {
                 //传递时转字符串（数据库限制）
                 this.commitValue(nv);
             }
-        }
+        },
+        parentId() {
+            let defaultParent = null;
+
+            if (this.defaultPidMode === "expression") {
+                if (this.defaultPidExp) {
+                    try {
+                        let model = deepClone(this.model);
+                        let vars = deepClone(this.vars || {});
+                        let rowIndex = this.rowIndex;
+                        let _this = this;
+
+                        let es = ReplaceFields(this.defaultPidExp);
+                        defaultParent = eval(`(function (model, vars, rowIndex, _this) {
+                                      ${es || 'return null;'}
+                                })(model, vars, rowIndex, _this)`)
+                    } catch (e) {
+                        console.info(e);
+                        defaultParent = null
+                    }
+                }
+
+            } else {
+                if (this.defaultPid) {
+                    defaultParent = this.defaultPid
+                }
+            }
+
+            if (!this.linkage) {
+                return defaultParent;
+            }
+            if (this.model && (this.linkage in this.model)) {
+                return this.model[this.linkage];
+            }
+            return defaultParent;
+        },
     },
     methods: {
         checkFilter(data, n) {
@@ -61,7 +97,12 @@ export default {
             let nodes = []
             //无论是否存在二级联动，先进行节点及name赋值
             nodes = await this.initInterfaceData();
-            this.nodes = TreeDataTrans(Array.isArray(nodes) ? nodes : [nodes]);
+            nodes = TreeDataTrans(Array.isArray(nodes) ? nodes : [nodes]);
+            if(this.parentId) {
+                this.nodes = this.fetch(nodes, this.parentId) || [];
+            } else {
+                this.nodes = nodes;
+            }
             let v = this.value || this.defaultValue
             if (v) {
                 this.onChange(v);
@@ -91,7 +132,21 @@ export default {
         initInterfaceData(pid = "") {
             return this.$http.post(`/app/bpm/app/getUserTree`, {type: "user", root: pid})
         },
-
+        fetch(ns, v) {
+            for (let i = 0; i < ns.length; i++) {
+                let n = ns[i];
+                // 此节点为二级联动节点，返回子节点
+                if (v === n.code) {
+                    return n.children || [];
+                }
+                // 查找子集是否含有联动节点
+                let temp = this.fetch(n.children || [], v);
+                if (temp) {
+                    return temp;
+                }
+            }
+            return null;
+        },
 
         onChange(v, vv, node) {
             //存入名称，不再次调用接口
