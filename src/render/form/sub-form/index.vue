@@ -55,21 +55,33 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize"],
         data() {
             return {
                 expendStatus: true,
                 flags: [], //{index:0, hideFields: false}
                 currentIndex:null,
-                pagination: {
-                    size: 10,
-                    index: 1,
-                    total: 0,
-                },
+                // pagination: {
+                //     size: 10,
+                //     index: 1,
+                //     total: 0,
+                // },
                 currentPageVals: [] //分页数据，开启分页时使用
             };
         },
         computed: {
+            pagination: {
+                get() {
+                    return {
+                        size: this.pageSize || 10,
+                        index: 1,
+                        total: 0,
+                    }
+                },
+                set(nv) {
+
+                }
+            },
             addShow() {
                 return !this.addHidden && this.currentFieldAuth.add
             },
