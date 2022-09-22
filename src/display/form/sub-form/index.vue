@@ -12,6 +12,7 @@
                         <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                         <div v-for="(sub, idx) in subs" :key="idx">
                             <item-html :model="row"
+                                       v-if="isShow(sub.options, row, model)"
                                        :style="colWidthStyle(sub.options.colWidth || '')"
                                        :type="sub.type"
                                        :value="row[sub.options.field]"
@@ -36,7 +37,7 @@
 </template>
 <script>
 import ItemHtml from "../../../display/form";
-import { deepClone, ReplaceFields } from "../../../utils/lib"
+import { deepClone, ReplaceFields, needShow } from "../../../utils/lib"
 import UUID from "uuid/v4";
 export default {
     name: "DspSubForm",
@@ -137,6 +138,9 @@ export default {
         delModel(i){
             this.value.splice(i, 1);
         },
+        isShow(opts, model, vars) { //子表项配置 行数据 整个表单数据
+            return !opts.hide && needShow(opts.showCondition, {...vars, ...model}) && this.authIsShow(opts.field, this.field);
+        },
         isHide(i) {
             return this.value[i].__hideFields;
         },
@@ -155,6 +159,23 @@ export default {
             this.value.forEach((row, i) => {
                 this.$set(this.value[i], "__hideFields", !this.expendStatus)
             })
+        },
+        //表单权限-子表字段显示隐藏条件
+        authIsShow(subfield, parentField) {
+            if(!(this.authority || []).length) {
+                return true
+            }
+            let hide = false
+            let subForm = this.authority.find(f => f.name === parentField)
+            if(subForm) {
+                let targetField = subForm.fields.find(f => f.name === subfield)
+                if(targetField) {
+                    //是否隐藏
+                    if((targetField.hide || []).length)
+                      hide = this.getAuth(targetField.hide, false);
+                }
+            }
+            return !hide
         },
         //列宽表达式
         transColWidth(width) {
