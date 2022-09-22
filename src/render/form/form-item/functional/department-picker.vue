@@ -15,7 +15,7 @@ export default {
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
-        "wholePath", "valChange", "vars",
+        "wholePath", "valChange", "vars", "defaultPid"
     ],
     data() {
         return {
@@ -87,7 +87,17 @@ export default {
             let nodes = deepClone(this.bindings);
 
             //无论是否存在二级联动，先进行节点及name赋值
-            this.nodes = nodes;
+            if(this.defaultPid) {
+                if(this.dataMode === 'tree') {
+                    this.nodes = this.fetch(nodes, this.defaultPid) || [];
+                } else {
+                    this.nodes = nodes.filter(f => {
+                        return this.defaultPid.split(",").includes(f.pid);
+                    })
+                }
+            } else {
+                this.nodes = nodes;
+            }
             if(this.defaultValue) {
                 this.onChange(this.defaultValue);
             }
