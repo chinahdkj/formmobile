@@ -7,7 +7,6 @@
         :disabled="!!disabled"
         :readonly="!!readonly"
         accept="all"
-        :base64="true"
         @input="onChange">
     </mue-img-upload>
 </template>
