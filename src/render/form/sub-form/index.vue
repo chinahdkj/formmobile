@@ -32,6 +32,7 @@
             </div>
             <van-pagination
                 v-if="!!isPager"
+                v-show="pagination.total > value.length"
                 v-model="pagination.index"
                 :items-per-page="pagination.size"
                 :total-items="pagination.total"
