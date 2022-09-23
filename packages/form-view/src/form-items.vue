@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isShow" v-show="isShowOfVshow" class="panel-form-item" :data-id="item.id">
+    <div v-if="isShow" v-show="isShowOfVshow && isEmptyCardShow" class="panel-form-item" :data-id="item.id">
         <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" :model="PREVIEW.model" panel-type="view">
             <template slot-scope="{tab, items}">
                 <form-items v-for="item in items" :key="item.id" :item="item" :list="items" :is-new="isNew" :model="PREVIEW.model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :global-disabled="!!globalDisabled" :authority="authority"/>
@@ -40,7 +40,7 @@
     import CardPanel from "../../../src/render/layout/card";
     import SubForm from "../../../src/render/form/sub-form"
     import Item from "../../../src/render/form";
-    import {needShow} from "../../../src/utils/lib";
+    import {needShow, GetFormItem} from "../../../src/utils/lib";
     import Authority from "../../../src/components/authority"
 
     export default {
@@ -65,12 +65,47 @@
         computed: {
             //v-if隐藏
             isShow() {
-                return this.item.options.KeepDom
+                let flag = this.item.options.KeepDom
                     || (this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model) && !this.currentFieldAuth.hide)
+
+                //设置表单项像是情况，用于空卡片隐藏布局
+                let status = true
+                if (this.item.options.KeepDom) {
+                    status = false
+                } else if (!(this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model) && !this.currentFieldAuth.hide)) {
+                    status = false
+                }
+                this.$set(this.item.options, "showStatus", status);
+
+                return flag
             },
             //v-show隐藏
             isShowOfVshow() {
-                return !this.item.options.KeepDom && this.PREVIEW && !this.item.options.hide && needShow(this.item.options.showCondition, this.PREVIEW.model)
+                if(this.PREVIEW && this.item.options.showCondition && needShow(this.item.options.showCondition, this.PREVIEW.model)) {
+                    return true
+                }
+                return !this.item.options.KeepDom
+            },
+            //当前布局组件下的表单项
+            realFormItem() {
+                //减少运算，return []
+                if(this.item.options.showEmpty) {
+                    return []
+                }
+
+                let items = [];
+                GetFormItem([this.item], items);
+                return items;
+            },
+            isEmptyCardShow() {
+                if (this.item.type !== "card" || this.item.options.showEmpty) {
+                    return true
+                }
+
+                //容器为卡片类型时，内部表单项为空的情况下，隐藏卡片容器
+                return this.realFormItem.some(s => {
+                    return s.options.showStatus
+                })
             }
         },
         methods: {
