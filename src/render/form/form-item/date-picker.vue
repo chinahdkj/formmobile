@@ -111,7 +111,7 @@
                     return base.add(limit.offset, limit.unit).toDate();
                 }
             },
-            onConfirm() {
+            onConfirm(v) {
                 this.evalValChange(v);
             },
         },
