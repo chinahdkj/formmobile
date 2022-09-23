@@ -508,6 +508,32 @@ export function TreeDataTrans(nodes) {
     
 }
 
+//从配置项中过滤布局组件拿表单项
+export const GetFormItem = (list, res) => {
+    list.forEach(f => {
+        //tabs
+        if(f.type === "tabs") {
+            for(let tab of f.tabs) {
+                GetFormItem(tab.children, res);
+            }
+        }
+        //grids
+        else if(f.type === "grids") {
+            for(let col of f.cols) {
+                GetFormItem(col.children, res);
+            }
+        }
+        //card
+        else if(f.type === "card") {
+            GetFormItem(f.cardItem, res);
+        }
+        //sub-form || item
+        else if(f.type === "sub-form" || f.classify === "form"){
+            res.push(f);
+        }
+    });
+}
+
 /* 从接口获取数据
 * url 接口地址
 * urlPrefix 接口地址前缀
