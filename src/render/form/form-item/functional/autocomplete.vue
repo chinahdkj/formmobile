@@ -72,7 +72,12 @@ export default {
         async query(){
             this.loading = true;
 
-            let res_Url = TransferUrl(this.format, this.model).replace("$self", this.q);
+            let res_Url = TransferUrl(this.format, this.model).replace(/\$self/g, () => {
+                if(!this.q) {
+                    return ""
+                }
+                return this.q
+            });
             let success = (res) => {
                 this.loading = false;
                 //接口返回数据结构处理
@@ -102,7 +107,12 @@ export default {
             }
 
             if (this.autoType === 1) {
-                let itfParams = this.itfParams.replace("$self", this.q || "\"\"");
+                let itfParams = this.itfParams.replace(/\$self/g, () => {
+                    if(!this.q) {
+                        return ""
+                    }
+                    return this.q
+                });
                 let bodyParams = EvalExpression(itfParams, this.model)
                 let params = {url: res_Url, body: bodyParams}
                 this.$server._Post(params, this.$OPTS.urlPrefix || "").then(success).catch(fail);
