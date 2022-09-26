@@ -66,8 +66,8 @@ export default {
             let arr = Array.isArray(date) ? date : date.split(",");
             return arr.map(m => moment(m, format).unix()).join(",")
         },
-        onChange(v){
-            this.evalValChange(v);
+        onChange(s,t){
+            this.evalValChange([s,t]);
         }
     }
 }
