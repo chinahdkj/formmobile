@@ -6,11 +6,12 @@
 
 <script>
     import {Validate} from "../../../utils/validate"
+    import {GetThousandSp} from "../../../utils/lib";
     export default {
         name: "DspText",
         inheritAttrs: false,
         components: {},
-        props: ["value", "unit", "dataType", "desensitization", "ndType", "bankCardNumbers"],
+        props: ["value", "unit", "dataType", "desensitization", "ndType", "bankCardNumbers", "thousandSp"],
         data(){
             return {};
         },
@@ -42,6 +43,9 @@
                             val = val.replace(/^(.{6})(?:\d+)(.{4})$/, "$1*********$2");
                         }
                     }
+                }
+                if(val && this.thousandSp) {
+                    return GetThousandSp(val);
                 }
                 return this.type === "number" ? Number(val) : val
             }

@@ -17,6 +17,7 @@
 <script>
     import BASE from "./base";
     import {Validate} from "../../../utils/validate"
+    import {GetThousandSp} from "../../../utils/lib";
     export default {
         mixins: [BASE],
         name: "FtmText",
@@ -24,7 +25,7 @@
         components: {},
         props: ["field", "model", "dataType", "readonly", "unit", "disabled", "afterBlur", "isSelect", "required", "defaultValue",
             "viewerType", "keepSpaces", "vars", "decimalLength", "desensitization", "ndType",
-            "bankCardNumbers"],
+            "bankCardNumbers", "thousandSp"],
         data(){
             return {};
         },
@@ -58,6 +59,10 @@
                         return val;
                     }
 
+                    if(val && this.thousandSp) {
+                        return GetThousandSp(val);
+                    }
+
                     return val;
                 },
                 set(nv){
@@ -88,6 +93,8 @@
                     try {
                         let value = this.value;
                         let _this = this;
+                        let model = this.model;
+                        let vars = this.vars;
                         let $post = this.$server._Post
                         let $get = this.$server._Get
                         eval(this.afterBlur)

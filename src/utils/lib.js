@@ -581,3 +581,25 @@ export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, it
         }
     });
 }
+
+
+// 添加千分位
+const addThousandSp= (n) => {
+    if(!n) return n;
+    let str = n.split('.');
+    let re = /\d{1,3}(?=(\d{3})+$)/g;
+    let n1 = str[0].replace(re, "$&,");
+    console.log("n1", n1);
+    return str.length > 1 && str[1] ? `${n1}.${str[1]}` : `${n1}`;
+};
+//去除千分位中的‘，'
+const delThousandSp = (num) => {
+    if(!num) return num;
+    num = num.toString();
+    num = num.replace(/,/gi, '');
+    return num;
+};
+// 千分位转译数值
+export const GetThousandSp = (val) => {
+    return addThousandSp(delThousandSp(String(val)));
+};
