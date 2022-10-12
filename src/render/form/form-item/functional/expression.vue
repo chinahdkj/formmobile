@@ -1,13 +1,6 @@
 <template>
-<!--    <el-input readonly v-model="value" :disabled="!!disabled"
-              :suffix-icon="error ? 'el-icon-warning-outline' : ''" v-bind="$attrs"></el-input>-->
     <mue-input v-model="value" readonly :icon="error ? 'icon-yichang-weixuan' : ''"
                :disabled="!!disabled" v-bind="$attrs">
-        <!-- <template slot="suffix">
-            <el-tooltip v-if="error" :content="errMsg" placement="top" effect="light">
-                <i class="iconfont icon-gaojing"></i>
-            </el-tooltip>
-        </template> -->
         <template v-if="unit" slot="suffix">{{unit}}</template>
     </mue-input>
 </template>
@@ -20,7 +13,7 @@
         components: {},
         props: [
             "field", "model", "disabled", "expression", "autoFields", "inputable", "vars", "unit", "errMessage",
-            "parentField", "rowIndex", "dataType"
+            "parentField", "rowIndex", "dataType", "decimalLength", "thousandSp"
         ],
         data() {
             return {
@@ -89,12 +82,11 @@
                     this.modelChange();
                 }
             },
-            value: {
-                immediate: true, deep: true, handler(v, ov) {
-                    let vv = this.dataType === "Number" ? Number(v) : v
-                    this.$set(this.model, this.field, vv);
-                }
-            },
+            // value: {
+            //     immediate: true, deep: true, handler(v, ov) {
+            //
+            //     }
+            // },
         },
         methods: {
             modelChange() {
@@ -121,19 +113,46 @@
                         this.value = eval(`(function () {
                                 ${es};
                             })()`);
+                        this.setVal(this.value);
                     }
                     if (!this.value && (this.value !== "" && this.value !== 0)) {
                         this.value = null;
+                        this.$set(this.model, this.field, this.value);
                     }
-                    // this.$set(this.model, this.field, this.value);
                     this.error = false;
 
                 } catch (e) {
                     console.info(e);
                     this.value = null;
-                    // this.$set(this.model, this.field, null);
+                    this.$set(this.model, this.field, this.value);
                     this.error = true;
                 }
+            },
+            setVal(v) {
+                let vv = v;
+
+                //保留几位小数
+                if(vv != null && this.decimalLength) {
+                    vv = Number(Number(vv).toFixed(this.decimalLength))
+                    this.value = vv;
+                    // vv = this.dataType === "Number" ? Number(vv) : String(v)
+                    // this.$set(this.model, this.field, vv);
+                    // return
+                }
+
+                if(vv != null && !!this.thousandSp) {
+                    let temp;
+                    if(typeof vv === "string") {
+                        temp = vv.includes(",") ? vv : Number(vv).toLocaleString();
+                    } else {
+                        temp = vv.toLocaleString();
+                    }
+                    this.value = temp;
+                }
+
+                vv = this.dataType === "Number" ? Number(vv) : String(vv)
+
+                this.$set(this.model, this.field, vv);
             }
         }
     }
