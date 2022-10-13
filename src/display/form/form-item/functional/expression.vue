@@ -9,16 +9,21 @@
         name: "DspExpression",
         inheritAttrs: false,
         components: {},
-        props: ["value", "unit", "thousandSp"],
+        props: ["value", "unit", "thousandSp", "decimalLength"],
         data(){
             return {};
         },
         computed: {
             text() {
-                if(!!this.thousandSp) {
-                    return Number(this.value).toLocaleString()
-                }
-                return this.value
+              let v = this.value;
+              //保留几位小数
+              if (v != null && this.decimalLength) {
+                  v = Number(Number(v).toFixed(this.decimalLength))
+              }
+              if (v != null && !!this.thousandSp) {
+                  v = Number(v).toLocaleString()
+              }
+              return v
             }
         }
     }
