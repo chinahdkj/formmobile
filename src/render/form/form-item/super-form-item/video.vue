@@ -6,7 +6,6 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
-        :header="FORMRENDER_HEADER"
         :is-comment="!!isComment" accept="video">
     </mue-img-upload>
 </template>

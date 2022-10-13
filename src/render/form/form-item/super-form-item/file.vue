@@ -10,7 +10,6 @@
                 :is-preview="!!isPreview"
                 :preview-url="prevUrl"
                 :preview-source="sourceUrl"
-                :header="FORMRENDER_HEADER"
                 @input="onChange"
                 @on-success="onSuccess"
                 isFrame>

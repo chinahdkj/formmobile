@@ -7,7 +7,6 @@
         :disabled="!!disabled"
         :readonly="!!readonly"
         :is-comment="!!isComment"
-        :header="FORMRENDER_HEADER"
         @input="onChange">
     </mue-img-upload>
 </template>
