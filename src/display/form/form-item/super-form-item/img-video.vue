@@ -1,7 +1,7 @@
 <template>
     <div class="dsp__img-video">
         <mue-img-upload v-model="files" :multiple="!!multiple" accept="all" readonly
-                        :header="FORMRENDER_HEADER"></mue-img-upload>
+                        ></mue-img-upload>
     </div>
 </template>
 
