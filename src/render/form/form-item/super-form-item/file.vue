@@ -10,6 +10,7 @@
                 :is-preview="!!isPreview"
                 :preview-url="prevUrl"
                 :preview-source="sourceUrl"
+                :header="FORMRENDER_HEADER"
                 @input="onChange"
                 @on-success="onSuccess"
                 isFrame>
@@ -41,6 +42,9 @@ export default {
             set(nv) {
                 this.commitValue(Array.isArray(nv) ? nv : strToArr(nv));
             }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
         },
         uploadPrefix() {
             return this.urlPrefix || this.$OPTS.urlPrefix || "";

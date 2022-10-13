@@ -1,6 +1,7 @@
 <template>
     <div class="dsp__pictrue">
-        <mue-img-upload v-model="files" :multiple="!!multiple" readonly></mue-img-upload>
+        <mue-img-upload v-model="files" :multiple="!!multiple" readonly
+                        :header="FORMRENDER_HEADER"></mue-img-upload>
     </div>
 </template>
 
@@ -23,7 +24,10 @@ export default {
             set() {
 
             }
-        }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
+        },
     }
 }
 </script>
