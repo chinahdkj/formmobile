@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__iframe">
-        <iframe class="ftm_iframe" v-if="url" frameborder="0" :src="targetUrl"
+        <iframe class="ftm_iframe" v-if="url" frameborder="0" :src="targetUrl" :data-formrender_token="FORMRENDER_TOKEN"
                 :style="{width: iframeWidth ? iframeWidth : '100%', height: iframeHeight ? iframeHeight : '300px'}"/>
 <!--        <div class="shandow is-disabled"></div>-->
     </div>
@@ -22,7 +22,10 @@ export default {
     computed: {
         targetUrl() {
             return TransferUrl(this.url, this.model, this.vars)
-        }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
+        },
     },
     watch: {
         value: {

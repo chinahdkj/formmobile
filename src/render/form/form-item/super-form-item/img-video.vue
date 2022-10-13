@@ -6,6 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
+        :header="FORMRENDER_HEADER"
         accept="all"
         @input="onChange">
     </mue-img-upload>
@@ -34,6 +35,9 @@ export default {
             set(nv) {
                 this.commitValue(Array.isArray(nv) ? nv : strToArr(nv));
             }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
         },
     },
     methods: {

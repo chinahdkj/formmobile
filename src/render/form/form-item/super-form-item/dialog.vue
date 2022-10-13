@@ -17,7 +17,7 @@
             position="right" style="width:90%;height:100%;">
             <div class="form-custom-dialog-header">{{dialogTitle || btnName}}</div>
             <div class="form-custom-dialog-container">
-                <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl"
+                <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl" :data-formrender_token="FORMRENDER_TOKEN"
                     :style="{width: '100%', height: '100%'}"/>
             </div>
             <!-- <div class="form-custom-dialog-footer">
@@ -55,6 +55,9 @@ export default {
             set(nv) {
                 this.$set(this.model, this.field, nv);
             }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
         },
         targetUrl() {
             const path = location.origin + location.pathname

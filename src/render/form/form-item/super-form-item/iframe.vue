@@ -1,6 +1,6 @@
 <template>
     <div class="ftm_iframe_box" style="width:100%">
-        <iframe class="ftm_iframe" v-if="url" frameborder="0" :src="targetUrl"
+        <iframe class="ftm_iframe" v-if="url" frameborder="0" :src="targetUrl" :data-formrender_token="FORMRENDER_TOKEN"
                 :style="{width: iframeWidth ? iframeWidth : '100%', height: iframeHeight ? iframeHeight : '300px'}"/>
         <div class="shandow" :class="{'is-disabled': !!disabled}"></div>
     </div>
@@ -29,6 +29,9 @@ export default {
             set(nv) {
                 this.$set(this.model, this.field, nv);
             }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
         },
         targetUrl() {
             return TransferUrl(this.url, this.model, this.vars)

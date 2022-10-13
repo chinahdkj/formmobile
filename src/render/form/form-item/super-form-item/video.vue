@@ -6,6 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
+        :header="FORMRENDER_HEADER"
         :is-comment="!!isComment" accept="video">
     </mue-img-upload>
 </template>
@@ -32,6 +33,9 @@ export default {
             set(nv) {
                 this.commitValue(Array.isArray(nv) ? nv : strToArr(nv));
             }
+        },
+        FORMRENDER_TOKEN(){
+            return sessionStorage.getItem('authortoken') || ''
         },
     },
     methods: {
