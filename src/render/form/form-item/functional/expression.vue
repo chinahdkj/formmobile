@@ -1,6 +1,6 @@
 <template>
     <mue-input v-model="value" readonly :icon="error ? 'icon-yichang-weixuan' : ''"
-               :disabled="!!disabled" v-bind="$attrs">
+               :disabled="!!disabled" v-bind="$attrs" @blur="onBlur">
         <template v-if="unit" slot="suffix">{{unit}}</template>
     </mue-input>
 </template>
@@ -153,6 +153,9 @@
                 vv = this.dataType === "Number" ? Number(vv) : String(vv)
 
                 this.$set(this.model, this.field, vv);
+            },
+            onBlur(v) {
+                this.setVal(v.target.value);
             }
         }
     }
