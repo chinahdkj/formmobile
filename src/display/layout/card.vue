@@ -37,6 +37,9 @@ export default {
         .mue-panel-header {
             border-bottom: solid 1px #dddddd;
         }
+        .mue-panel-body{
+            overflow: unset;
+        }
     }
 
 }
