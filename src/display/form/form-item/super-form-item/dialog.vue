@@ -64,11 +64,12 @@ export default {
             let pp = path.split(`/${sn}/`)[0]
             pp = pp + (pp.endsWith('/') ? `${sn}/hddev` : `/${sn}/hddev`)
             if(!sn){
-              pp = location.origin
-              if(location.pathname.startsWith('/static/apps/') && location.origin.startsWith('http')){
-                  let patharr = location.pathname.split('/')
-                  pp = pp + `/${patharr[1]}/${patharr[2]}/${patharr[3]}`
-              }
+                pp = location.origin
+            }
+            if(location.pathname.startsWith('/static/apps/') && location.origin.startsWith('http')){
+                pp = location.origin
+                let patharr = location.pathname.split('/')
+                pp = pp + `/${patharr[1]}/${patharr[2]}/${patharr[3]}`
             }
             let trans_url = this.mobileUrl || this.url
             let url = TransferUrl(trans_url, this.model, this.vars)
