@@ -26,6 +26,7 @@ import FtmIframe from "./form/form-item/super-form-item/iframe";
 import FtmCascader from "./form/form-item/super-form-item/cascader";
 import FtmCustom from "./form/form-item/super-form-item/custom";
 import FtmInputDialog from "./form/form-item/super-form-item/input-dialog";
+import FtmHighScanner from "./form/form-item/super-form-item/high-scanner";
 
 
 //功能组件
@@ -59,7 +60,7 @@ let components = [
     FtmText, FtmTextarea, FtmSelect, FtmRadio, FtmCheckbox, FtmSwitch, FtmInputNumber,
     FtmTimePicker, FtmDatePicker, FtmDateRangePicker, FtmRate, FtmColorPicker, FtmSlider, FtmWord, FtmHtml,
     
-    FtmFile, FtmVideo, FtmPicture, FtmImgVideo, FtmEditor, FtmCascader, FtmCustom, FtmDialog, FtmIframe,
+    FtmFile, FtmVideo, FtmPicture, FtmImgVideo, FtmEditor, FtmCascader, FtmCustom, FtmDialog, FtmIframe, FtmHighScanner,
     
     FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete, FtmRegion, FtmDrawLayer,
     FtmProcessHistory,
