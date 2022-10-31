@@ -11,14 +11,11 @@ import UUID from "uuid/v4";
 import { EventBus } from "../../../../utils/eventBus"
 import Less from "less";
 import Vue from "vue";
-import renders from "../../../../render/index";
-import displays from "../../../../display/index";
 export default {
     mixins: [PostMessage],
     name: "FtmCustom",
     inheritAttrs: false,
     components: {
-      ...Object.values(renders), ...Object.values(displays)
     },
     props: {
         isDesign: Boolean,
