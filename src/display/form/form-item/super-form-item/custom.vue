@@ -34,7 +34,7 @@ export default {
             timer: null,
             view: null,
             styleId: UUID(),
-            $token: window.localStorage.getItem('uniwater_utoken'),
+            $token: window.sessionStorage.getItem('authortoken'),
         };
     },
     computed: {
@@ -44,7 +44,7 @@ export default {
         $get() {
             return this.$server._Get
         },
-        deepClone() {
+        $deepClone() {
             return deepClone
         },
         codesStr(){
