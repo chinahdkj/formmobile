@@ -11,11 +11,15 @@ import UUID from "uuid/v4";
 import { EventBus } from "../../../../utils/eventBus"
 import Less from "less";
 import Vue from "vue";
+import renders from "../../../../render/index";
+import displays from "../../../../display/index";
 export default {
     mixins: [PostMessage],
     name: "FtmCustom",
     inheritAttrs: false,
-    components: {},
+    components: {
+      ...Object.values(renders), ...Object.values(displays)
+    },
     props: {
         isDesign: Boolean,
         field: String,
@@ -37,7 +41,7 @@ export default {
             timer: null,
             view: null,
             styleId: UUID(),
-            $token: window.localStorage.getItem('uniwater_utoken'),
+            $token: window.sessionStorage.getItem('authortoken'),
         };
     },
     computed: {
@@ -55,7 +59,7 @@ export default {
         $get() {
             return this.$server._Get
         },
-        deepClone() {
+        $deepClone() {
             return deepClone
         },
         codesStr(){
