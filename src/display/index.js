@@ -60,14 +60,16 @@ let components = [
     DspTimePicker, DspDatePicker, DspDateRangePicker, DspRate, DspColorPicker, DspSlider,
     DspWord, DspHtml,
     
-    DspFile, DspVideo, DspPicture, DspImgVideo, DspEditor,DspCascader, DspCustom, DspDialog, DspIframe, DspHighScanner,
+    DspFile, DspVideo, DspPicture, DspImgVideo, DspEditor,DspCascader, DspDialog, DspIframe, DspHighScanner,
     
     DspUserPicker, DspSubUser, DspDepartmentPicker, DspExpression, DspZtree, DspLocation, DspAutocomplete, DspRegion, DspDrawLayer,
     DspProcessHistory,
     
     DspWaterMarkingCamera, DspCodeScanner, DspAudio, DspSignature, DspSignatureWrite, DspNfc,
     
-    DspTabsPanel, DspGridsPanel, DspSplitLine, DspCardPanel, DspSubForm, DspInputDialog
+    DspTabsPanel, DspGridsPanel, DspSplitLine, DspCardPanel, DspSubForm, DspInputDialog,
+
+    DspCustom,
 ]
 
 components.forEach((cmp) => {
