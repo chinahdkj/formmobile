@@ -60,7 +60,7 @@ let components = [
     FtmText, FtmTextarea, FtmSelect, FtmRadio, FtmCheckbox, FtmSwitch, FtmInputNumber,
     FtmTimePicker, FtmDatePicker, FtmDateRangePicker, FtmRate, FtmColorPicker, FtmSlider, FtmWord, FtmHtml,
     
-    FtmFile, FtmVideo, FtmPicture, FtmImgVideo, FtmEditor, FtmCascader, FtmInputDialog, FtmCustom, FtmDialog, FtmIframe, FtmHighScanner,
+    FtmFile, FtmVideo, FtmPicture, FtmImgVideo, FtmEditor, FtmCascader, FtmInputDialog, FtmDialog, FtmIframe, FtmHighScanner,
     
     FtmUserPicker, FtmSubUser, FtmDepartmentPicker, FtmExpression, FtmZtree, FtmLocation, FtmAutocomplete, FtmRegion, FtmDrawLayer,
     FtmProcessHistory,
@@ -68,6 +68,8 @@ let components = [
     FtmWaterMarkingCamera, FtmCodeScanner, FtmAudio, FtmSignature, FtmSignatureWrite, FtmNfc,
     
     TabsPanel, GridsPanel, SplitLine, CardPanel, SubForm,
+
+    FtmCustom
 ]
 
 components.forEach((cmp) => {
