@@ -2,27 +2,27 @@
     <div class="sub-form-view">
         <van-icon class="do-expand" :name="expendStatus ? 'arrow-up' : 'arrow-down'" @click="onExpand" />
         <mue-form-item :label="name" :field="field" :inline="false" :rules="subFormRules"
-                       :data-field="field" :class="['fpt__subform', customClass ? customClass : '', !!isPager ? 'is-pager' : '']">
+            :data-field="field" :class="['fpt__subform', customClass ? customClass : '', !!isPager ? 'is-pager' : '']">
             <div class="form-part" v-for="(row, i) in (!!isPager ? currentPageVals : value)" :key="i" :class="{'hide': isHide(i)}">
                 <mue-panel :title="!!showRowNum ? `#${!!isPager ? ((pagination.index - 1) * pagination.size + i + 1) : (i + 1)}` : ''">
                     <van-icon v-if="!isDisabled && !hideDelete && !deleteDisabledCondition(row, i)" slot="tools" name="delete" style="line-height: inherit;"
-                              @click="delModel(i)"/>
+                        @click="delModel(i, row)"/>
                     <van-icon v-if="isHide(i)" slot="tools" name="arrow-down" @click="showFields(i)"/>
                     <van-icon v-else slot="tools" name="arrow-up" @click="hideFields(i)"/>
                     <div v-for="(sub, idx) in subs" :key="idx">
                         <form-item v-if="isShow(sub.options, row, model)" :model="row"
-                                    :style="colWidthStyle(sub.options.colWidth)"
-                                    :type="sub.type"
-                                    :vars="model"
-                                    v-bind="sub.options"
-                                    :parent-field="field"
-                                    :is-new="isNew"
-                                    :sub-options="subs"
-                                    :global-disabled="globalDisabled"
-                                    :index="i"
-                                    :all-vars="allVars"
-                                    :nodes-values-dict="nodesValuesDict"
-                                    :authority="authority">
+                             :style="colWidthStyle(sub.options.colWidth)"
+                             :type="sub.type"
+                             :vars="model"
+                             v-bind="sub.options"
+                             :parent-field="field"
+                             :is-new="isNew"
+                             :sub-options="subs"
+                             :global-disabled="globalDisabled"
+                             :index="i"
+                             :all-vars="allVars"
+                             :nodes-values-dict="nodesValuesDict"
+                             :authority="authority">
                         </form-item>
                     </div>
                 </mue-panel>
@@ -55,7 +55,7 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize", "watchValChange", "addEvent", "deleteEvent"],
         data() {
             return {
                 expendStatus: true,
@@ -133,12 +133,17 @@
                     this.value.forEach(row => {
                         for(let sub of v) {
                             if(!(sub.options.field in row)) {
-                              let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
-                              row[sub.options.field] = defaultValue
+                                let defaultValue = sub.options.defaultValue === "$$notExtend" ? null : sub.options.defaultValue
+                                row[sub.options.field] = defaultValue
                             }
                         }
                     })
                     this.$set(this.model, this.field, this.value);
+                }
+            },
+            value: {
+                immediate: true, deep: true, handler(v, ov) {
+                    this.watchChange(v)
                 }
             },
             "value.length": {
@@ -151,6 +156,20 @@
             },
         },
         methods: {
+            //监听子表数据触发事件
+            watchChange(v) {
+                if(this.watchValChange) {
+                    try {
+                        let val = v;
+                        let model = this.model;
+                        let selection = [];
+                        let _this = this;
+                        eval(this.watchValChange);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
+            },
             pageSizeChange(size) {
                 this.pagination.index = 1;
                 this.pagination.size = size;
@@ -199,9 +218,40 @@
                 } else {
                     this.value.push(fields);
                 }
+                this.addChange(fields);
             },
-            delModel(i){
+            //手动点击新增触发事件
+            addChange(row) {
+                if(this.addEvent) {
+                    try {
+                        let row = deepClone(row);
+                        let model = this.model;
+                        let selection = [];
+                        let _this = this;
+                        eval(this.addEvent);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
+            },
+            delModel(i, row){
                 this.value.splice(i, 1);
+                this.deleteChange(row, i);
+            },
+            //手动点击删除触发事件
+            deleteChange(row, index) {
+                if(this.deleteEvent) {
+                    try {
+                        let row = deepClone(row);
+                        let index = index;
+                        let model = this.model;
+                        let selection = [];
+                        let _this = this;
+                        eval(this.deleteEvent);
+                    } catch (e) {
+                        console.info(e)
+                    }
+                }
             },
             isShow(opts, model, vars) { //子表项配置 行数据 整个表单数据
                 return !opts.hide && needShow(opts.showCondition, {...vars, ...model}) && this.authIsShow(opts.field, this.field);
