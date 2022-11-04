@@ -11,11 +11,14 @@ import UUID from "uuid/v4";
 import { EventBus } from "../../../../utils/eventBus"
 import Less from "less";
 import Vue from "vue";
+import FtmInputDialog from "../super-form-item/input-dialog"
+import FtmDialog from "../super-form-item/dialog"
 export default {
     mixins: [PostMessage],
     name: "FtmCustom",
     inheritAttrs: false,
     components: {
+      FtmInputDialog, FtmDialog,
     },
     props: {
         isDesign: Boolean,
