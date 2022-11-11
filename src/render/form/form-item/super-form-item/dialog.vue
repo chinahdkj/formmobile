@@ -125,7 +125,7 @@ export default {
     },
     methods: {
         openPopup(){
-            if(!!this.disabled) return
+            if(!!this.disabled && !this.displayReadonly) return
             this.dialog.visible = true
         },
         checkURL(URL){
