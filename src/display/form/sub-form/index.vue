@@ -1,7 +1,7 @@
 <template>
     <div class="sub-form-view-display">
         <van-icon class="do-expand" :name="expendStatus ? 'arrow-up' : 'arrow-down'" @click="onExpand" />
-        <div class="container":class="[!!isPager ? 'is-pager' : '']">
+        <div class="container" :class="[!!isPager ? 'is-pager' : '']">
             <div class="header">
                 {{name}}
             </div>
