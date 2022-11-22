@@ -32,7 +32,7 @@
             </div>
             <van-pagination
                 v-if="!!isPager"
-                v-show="pagination.total > value.length"
+                v-show="pagination.total > currentPageVals.length"
                 v-model="pagination.index"
                 :items-per-page="pagination.size"
                 :total-items="pagination.total"
@@ -55,7 +55,7 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize", "watchValChange", "addEvent", "deleteEvent"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize", "watchValChange", "addEvent", "deleteEvent","mobileHideFields"],
         data() {
             return {
                 expendStatus: true,
@@ -94,7 +94,13 @@
             value: {
                 get(){
                     let v = this.model[this.field] || []
-                    return Array.isArray(v) ? v : JSON.parse(v);
+                    v = Array.isArray(v) ? v : JSON.parse(v)
+                    v.forEach((row, i) => {
+                        if(!Object.keys(row).includes('__hideFields')){
+                            this.$set(v[i], "__hideFields", !!this.mobileHideFields)
+                        }
+                    })
+                    return v;
                 },
                 set(nv){
                     this.$set(this.model, this.field, nv);
@@ -210,6 +216,7 @@
                   fields[sub.options.field] = defaultValue
                   fields['$$innerIsEdit'] = true;
                   fields['$$innerId'] = UUID();
+                  fields['__hideFields'] = false;
                 }
                 //有分页的情况，新增放置顶层,并且将分页切换到第一页
                 if(!!this.isPager) {
