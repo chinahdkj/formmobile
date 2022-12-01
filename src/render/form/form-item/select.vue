@@ -230,8 +230,8 @@
         mounted() {
             this.$set(this.model, `${this.field}$$text`, this.model[`${this.field}$$text`] || "");
             this.initBindings();
-
-            let unwatch = this.$watch(() => {
+            let unwatch = null
+            unwatch = this.$watch(() => {
               return this.items
             }, (v) => {
               if(this.interface && (v || []).length) {
