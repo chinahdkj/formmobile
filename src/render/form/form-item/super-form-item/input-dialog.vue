@@ -20,7 +20,7 @@
             position="right" style="width:90%;height:100%;">
             <div class="form-input-dialog-header">{{dialogTitle || btnName}}</div>
             <div class="form-input-dialog-container">
-                <iframe v-if="url && dialog.visible" frameborder="0" :src="targetUrl" :data-formrender_token="FORMRENDER_TOKEN"
+                <iframe v-if="(mobileUrl || url) && dialog.visible" frameborder="0" :src="targetUrl" :data-formrender_token="FORMRENDER_TOKEN"
                     :style="{width: '100%', height: '100%'}"/>
             </div>
         </van-popup>
@@ -67,31 +67,40 @@ export default {
             return sessionStorage.getItem('authortoken') || ''
         },
         targetUrl() {
-            const path = location.origin + location.pathname
-            const sn = sessionStorage.getItem('app_sn') ? `${sessionStorage.getItem('app_sn')}` : '';
-            let pp = path.split(`/${sn}/`)[0]
-            pp = pp + (pp.endsWith('/') ? `${sn}/hddev` : `/${sn}/hddev`)
-            if(!sn){
+            let appid = sessionStorage.getItem('appid')
+            let token = sessionStorage.getItem('authortoken')
+            let app = sessionStorage.getItem('authorapp')
+            let host = sessionStorage.getItem('host')
+            const app_sn = sessionStorage.getItem('app_sn') ? `${sessionStorage.getItem('app_sn')}` : '';
+            let pp = ''
+            if(app_sn){
+                if(location.href.indexOf(`/${app_sn}/`) > -1){
+                    pp = location.href.split(`/${app_sn}/`)[0] + `/${app_sn}/hddev`
+                }else if(location.href.indexOf('/hddev/') > -1){
+                    pp = location.href.split('/hddev/')[0] + '/hddev'
+                }else{
+                    pp = location.origin
+                }
+            }else if(location.href.indexOf('/hddev/') > -1){
+                pp = location.href.split('/hddev/')[0] + '/hddev'
+            }else{
                 pp = location.origin
             }
             if(location.pathname.startsWith('/static/apps/') && location.origin.startsWith('http')){
-                pp = location.origin
-                let patharr = location.pathname.split('/')
-                pp = pp + `/${patharr[1]}/${patharr[2]}/${patharr[3]}`
+                const patharr = location.pathname.split('/')
+                pp = `${location.origin}/${patharr[1]}/${patharr[2]}/${patharr[3]}`
             }
-            let trans_url = this.mobileUrl || this.url
-            let url = TransferUrl(trans_url, this.model, this.vars)
-            // url = url.replace("$rowIndex", this.rowIndex)
+            let url = TransferUrl(this.mobileUrl || this.url, this.model, this.vars)
             //子表链接自动携带上rowIndex
             if(this.rowIndex !== undefined) {
-                url = (url || "").includes("?") ? `${url}&rowIndex=${this.rowIndex}` : `${trans_url}?rowIndex=${this.rowIndex}`
+                url = (url || "").includes("?") ? `${url}&rowIndex=${this.rowIndex}` : `${url}?rowIndex=${this.rowIndex}`
             }
-            const ur = new URL((url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`))
-            ur.searchParams.set('appid',sessionStorage.getItem('hddevappid') || sessionStorage.getItem('appid'))
-            ur.searchParams.set('token',sessionStorage.getItem('authortoken'))
-            ur.searchParams.set('app',sessionStorage.getItem('authorapp'))
-            sessionStorage.getItem('host') && ur.searchParams.set('host',sessionStorage.getItem('host'))
-            return this.checkURL(url) ? url : ur.href
+            console.log({pp,url,param:$.param({appid,token,app,host})})
+            if(!url.startsWith('http') && !url.startsWith('file')){
+                return url.startsWith('/') ? `${pp}${url}` : `${pp}/${url}`
+            }else{
+                return url + '&' + $.param({appid,token,app,host})
+            }
         },
         btnStyle() {
             return this.btnWidth ? {width: this.btnWidth} : {}
