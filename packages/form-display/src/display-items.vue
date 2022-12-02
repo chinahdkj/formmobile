@@ -2,24 +2,24 @@
     <div v-if="isShow" v-show="isShowOfVshow && isEmptyCardShow" class="panel-form-item-display" :data-id="item.id">
         <tabs-panel v-if="item.type === 'tabs'" v-bind="item.options" :id="item.id" :tabs="item.tabs" :model="model" panel-type="view">
             <template slot-scope="{tab, items}">
-                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict"/>
+                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :authority="authority"/>
             </template>
         </tabs-panel>
 
         <grids-panel v-else-if="item.type === 'grids'" v-bind="item.options" :id="item.id" :cols="item.cols" panel-type="view">
             <template slot-scope="{grid, items}">
-                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict"/>
+                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :authority="authority"/>
             </template>
         </grids-panel>
 
         <card-panel v-else-if="item.type === 'card'" v-bind="item.options" :id="item.id" :card="item" panel-type="view">
             <template slot-scope="{tab, items}">
-                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict"/>
+                <display-items v-for="itm in items" :key="itm.id" :item="itm" :list="items" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :authority="authority"/>
             </template>
         </card-panel>
 
         <sub-form v-else-if="item.type === 'sub-form'" v-bind="item.options" :type="item.type"
-                  :id="item.id" :subs="item.subs" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict">
+                  :id="item.id" :subs="item.subs" :model="model" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :authority="authority">
         </sub-form>
 
         <template v-else-if="item.type === 'split-line'">
@@ -27,7 +27,7 @@
         </template>
 
         <template v-else>
-            <item-html v-bind="item.options" :model="model" :type="item.type" :value="model[item.options.field]" :all-vars="allVars" :nodes-values-dict="nodesValuesDict"></item-html>
+            <item-html v-bind="item.options" :model="model" :type="item.type" :value="model[item.options.field]" :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :authority="authority"/>
         </template>
     </div>
 </template>
@@ -39,9 +39,11 @@
     import CardPanel from "../../../src/display/layout/card";
     import SubForm from "../../../src/display/form/sub-form";
     import ItemHtml from "../../../src/display/form";
+    import Authority from "../../../src/components/authority"
     import {needShow, GetFormItem} from "../../../src/utils/lib";
 
     export default {
+        mixins: [Authority], //混入表单权限，取currentFieldAuth 当前字段权限对象
         inheritAttrs: false,
         name: "display-items",
         components: {
@@ -59,13 +61,13 @@
         computed: {
             //v-if隐藏
             isShow() {
-                let flag = this.item.options.KeepDom || (!this.item.options.hide && needShow(this.item.options.showCondition, this.model));
+                let flag = this.item.options.KeepDom || (!this.item.options.hide && needShow(this.item.options.showCondition, this.model) && !this.currentFieldAuth.hide);
 
                 //设置表单项像是情况，用于空卡片隐藏布局
                 let status = true
                 if (this.item.options.KeepDom) {
                     status = false
-                } else if (!(this.item.options.KeepDom || (!this.item.options.hide && needShow(this.item.options.showCondition, this.model)))) {
+                } else if (!(this.item.options.KeepDom || (!this.item.options.hide && needShow(this.item.options.showCondition, this.model) && !this.currentFieldAuth.hide))) {
                     status = false
                 }
                 this.$set(this.item.options, "showStatus", status);

@@ -11,18 +11,45 @@
 </template>
 <script>
 import BASE from "./base";
-
+import { deepClone, needShow } from '../../utils/lib'
 export default {
+    inject: {
+        PREVIEW: {
+            from: "PREVIEW",
+            default: null
+        },
+    },
     name: "DspCardPanel",
     inheritAttrs: false,
     components: {},
     mixins: [BASE],
     props: [
         "id", "type", "showCondition", "isDesign", "panelType",
-        "card", "showTitle", "title", "shadow", "showBorder", "titleLine"
+        "card", "showTitle", "title", "shadow", "showBorder", "titleLine",
+        "isCuttle", "cuttleCondition",
     ],
     data() {
-        return {};
+        return {
+            openStatus: true
+        };
+    },
+    computed: {
+        cnd() {
+            let model = this.PREVIEW && this.PREVIEW.model ? deepClone(this.PREVIEW.model) : {}
+            return needShow(this.cuttleCondition, model)
+        }
+    },
+    watch: {
+        cnd: {
+            immediate: true, handler(v) {
+                this.openStatus = v;
+            }
+        }
+    },
+    methods:{
+        toggleCard() {
+            this.openStatus = !this.openStatus;
+        }
     }
 
 };
