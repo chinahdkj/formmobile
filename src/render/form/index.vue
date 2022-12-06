@@ -28,6 +28,7 @@
                    :all-vars="allVars"
                    :nodes-values-dict="nodesValuesDict"
                    :user-key="userKey"
+                   :task-info="taskInfo"
                    v-bind="$attrs"
                    v-on="$listeners"
                    ref="cpt"/>
@@ -67,7 +68,8 @@
             "labelWidth", "labelHidden", "defaultValue", "placeholder", "rules", "showCondition",
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
-            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority", "colWidth"],
+            "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority", "colWidth",
+            "taskInfo"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled

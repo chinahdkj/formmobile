@@ -24,6 +24,9 @@ export default {
         disabled: [Number,String,Boolean],
         isNew: [Boolean, Number],
         platType: String,
+        taskInfo: Object,
+        allVars: Object,
+        nodesValuesDict: Object,
         customHandleMobile: {
             type: Object,
             default() {
@@ -115,6 +118,9 @@ export default {
                 this.view.$field = this.field;
                 this.view.$model = this.model;
                 this.view.$isNew = !!this.isNew;
+                this.view.$allVars = deepClone(this.allVars);
+                this.view.$taskInfo = deepClone(this.taskInfo);
+                this.view.dict = this.nodesValuesDict;
                 this.view.$disabled = !!this.disabled;
                 this.view.$post = this.$post;
                 this.view.$get = this.$get;

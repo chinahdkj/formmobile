@@ -2,7 +2,7 @@
     <div class="form-display" v-loading.fullscreen.lock="loading">
         <div :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
             <display-items v-for="item in forms" :key="item.id" :item="item" :list="forms" :model="model"  :all-vars="allVars"
-            :nodes-values-dict="nodesValuesDict" :authority="authority"></display-items>
+            :nodes-values-dict="nodesValuesDict" :task-info="taskInfo" :authority="authority"></display-items>
         </div>
     </div>
 </template>
@@ -40,6 +40,10 @@
                 default() {
                     return []
                 }
+            },
+            taskInfo: { //当前任务节点信息
+                type: Object,
+                default: () => {}
             },
         },
         data() {

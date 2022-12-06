@@ -9,7 +9,8 @@
                 :all-vars="allVars"
                 :nodes-values-dict="nodesValuesDict" 
                 :global-disabled="disabled" 
-                :authority="authority">
+                :authority="authority"
+                :task-info="taskInfo">
             </form-items>
         </mue-form>
         <div v-if="noForm" :class="globalConfig.customClass" v-bind="globalConfig" :style="formStyle">
@@ -21,7 +22,8 @@
                 :all-vars="allVars" 
                 :nodes-values-dict="nodesValuesDict" 
                 :global-disabled="disabled" 
-                :authority="authority">
+                :authority="authority"
+                :task-info="taskInfo">
             </form-items>
         </div>
 
@@ -70,6 +72,12 @@ export default {
             type: Array,
             default() {
                 return []
+            }
+        },
+        taskInfo: {
+            type: Object,
+            default() {
+                return {}
             }
         },
         isNew: {type: Boolean, default: true}, //表单模式（新增|修改）,默认新增
