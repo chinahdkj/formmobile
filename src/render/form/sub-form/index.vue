@@ -22,7 +22,8 @@
                              :index="i"
                              :all-vars="allVars"
                              :nodes-values-dict="nodesValuesDict"
-                             :authority="authority">
+                             :authority="authority"
+                             :task-info="taskInfo">
                         </form-item>
                     </div>
                 </mue-panel>
@@ -55,7 +56,8 @@
         components: {FormItem},
         props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align", "addHidden", "deleteHidden", "allVars", "initOneRow",
             "customClass", "labelWidth", "labelHidden", "showRowNum", "dataType", "itfData", "afterQuery", "isNew", "addDisabled", "globalDisabled",
-            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize", "watchValChange", "addEvent", "deleteEvent","mobileHideFields"],
+            "initNums", "maxNums", "minNums", "nodesValuesDict", "authority", "colWidth", "isPager","pageSize", "watchValChange", "addEvent", "deleteEvent","mobileHideFields",
+            "taskInfo"],
         data() {
             return {
                 expendStatus: true,

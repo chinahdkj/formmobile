@@ -21,12 +21,26 @@ export default {
         disabled: [Number,String,Boolean],
         isNew: [Boolean, Number],
         dspPlatType: String,
+        allVars: { //所有节点数据对象（流程节点中使用）
+            type: Object,
+            default: () => {}
+        },
+        nodesValuesDict: { //所有节点数据字典（流程节点中使用）
+            type: Object,
+            default: () => {}
+        },
         dspCustomHandleMobile: {
             type: Object,
             default() {
                 return {}
             }
-        }
+        },
+        taskInfo: {
+            type: Object,
+            default() {
+                return {}
+            }
+        },
     },
     data() {
         return {
@@ -93,6 +107,9 @@ export default {
                 this.view.$value = this.value
                 this.view.$field = this.field;
                 this.view.$model = this.model;
+                this.view.$allVars = deepClone(this.allVars);
+                this.view.$taskInfo = deepClone(this.taskInfo);
+                this.view.dict = this.nodesValuesDict;
                 this.view.$isNew = !!this.isNew;
                 this.view.$disabled = !!this.disabled;
                 this.view.$post = this.$post;

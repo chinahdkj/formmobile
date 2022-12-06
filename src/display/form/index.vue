@@ -15,6 +15,7 @@
                    :class="customClass"
                    :all-vars="allVars"
                    :nodes-values-dict="nodesValuesDict"
+                   :task-info="taskInfo"
                    v-bind="$attrs">
         </component>
     </div>
@@ -27,7 +28,7 @@
         props: [
             "value", "model", "type",
             "name", "field", "labelLine", "width", "customClass", "labelWidth", "labelHidden",
-            "defaultValue", "showCondition", "isDesign", "labelHtml", "allVars", "nodesValuesDict",
+            "defaultValue", "showCondition", "isDesign", "labelHtml", "allVars", "nodesValuesDict", "taskInfo",
         ],
         computed: {
             boxstyle() {
