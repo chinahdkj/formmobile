@@ -17,7 +17,7 @@
                                        :type="sub.type"
                                        :value="row[sub.options.field]"
                                        v-bind="sub.options"
-                                       :all-vars="allVars" :nodes-values-dict="nodesValuesDict">
+                                       :all-vars="allVars" :nodes-values-dict="nodesValuesDict" :task-info="taskInfo">
                             </item-html>
                         </div>
                     </mue-panel>
@@ -45,7 +45,7 @@ export default {
     components: {ItemHtml},
     mixins: [],
     props: ["id", "subs", "model", "name", "field", "type", "labelLine", "width", "disabled", "align",
-        "customClass", "labelWidth", "labelHidden", "showRowNum", "allVars", "nodesValuesDict", "isPager","pageSize","mobileHideFields"],
+        "customClass", "labelWidth", "labelHidden", "showRowNum", "allVars", "nodesValuesDict", "isPager","pageSize","mobileHideFields","taskInfo"],
     data() {
         return {
             expendStatus: true,
