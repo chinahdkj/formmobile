@@ -1,6 +1,8 @@
 <template>
     <span class="dsp__draw-layer">
-        <van-tag>移动端不支持</van-tag>
+        <van-button v-if="value" size="mini" native-type="button" @click.stop="handleShow">查看</van-button>
+        <mue-gis-draw-layer ref="gisDraw" :disabled="true" :readonly="true" v-show="false" v-model="val"
+                            :options="options" :type="polyType || 'polygon'" :gwt-option="gwt" :off-option="offOpts" />
     </span>
 </template>
 
@@ -54,7 +56,7 @@ export default {
     },
     methods: {
         handleShow() {
-            this.$refs.gisDraw.visible = true
+            this.$refs.gisDraw.pop = true
         }
     }
 };

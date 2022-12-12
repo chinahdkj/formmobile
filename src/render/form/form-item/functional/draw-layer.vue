@@ -1,5 +1,6 @@
 <template>
-  <van-tag>移动端不支持</van-tag>
+    <mue-gis-draw-layer v-model="value" :options="options" :gwt-option="gwt" :type="polyType || 'polygon'"
+                        :off-option="offOpts" :disabled="!!disabled" :readonly="!!readonly"/>
 </template>
 
 <script>
