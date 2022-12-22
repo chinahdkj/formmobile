@@ -56,6 +56,19 @@
                     this.initInterfaceData(v)
                 }
             },
+            value: {
+                immediate: true, handler(v) {
+                    //存入名称，不再次调用接口
+                    this.$nextTick(()=>{
+                        setTimeout(() => {
+                            let name = this.$refs.select.text;
+                            if(name) {
+                                this.$set(this.model, `${this.field}$$text`, name);
+                            }
+                        },0)
+                    })
+                }
+            }
         },
         methods: {
             setTempList() {

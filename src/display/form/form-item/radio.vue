@@ -20,9 +20,9 @@
                 let $$text = this.model[`${this.field}$$text`]; //从数据中直取text
                 let text = "";
                 if(this.optionsType === "dynamic") {
-                    text = formatFromBinding(this.value, BindRecords(this.optionsDict))
+                    text = formatFromBinding(String(this.value), BindRecords(this.optionsDict))
                 } else {
-                    text = formatFromBinding(this.value, this.bindings)
+                    text = formatFromBinding(String(this.value), this.bindings)
                 }
                 return $$text || text;
             }
