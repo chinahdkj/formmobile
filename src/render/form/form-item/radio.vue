@@ -23,7 +23,7 @@ export default {
     computed: {
         value: {
             get() {
-                return this.model[this.field];
+                return String(this.model[this.field]);
             },
             set(nv) {
                 this.$set(this.model, this.field, nv);
