@@ -390,6 +390,7 @@ export const DateFormat = (value, format) => {
     format = GetFormatString(format || "yyyy-MM-dd");
     let num = Number(value);
     if(!isNaN(num)){ //数字类型 or 字符串类型的数字
+        if(format === 'YYYY' && value.length === 4) return value //格式化成YYYY并且不是时间戳格式，直接返回value
         return moment.unix(num).format(format);
     }
     return moment(value).format(format);
