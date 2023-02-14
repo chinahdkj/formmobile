@@ -6,6 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
+        :upload-accpet="uploadAccept"
         accept="all"
         @input="onChange">
     </mue-img-upload>
@@ -20,7 +21,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "dataType", "readonly", "disabled", "required", "vars",
-        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit", "valChange"],
+        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit", "valChange", "uploadAccept"],
     data() {
         return {};
     },
