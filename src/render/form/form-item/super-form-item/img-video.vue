@@ -6,7 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
-        :upload-accpet="uploadAccept"
+        :upload-accept="uploadAccept"
         accept="all"
         @input="onChange">
     </mue-img-upload>
