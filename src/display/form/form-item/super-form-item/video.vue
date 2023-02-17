@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__video">
-        <mue-img-upload v-model="files" :multiple="!!multiple" readonly
+        <mue-img-upload v-model="files" :multiple="!!multiple" :base64="!!base64" readonly
                         ></mue-img-upload>
     </div>
 </template>
@@ -11,7 +11,7 @@ import {strToArr} from '../../../../utils/lib'
 export default {
     name: "DspVideo",
     components: {},
-    props: ["value", "multiple"],
+    props: ["value", "multiple","base64"],
     data() {
         return {};
     },
