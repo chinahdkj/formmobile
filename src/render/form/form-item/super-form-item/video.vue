@@ -6,6 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
+        :base64="!!base64"
         :is-comment="!!isComment" accept="video">
     </mue-img-upload>
 </template>
@@ -18,7 +19,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "dataType", "readonly", "disabled", "required",
-        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit"],
+        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit", "base64"],
     data() {
         return {};
     },

@@ -7,6 +7,7 @@
         :disabled="!!disabled"
         :readonly="!!readonly"
         :is-comment="!!isComment"
+        :base64="!!base64"
         @input="onChange">
     </mue-img-upload>
 </template>
@@ -20,7 +21,7 @@ export default {
     inheritAttrs: false,
     components: {},
     props: ["field", "model", "dataType", "readonly", "disabled", "required", "vars",
-        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit"],
+        "defaultValue", "multiple", "accept", "thumbZip", "isComment", "limit", "base64"],
     data() {
         return {};
     },
