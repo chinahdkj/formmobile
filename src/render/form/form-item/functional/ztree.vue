@@ -98,6 +98,13 @@ export default {
                         }
                     },0)
                 })
+                this.$nextTick(() => {
+                    this.$refs.tree.getText().then((name)=>{
+                        if(name) {
+                            this.$set(this.model, `${this.field}$$text`, name);
+                        }
+                    })
+                })
             }
         }
     },
