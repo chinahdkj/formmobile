@@ -60,6 +60,20 @@ export default {
             }
         }
     },
+    watch: {
+        value: {
+            immediate: true, handler(v) {
+                //存入名称，不再次调用接口
+                this.$nextTick(() => {
+                    this.$refs.tree.getText().then((name)=>{
+                        if(name) {
+                            this.$set(this.model, `${this.field}$$text`, name);
+                        }
+                    })
+                })
+            }
+        }
+    },
     methods: {
         checkFilter(data, n){
             if(!this.multiple) return true
