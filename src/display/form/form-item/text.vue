@@ -1,6 +1,6 @@
 <template>
-    <div class="dsp__text">
-        {{transValue}} <span v-if="value || value === 0">{{unit}}</span>
+    <div class="dsp__text" @click="click">
+        <span :style="style">{{transValue}}</span> <span v-if="value || value === 0">{{unit}}</span>
     </div>
 </template>
 
@@ -16,6 +16,12 @@
             return {};
         },
         computed:{
+            isPhone() {
+                return /(^(\d{3,4}-)?\d{7,8})$|(1[3|5|7|8|9]\d{9})/.test(this.value);
+            },
+            style() {
+                return this.isPhone ? {"text-decoration": "underline"} : null;
+            },
             type(){
                 return this.dataType ? this.dataType.toLowerCase() : "text";
             },
@@ -48,6 +54,13 @@
                     return GetThousandSp(val);
                 }
                 return this.type === "number" ? Number(val) : val
+            }
+        },
+        methods: {
+            click(){
+                if (this.isPhone) {
+                    this.$comm.makeCall(this.value);
+                }
             }
         }
     }
