@@ -17,7 +17,7 @@
         },
         computed:{
             isPhone() {
-                return /(^(\d{3,4}-)?\d{7,8})$|(1[3|5|7|8|9]\d{9})/.test(this.value);
+                return /^1([358][0-9]|4[56789]|6[2567]|7[012345678]|9[189])[0-9]{8}$/.test(this.value);
             },
             style() {
                 return this.isPhone ? {"text-decoration": "underline"} : null;
