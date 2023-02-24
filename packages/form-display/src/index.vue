@@ -45,12 +45,18 @@
                 type: Object,
                 default: () => {}
             },
+            globalConfigCustom: { // 自定义全局配置参数
+                type: Object,
+                default: ()=>{
+                    return {}
+                }
+            }
         },
         data() {
             return {
                 loading: false,
                 forms: [], //所有表单项，包含布局
-                globalConfig: GlobalDefaultOptions() //表单全局配置
+                globalConfig: {...GlobalDefaultOptions(), ...this.globalConfigCustom} //表单全局配置
             };
         },
         watch: {
@@ -60,7 +66,7 @@
                         return
                     }
                     this.forms = v.list ? deepClone(v.list) : [];
-                    this.globalConfig = v.globalConfig ? deepClone(v.globalConfig) : {};
+                    this.globalConfig = v.globalConfig ? deepClone({...v.globalConfig, ...this.globalConfigCustom}) : {};
                 }
             }
         },
