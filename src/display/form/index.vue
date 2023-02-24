@@ -23,6 +23,7 @@
 
 <script>
     export default {
+        inject: ["PREVIEW"],
         components: {},
         inheritAttrs: false,
         props: [
@@ -38,12 +39,19 @@
                 return {width: this.width};
             },
             labelStyle() {
-                return {
-                    width: this.labelWidth ? `${this.labelWidth}px` : '110px'
+                let obj = {
+                    width: '110px'
                 }
+                if(this.PREVIEW && this.PREVIEW.globalConfig && this.PREVIEW.globalConfig.labelWidth) {
+                    obj.width = `${this.PREVIEW.globalConfig.labelWidth}px`
+                }
+                if(this.labelWidth) {
+                    obj.width = `${this.labelWidth}px`
+                }
+                return obj
             },
             isLabelLine() {
-                return this.labelLine ? 'is-label-line' : ''
+                return this.labelLine || (this.PREVIEW && this.PREVIEW.globalConfig && this.PREVIEW.globalConfig.labelLine) ? 'is-label-line' : ''
             }
         },
         methods: {}
