@@ -126,6 +126,9 @@ export default {
                 this.$set(this.model, `${this.field}$$text`, "");
                 this.initInterfaceData(v).then(nodes => {
                     this.nodes = TreeDataTrans(Array.isArray(nodes) ? nodes : [nodes]);
+                    if(v){ // getUserTree接口的root参数不生效，接口返回数据重新根据v进行赋值
+                        this.nodes = this.fetch(this.nodes, v) || [];
+                    }
                 })
             }, {deep: true, immediate: !this.defaultValue});
         },
