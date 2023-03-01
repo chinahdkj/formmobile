@@ -16,7 +16,7 @@ import {formatFromBinding, BindRecords} from "../../../../utils/lib"
         computed: {
             text() {
                 let $$text = this.model[`${this.field}$$text`]; //从数据中直取text
-                let text = formatFromBinding(this.value, BindRecords(this.dict)); //从字典中取值
+                let text = formatFromBinding(String(this.value), BindRecords(this.dict)); //从字典中取值
                 return $$text || text;
             }
         },
