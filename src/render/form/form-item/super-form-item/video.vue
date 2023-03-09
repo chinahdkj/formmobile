@@ -7,6 +7,7 @@
         :disabled="!!disabled"
         :readonly="!!readonly"
         :base64="!!base64"
+        appid=""
         :is-comment="!!isComment" accept="video">
     </mue-img-upload>
 </template>

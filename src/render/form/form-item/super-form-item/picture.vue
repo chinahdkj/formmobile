@@ -8,6 +8,7 @@
         :readonly="!!readonly"
         :is-comment="!!isComment"
         :base64="!!base64"
+        appid=""
         @input="onChange">
     </mue-img-upload>
 </template>

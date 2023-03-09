@@ -8,6 +8,7 @@
         :readonly="!!readonly"
         :upload-accept="uploadAccept"
         :base64="!!base64"
+        appid=""
         accept="all"
         @input="onChange">
     </mue-img-upload>
