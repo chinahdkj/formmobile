@@ -1,6 +1,6 @@
 <template>
     <div class="dsp__video">
-        <mue-img-upload v-model="files" :multiple="!!multiple" :base64="!!base64" readonly
+        <mue-img-upload v-model="files" :multiple="!!multiple" :base64="!!base64" appid="" readonly
                         ></mue-img-upload>
     </div>
 </template>
