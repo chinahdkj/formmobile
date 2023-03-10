@@ -6,7 +6,7 @@
         :multiple="!!multiple"
         :disabled="!!disabled"
         :readonly="!!readonly"
-        :upload-accept="uploadAccept"
+        :m-type="uploadAccept"
         :base64="!!base64"
         appid=""
         accept="all"
