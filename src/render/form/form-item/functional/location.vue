@@ -42,7 +42,7 @@ export default {
         }
     },
     methods: {
-        onConfirm(pos, address) {
+        onConfirm(address) {
             if(!address || !address.addressComponent || !address.formatted_address) {
                 return
             }
