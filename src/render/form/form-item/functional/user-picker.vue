@@ -14,7 +14,7 @@ export default {
     components: {},
     props: [
         "field", "model", "disabled", "required", "defaultValue", "multiple", "linkage", "valChange", "vars", "isAuth",
-        "defaultPid", "defaultPidMode", "defaultPidExp", "rowIndex"
+        "defaultPid", "defaultPidMode", "defaultPidExp", "rowIndex", "customPrefix"
     ],
     data() {
         return {
@@ -133,7 +133,7 @@ export default {
             }, {deep: true, immediate: !this.defaultValue});
         },
         initInterfaceData(pid = "") {
-            return this.$http.post(`/app/bpm/app/getUserTree`, {type: "user", root: pid})
+            return this.$http.post(`/app/${this.customPrefix || 'bpm'}/app/getUserTree`, {type: "user", root: pid})
         },
         fetch(ns, v) {
             for (let i = 0; i < ns.length; i++) {
