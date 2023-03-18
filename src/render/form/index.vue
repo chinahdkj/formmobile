@@ -212,7 +212,7 @@
                 //文本框默认值从接口获取
                 if(this.type === 'text' && this.defaultType === 'interface') {
                     defaultValue = await GetInterfaceData(this.interface, this.$OPTS.urlPrefix,
-                        this.model, this.afterQuery, this.autoType, this.itfParams, {} ,this.headerParams);
+                        this.model, this.afterQuery, this.autoType, this.itfParams, this.vars || {} ,this.headerParams);
                 }
 
                 //用户选择组件取当前登录人
