@@ -543,10 +543,9 @@ export const GetFormItem = (list, res) => {
 * autoType 接口类型 (POST/GET)
 * itfParams post传参参数
 * */
-export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, itfParams, vars) => {
+export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, itfParams, vars, headers) => {
     return new Promise((resolve, reject) => {
         let res_Url = TransferUrl(url, model, vars);
-        console.log(model)
         let success = (res) => {
             let result = null;
             //接口返回数据结构处理
@@ -569,16 +568,46 @@ export const GetInterfaceData = (url, urlPrefix, model, afterQuery, autoType, it
             }
         }
         
-        let fail = (e) => {
-            console.log(e);
+        let fail = (res) => {
+            console.log("fail", res);
+            let result = null;
+            //接口返回数据结构处理
+            if (afterQuery) {
+                try {
+                    result = eval(`(function (res) {
+                        ${afterQuery}
+                    })(res)`)
+                    resolve(result);
+                } catch (e) {
+                    resolve(result)
+                    console.error(e)
+                }
+            } else {
+                if (res.Code === 0) {
+                    resolve(res.Response)
+                } else {
+                    reject(res.Message)
+                }
+            }
+        }
+    
+        let headerParams = {}
+        if(headers) {
+            try {
+                headerParams = eval(`(function () {
+                        ${headers}
+                    })()`)
+            } catch (e) {
+                console.error(e)
+            }
         }
         
         if (autoType === 1) {
             let bodyParams = EvalExpression(itfParams, model, vars)
             let params = {url: res_Url, body: bodyParams}
-            $server._Post(params, urlPrefix || "").then(success).catch(fail);
+            $server._Post(params, urlPrefix || "", headerParams).then(success).catch(fail);
         } else {
-            $server._Get({url: res_Url}, urlPrefix || "").then(success).catch(fail);
+            $server._Get({url: res_Url}, urlPrefix || "", headerParams).then(success).catch(fail);
         }
     });
 }

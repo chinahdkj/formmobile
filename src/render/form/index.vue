@@ -29,6 +29,7 @@
                    :nodes-values-dict="nodesValuesDict"
                    :user-key="userKey"
                    :task-info="taskInfo"
+                   :header-params="headerParams"
                    v-bind="$attrs"
                    v-on="$listeners"
                    ref="cpt"/>
@@ -69,7 +70,7 @@
             "parentField", "index", "isDesign", "parent", "defaultType", "dftActivity", "userKey",
             "itfParams" ,"autoType", "interface", "afterQuery", "disabled", "disabledCondition", "mustCondition", "isNew",
             "unique", "uniqueFields", "subOptions", "globalDisabled", "isCurrentUser", "isCurrentGroup", "allVars", "nodesValuesDict", "authority", "colWidth",
-            "taskInfo"],
+            "taskInfo", "headerParams"],
         computed: {
             isDisabled() {
                 return !!this.globalDisabled
@@ -211,7 +212,7 @@
                 //文本框默认值从接口获取
                 if(this.type === 'text' && this.defaultType === 'interface') {
                     defaultValue = await GetInterfaceData(this.interface, this.$OPTS.urlPrefix,
-                        this.model, this.afterQuery, this.autoType, this.itfParams);
+                        this.model, this.afterQuery, this.autoType, this.itfParams, {} ,this.headerParams);
                 }
 
                 //用户选择组件取当前登录人

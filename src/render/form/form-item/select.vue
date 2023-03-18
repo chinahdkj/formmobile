@@ -17,7 +17,7 @@
             "field", "model", "vars", "disabled", "required", "defaultValue", "placeholder",
             "multiple", "expandTags", "bindings", "dataType", "optionsType", "optionsDict", "linkage", "searchable",
             "limit", "autoType", "interface", "itfParams", "afterQuery", "valChange", "linkageNoClear", "afterInitData",
-            "parentField"
+            "parentField", "headerParams"
         ],
         data() {
             return {
@@ -213,7 +213,7 @@
                     //     this.model, this.afterQuery, this.autoType, this.itfParams, this.vars);
                     // this.items = TransBindings(items);
                     let items = await GetInterfaceData(url, this.$OPTS.urlPrefix,
-                        this.model, this.afterQuery, this.autoType, this.itfParams, this.vars, this.field, this.parentField);
+                        this.model, this.afterQuery, this.autoType, this.itfParams, this.vars, this.headerParams);
                     this.items = TransBindings(items);
                     if (!this.items) {
                         this.items = [];
