@@ -22,7 +22,7 @@ export default {
     props: [
         "field", "model", "vars", "disabled", "required", "defaultValue", "multiple", "dataMode", "linkage",
         "wholePath", "dict", "sourceType", "interface", "saveFields", "autoType", "itfParams", "afterQuery",
-        "valChange"
+        "valChange", "headerParams"
     ],
     data() {
         return {
@@ -238,7 +238,7 @@ export default {
                 }
 
                 let nodes = await GetInterfaceData(url, this.$OPTS.urlPrefix,
-                    this.model, this.afterQuery, this.autoType, this.itfParams, this.vars);
+                    this.model, this.afterQuery, this.autoType, this.itfParams, this.vars, this.headerParams);
                 nodesTrans(nodes);
 
                 /*let res_Url = TransferUrl(url, this.model);

@@ -45,7 +45,7 @@ export default {
     */
     props: [
         "field", "model", "required", "disabled", "autoType", "showField", "valueField", "format", "saveFields",
-        "itfParams", "afterQuery"
+        "itfParams", "afterQuery", "headerParams"
     ],
     data() {
         return {
@@ -115,9 +115,9 @@ export default {
                 });
                 let bodyParams = EvalExpression(itfParams, this.model)
                 let params = {url: res_Url, body: bodyParams}
-                this.$server._Post(params, this.$OPTS.urlPrefix || "").then(success).catch(fail);
+                this.$server._Post(params, this.$OPTS.urlPrefix || "", this.headerParams).then(success).catch(fail);
             } else {
-                this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "").then(success).catch(fail);
+                this.$server._Get({url: res_Url}, this.$OPTS.urlPrefix || "", this.headerParams).then(success).catch(fail);
             }
 
             /*let url = TransferUrl(this.format, this.model);  //转换表单中的值 ${}
