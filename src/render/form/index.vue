@@ -217,8 +217,8 @@
 
                 //用户选择组件取当前登录人
                 if(this.type === "user-picker" && !!this.isCurrentUser) {
-                    defaultValue = window.FORM_CurrentUser.user_id || ""
-                    this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser.user_nm);
+                    defaultValue = window.FORM_CurrentUser && window.FORM_CurrentUser.user_id || ""
+                    this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser && window.FORM_CurrentUser.user_nm || "");
                 }
 
               //用户选择组件取表达式
