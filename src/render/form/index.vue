@@ -221,24 +221,24 @@
                     this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser && window.FORM_CurrentUser.user_nm || "");
                 }
 
-              //用户选择组件取表达式
-              if(this.type === "user-picker" && !this.isCurrentUser && this.defaultValueMode === "expression") {
-                try {
-                  let model = deepClone(this.model);
-                  let vars = deepClone(this.vars || {});
-                  let rowIndex = this.rowIndex;
-                  let _this = this;
+                //用户选择组件取表达式
+                if(this.type === "user-picker" && !this.isCurrentUser && this.defaultValueMode === "expression") {
+                    try {
+                        let model = deepClone(this.model);
+                        let vars = deepClone(this.vars || {});
+                        let rowIndex = this.rowIndex;
+                        let _this = this;
 
-                  let es = ReplaceFields(this.defaultValueExp);
-                  defaultValue = eval(`(function (model, vars, rowIndex, _this) {
-                            ${es || 'return null;'}
-                        })(model, vars, rowIndex, _this)`)
-                } catch (e) {
-                  console.info(e);
-                  defaultValue = this.defaultValue;
+                        let es = ReplaceFields(this.defaultValueExp);
+                        defaultValue = eval(`(function (model, vars, rowIndex, _this) {
+                              ${es || 'return null;'}
+                          })(model, vars, rowIndex, _this)`)
+                    } catch (e) {
+                        console.info(e);
+                        defaultValue = this.defaultValue;
+                    }
+                    //this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser.user_nm);
                 }
-                //this.$set(this.model, `${this.field}$$text`, window.FORM_CurrentUser.user_nm);
-              }
 
                 //部门选择组件取当前登录人部门
                 if(this.type === "department-picker" && !!this.isCurrentGroup) {
