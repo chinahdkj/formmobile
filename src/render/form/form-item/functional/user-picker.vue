@@ -1,6 +1,6 @@
 <template>
     <mue-tree-picker ref="tree" v-model="value" :clearable="!required" :data="nodes" :disabled="!!disabled"
-                     :multiple="!!multiple" :selectable="checkFilter" @change="onChange" searchable>
+                     :multiple="!!multiple" :selectable="checkFilter" @change="onChange" @set-text="setText" searchable>
     </mue-tree-picker>
 </template>
 
@@ -83,6 +83,13 @@ export default {
             } else {
                 this.$set(this.model, this.field, String(v));
             }
+            this.$nextTick(() => {
+                this.$refs.tree.getText().then((name)=>{
+                    if(name) {
+                        this.$set(this.model, `${this.field}$$text`, name);
+                    }
+                })
+            })
         },
         getChildren(result, node, datas) {
             let r = {code: node.code, name: node.name, pid: node.pid, children: []};
@@ -213,6 +220,9 @@ export default {
                 this.$set(this.model, f.mobileField, v);
             });
         },
+        setText(v) {
+            this.$set(this.model, `${this.field}$$text`, v);
+        }
     },
     mounted() {
         this.$set(this.model, `${this.field}$$text`, this.model[`${this.field}$$text`] || "");
