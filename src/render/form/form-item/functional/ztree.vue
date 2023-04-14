@@ -192,7 +192,7 @@ export default {
             let res = []
             for (let i = 0; i < ns.length; i++) {
                 let n = ns[i];
-                if (v.split(",").includes(n.extend)) {
+                if (v.split(",").includes(n.extend || n.pid)) {
                     res.push(n);
                 }
             }
