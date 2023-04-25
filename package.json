@@ -15,7 +15,7 @@
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "moment": "^2.24.0",
-    "mue": "git+https://hub.hddznet.com/uniplatform/mue.git",
+    "mue": "git+https://github.com/chinahdkj/mue.git",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
